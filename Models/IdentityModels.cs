@@ -20,6 +20,8 @@ namespace BlogDeInvestigacion.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Laboratorio> Laboratorios { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

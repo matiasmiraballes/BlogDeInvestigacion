@@ -8,6 +8,16 @@ namespace BlogDeInvestigacion.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Laboratorios",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Nombre = c.String(),
+                        Descripcion = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -94,6 +104,7 @@ namespace BlogDeInvestigacion.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Laboratorios");
         }
     }
 }
