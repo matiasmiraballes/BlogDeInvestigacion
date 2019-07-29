@@ -24,6 +24,7 @@ namespace BlogDeInvestigacion.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrador")]
         public ActionResult Estadisticas()
         {
             ViewBag.Message = "Estadisticas";
@@ -34,13 +35,6 @@ namespace BlogDeInvestigacion.Controllers
         public ActionResult Laboratorios()
         {
             ViewBag.Message = "Aprendé Nico!!";
-
-            return View();
-        }
-
-        public ActionResult CrearUsuario()
-        {
-            ViewBag.Message = "Crear Usuario";
 
             return View();
         }
