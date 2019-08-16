@@ -44,7 +44,9 @@ https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-sta
 Working with DbContext: 
 https://docs.microsoft.com/en-us/ef/ef6/fundamentals/working-with-dbcontext
 
-
+Info About IdentityDbContext:
+https://stackoverflow.com/questions/19902756/asp-net-identity-dbcontext-confusion
+https://github.com/TypecastException/AspNet-Identity-2-Extensible-Project-Template
 
 
 
