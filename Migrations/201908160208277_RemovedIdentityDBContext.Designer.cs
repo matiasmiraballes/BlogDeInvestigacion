@@ -7,13 +7,13 @@ namespace BlogDeInvestigacion.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addedDataAnotations : IMigrationMetadata
+    public sealed partial class RemovedIdentityDBContext : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedDataAnotations));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RemovedIdentityDBContext));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907271420460_addedDataAnotations"; }
+            get { return "201908160208277_RemovedIdentityDBContext"; }
         }
         
         string IMigrationMetadata.Source

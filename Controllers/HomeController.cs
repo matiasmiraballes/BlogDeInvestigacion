@@ -32,13 +32,6 @@ namespace BlogDeInvestigacion.Controllers
             return View();
         }
 
-        public ActionResult Laboratorios()
-        {
-            ViewBag.Message = "Aprendé Nico!!";
-
-            return View();
-        }
-
         public ActionResult Perfil()
         {
             ViewBag.Message = "Perfil";

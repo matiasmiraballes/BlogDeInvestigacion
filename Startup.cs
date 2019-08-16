@@ -1,4 +1,5 @@
-﻿using BlogDeInvestigacion.Models;
+﻿using BlogDeInvestigacion.Data_Management;
+using BlogDeInvestigacion.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -13,6 +14,13 @@ namespace BlogDeInvestigacion
         {
             ConfigureAuth(app);
             CreateRolesandUsers();
+            var ctx = new BlogContext();
+            {
+                var laboratorio = new Laboratorio { Nombre = "LINES", Descripcion = "LINES - Laboratorio" };
+
+                ctx.Laboratorios.Add(laboratorio);
+                ctx.SaveChanges();
+            }
         }
 
 
@@ -20,7 +28,7 @@ namespace BlogDeInvestigacion
 
         private void CreateRolesandUsers()
         {
-            ApplicationDbContext context = new ApplicationDbContext();
+            BlogContext context = new BlogContext();
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));

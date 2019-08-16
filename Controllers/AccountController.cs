@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BlogDeInvestigacion.Models;
+using BlogDeInvestigacion.Data_Management;
 
 namespace BlogDeInvestigacion.Controllers
 {
