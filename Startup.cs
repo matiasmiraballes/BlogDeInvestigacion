@@ -14,6 +14,14 @@ namespace BlogDeInvestigacion
         {
             ConfigureAuth(app);
             CreateRolesandUsers();
+            //PopulateDatabase();
+        }
+
+        // Agregar entradas a la base de datos manualmente, alternativamente se puede usar el comando "update-database"
+        private void PopulateDatabase()
+        {
+            //CreateRolesandUsers();
+
             var ctx = new BlogContext();
             {
                 var laboratorio = new Laboratorio { Nombre = "LINES", Descripcion = "LINES - Laboratorio" };
@@ -23,9 +31,7 @@ namespace BlogDeInvestigacion
             }
         }
 
-
         // Mas informacion en: https://code.msdn.microsoft.com/ASPNET-MVC-5-Security-And-44cbdb97
-
         private void CreateRolesandUsers()
         {
             BlogContext context = new BlogContext();
