@@ -8,18 +8,21 @@
 "Microsoft.CodeDom.Providers.DotNetCompilerPlatform" desde NuGet Package Manager.
 
 3. Creación de la base de datos
+
 3.1.
   Verificar que **no** exista la base de datos "DbBlog", en caso de que exista borrarla, puede hacerlo desde:
   a) SQL Server Management Studio, con server name (LocalDb)\MSSQLLocalDB
   b) Abrir la solucion en Visual Studio -> Views -> SQL Server Object Explorer
   
-3.2.
+3.2
+  Verificar que exista la carpeta "App_Data" dentro de la carpeta donde se encuentra ubicado el proyecto, de otra forma la aplicación dará un error a la hora de intentar de crear la base de datos
+3.3.
   Eliminar todas las migraciones (en la carpeta migrations dentro del proyecto, **NO ELIMINAR configuration.cs**)
   
-3.3.
+3.4.
   Reconstruir el projecto (Visual Studio -> Build -> Rebuild Solution)
   
-3.4.
+3.5.
   En Package Manager Console, correr los siguientes comandos:
   
   Add-Migration NombreDeLaMigracion       
@@ -27,7 +30,7 @@
   
   **Update-Database**
   
-3.5.
+3.6.
   Iniciar la aplicación para que termine de crear las tablas restantes
 
 
