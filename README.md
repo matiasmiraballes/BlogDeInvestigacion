@@ -16,6 +16,7 @@
   
 3.2
   Verificar que exista la carpeta "App_Data" dentro de la carpeta donde se encuentra ubicado el proyecto, de otra forma la aplicación dará un error a la hora de intentar de crear la base de datos
+
 3.3.
   Eliminar todas las migraciones (en la carpeta migrations dentro del proyecto, **NO ELIMINAR configuration.cs**)
   
