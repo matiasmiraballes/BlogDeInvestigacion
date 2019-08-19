@@ -35,6 +35,55 @@
   Iniciar la aplicación para que termine de crear las tablas restantes
 
 
+# AGREGANDO TABLAS A LA BASE DE DATOS
+
+Para agregar tablas a la base de datos seguir los siguientes pasos:
+
+#### CREAR EL MODELO CORRESPONDIENTE
+
+Para ello debemos agregar una clase dentro de la carpeta **"/Models"** con el nombre del modelo deseado, los modelos siguen un formato similar al siguiente:
+```
+namespace BlogDeInvestigacion.Models
+{
+    public class Laboratorio
+    {
+        [Key]
+        public int IdLaboratorio { get; set; }
+
+        [StringLength(50)]
+        public string Nombre { get; set; }
+
+        public string Descripcion { get; set; }
+        ...
+    }
+}
+```
+**NOTA**: [Key], [StringLength(50)] son etiquetas que se utilizan para especificar caracteristicas de las propiedades, se pueden buscar por el nombre **Data Annotations** 
+
+#### ACTUALIZAR EL METODO SEEDER
+
+Dentro de la clase "/Migrations/Configuration.cs" se encuentra un método llamado Seed. Este método se ejecuta luego de actualizar la base de datos
+co el comando "Update-Database". Las migraciones no plasmarán modelos a la base de datos a menos que se utilicen en alguna seccion del código.
+Es recomendable agregar registros a la base de datos aquí, de esta forma las tablas siempre estarán creadas y con información para poder hacer pruebas.
+
+** Ejemplo de registros "laboratorios"
+```
+var laboratorios = new List<Laboratorio>
+{
+new Laboratorio{Nombre="LINES",Descripcion="LINES - Laboratorio de Ingeniería en Sistemas de Información, Misión: Efectuar desarrollos de avanzada e investigación aplicada, sobre temas relacionados con las necesidades y características informáticas del sistema productivo local, nacional e internacional. En temas relacionados a desarrollo de software a medida, auditorias, consultoría, redes y comunicaciones."},
+new Laboratorio{Nombre="LINSI",Descripcion="LINSI - Laboratorio de Innovaciones en sistemas de Información, Misión: Dar Apoyo académico en áreas de competencia del Departamento de Sistemas de Información (DSI) que componen el Departamento de Ingeniería en Sistemas de Información, además de desarrollar actividades de investigación y desarrollo de distintos proyectos tecnológicos."},
+...
+};
+
+laboratorios.ForEach(l => context.Laboratorios.Add(l));
+context.SaveChanges();
+```
+#### ACTUALIZAR LA BASE DE DATOS CON ENTITY FRAMEWORK
+
+Una vez agregado el modelo y actualizado el seeder, solo queda correr los comandos para actualizar la base de datos. Asegurese de que las entradas que se intentan agregar a la base de datos cumplan con los tipos/restricciones asignados:
+
+1. **Add-Migration NombreDeLaMigracion**
+2. **Update-Database**
 
 
 ## VINCULOS RELEVANTES
