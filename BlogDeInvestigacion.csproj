@@ -185,6 +185,10 @@
     <Compile Include="Migrations\201908160208277_RemovedIdentityDBContext.Designer.cs">
       <DependentUpon>201908160208277_RemovedIdentityDBContext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908192302524_LaboratorioNoticiaRelationship.cs" />
+    <Compile Include="Migrations\201908192302524_LaboratorioNoticiaRelationship.Designer.cs">
+      <DependentUpon>201908192302524_LaboratorioNoticiaRelationship.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Laboratorio.cs" />
@@ -283,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908160208277_RemovedIdentityDBContext.resx">
       <DependentUpon>201908160208277_RemovedIdentityDBContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908192302524_LaboratorioNoticiaRelationship.resx">
+      <DependentUpon>201908192302524_LaboratorioNoticiaRelationship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

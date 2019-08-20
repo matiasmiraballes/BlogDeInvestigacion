@@ -33,6 +33,19 @@ namespace BlogDeInvestigacion.Migrations
 
             laboratorios.ForEach(l => context.Laboratorios.Add(l));
             context.SaveChanges();
+
+            var noticias = new List<Noticia>
+            {
+                new Noticia{Titulo="Inauguracion", Description="Se ha inaugurado la seccion de...", FechaCreacion = DateTime.ParseExact("15/06/2019 20:00:00", "dd/MM/yyyy HH:mm:ss",null)}
+            };
+
+            noticias.ForEach(n => context.Noticias.Add(n));
+            context.SaveChanges();
+
+            //public Laboratorio laboratorio { get; set; }
+            //public string Titulo { get; set; }
+            //public string Description { get; set; }
+            //public DateTime FechaCreacion { get; set; }
         }
     }
 }

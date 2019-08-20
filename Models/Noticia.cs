@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,8 @@ namespace BlogDeInvestigacion.Models
     {
         [Key]
         public int IdNoticia { get; set; }
-        public int IdLaboratorio { get; set; }
+
+        public Laboratorio laboratorio { get; set; }
 
         [Required]
         [MaxLength(50)]
