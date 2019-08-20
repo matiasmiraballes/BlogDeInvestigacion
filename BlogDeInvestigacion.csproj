@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\Laboratorio.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Noticia.cs" />

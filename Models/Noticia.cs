@@ -19,7 +19,7 @@ namespace BlogDeInvestigacion.Models
         public string Titulo { get; set; }
 
         [MaxLength(500)]
-        public string Description { get; set; }
+        public string Descripcion { get; set; }
         public DateTime FechaCreacion { get; set; }
     }
 }
