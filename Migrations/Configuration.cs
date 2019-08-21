@@ -6,7 +6,9 @@ namespace BlogDeInvestigacion.Migrations
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Data.Entity.Validation;
     using System.Linq;
+    using System.Text;
 
     internal sealed class Configuration : DbMigrationsConfiguration<BlogContext>
     {
@@ -32,7 +34,7 @@ namespace BlogDeInvestigacion.Migrations
             };
 
             laboratorios.ForEach(l => context.Laboratorios.Add(l));
-            context.SaveChanges();
+            SaveChanges(context);
 
             var noticias = new List<Noticia>
             {
@@ -41,12 +43,55 @@ namespace BlogDeInvestigacion.Migrations
             };
 
             noticias.ForEach(n => context.Noticias.Add(n));
-            context.SaveChanges();
+            SaveChanges(context);
 
-            //public Laboratorio laboratorio { get; set; }
-            //public string Titulo { get; set; }
-            //public string Description { get; set; }
-            //public DateTime FechaCreacion { get; set; }
+            var eventos = new List<Evento>
+            {
+                new Evento
+                {
+                    Nombre ="Jornada interna exposición de avances de trabajos de becarios...",
+                    Descripcion ="Los becarios del LINSI han presentado el primer avance del trabajo de Active Directory y SAMBA...Excelente!!!",
+                    Laboratorio = laboratorios[1],
+                    Inicio = DateTime.ParseExact("15/06/2018 18:00:00", "dd/MM/yyyy HH:mm:ss",null),
+                    Fin = DateTime.ParseExact("15/06/2019 22:00:00", "dd/MM/yyyy HH:mm:ss",null)
+                }
+            };
+
+            eventos.ForEach(e => context.Eventos.Add(e));
+            SaveChanges(context);
         }
+
+
+        /// <summary>
+        /// Wrapper for SaveChanges adding the Validation Messages to the generated exception
+        /// </summary>
+        /// <param name="context">The context.</param>
+        private void SaveChanges(DbContext context)
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
+            }
+        }
+
     }
 }

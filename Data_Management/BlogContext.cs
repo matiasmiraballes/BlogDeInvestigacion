@@ -35,6 +35,7 @@ namespace BlogDeInvestigacion.Data_Management
 
         public DbSet<Laboratorio> Laboratorios { get; set; }
         public DbSet<Noticia> Noticias { get; set; }
+        public DbSet<Evento> Eventos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
