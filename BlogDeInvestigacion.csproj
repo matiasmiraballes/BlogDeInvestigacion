@@ -177,25 +177,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201908070003358_CleanMigration.cs" />
-    <Compile Include="Migrations\201908070003358_CleanMigration.Designer.cs">
-      <DependentUpon>201908070003358_CleanMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908160208277_RemovedIdentityDBContext.cs" />
-    <Compile Include="Migrations\201908160208277_RemovedIdentityDBContext.Designer.cs">
-      <DependentUpon>201908160208277_RemovedIdentityDBContext.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908192302524_LaboratorioNoticiaRelationship.cs" />
-    <Compile Include="Migrations\201908192302524_LaboratorioNoticiaRelationship.Designer.cs">
-      <DependentUpon>201908192302524_LaboratorioNoticiaRelationship.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908202341460_ModeloNoticias.cs" />
-    <Compile Include="Migrations\201908202341460_ModeloNoticias.Designer.cs">
-      <DependentUpon>201908202341460_ModeloNoticias.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908210012309_ModeloEventos.cs" />
-    <Compile Include="Migrations\201908210012309_ModeloEventos.Designer.cs">
-      <DependentUpon>201908210012309_ModeloEventos.cs</DependentUpon>
+    <Compile Include="Migrations\201908252249581_CleanMigration.cs" />
+    <Compile Include="Migrations\201908252249581_CleanMigration.Designer.cs">
+      <DependentUpon>201908252249581_CleanMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -291,20 +275,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908070003358_CleanMigration.resx">
-      <DependentUpon>201908070003358_CleanMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908160208277_RemovedIdentityDBContext.resx">
-      <DependentUpon>201908160208277_RemovedIdentityDBContext.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908192302524_LaboratorioNoticiaRelationship.resx">
-      <DependentUpon>201908192302524_LaboratorioNoticiaRelationship.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908202341460_ModeloNoticias.resx">
-      <DependentUpon>201908202341460_ModeloNoticias.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908210012309_ModeloEventos.resx">
-      <DependentUpon>201908210012309_ModeloEventos.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908252249581_CleanMigration.resx">
+      <DependentUpon>201908252249581_CleanMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

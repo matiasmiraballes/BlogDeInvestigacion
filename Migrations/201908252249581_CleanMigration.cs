@@ -8,6 +8,45 @@ namespace BlogDeInvestigacion.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Eventos",
+                c => new
+                    {
+                        IdEvento = c.Int(nullable: false, identity: true),
+                        Nombre = c.String(nullable: false, maxLength: 100),
+                        Descripcion = c.String(maxLength: 500),
+                        Inicio = c.DateTime(nullable: false),
+                        Fin = c.DateTime(nullable: false),
+                        Laboratorio_IdLaboratorio = c.Int(),
+                    })
+                .PrimaryKey(t => t.IdEvento)
+                .ForeignKey("dbo.Laboratorios", t => t.Laboratorio_IdLaboratorio)
+                .Index(t => t.Laboratorio_IdLaboratorio);
+            
+            CreateTable(
+                "dbo.Laboratorios",
+                c => new
+                    {
+                        IdLaboratorio = c.Int(nullable: false, identity: true),
+                        Nombre = c.String(maxLength: 50),
+                        Descripcion = c.String(maxLength: 500),
+                    })
+                .PrimaryKey(t => t.IdLaboratorio);
+            
+            CreateTable(
+                "dbo.Noticias",
+                c => new
+                    {
+                        IdNoticia = c.Int(nullable: false, identity: true),
+                        Titulo = c.String(nullable: false, maxLength: 50),
+                        Descripcion = c.String(maxLength: 500),
+                        FechaCreacion = c.DateTime(nullable: false),
+                        laboratorio_IdLaboratorio = c.Int(),
+                    })
+                .PrimaryKey(t => t.IdNoticia)
+                .ForeignKey("dbo.Laboratorios", t => t.laboratorio_IdLaboratorio)
+                .Index(t => t.laboratorio_IdLaboratorio);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -23,12 +62,13 @@ namespace BlogDeInvestigacion.Migrations
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(nullable: false, maxLength: 128),
+                        IdentityUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
                 .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
+                .ForeignKey("dbo.AspNetUsers", t => t.IdentityUser_Id)
+                .Index(t => t.RoleId)
+                .Index(t => t.IdentityUser_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -46,6 +86,7 @@ namespace BlogDeInvestigacion.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
@@ -55,13 +96,14 @@ namespace BlogDeInvestigacion.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(),
                         ClaimType = c.String(),
                         ClaimValue = c.String(),
+                        IdentityUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.AspNetUsers", t => t.IdentityUser_Id)
+                .Index(t => t.IdentityUser_Id);
             
             CreateTable(
                 "dbo.AspNetUserLogins",
@@ -70,30 +112,38 @@ namespace BlogDeInvestigacion.Migrations
                         LoginProvider = c.String(nullable: false, maxLength: 128),
                         ProviderKey = c.String(nullable: false, maxLength: 128),
                         UserId = c.String(nullable: false, maxLength: 128),
+                        IdentityUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.AspNetUsers", t => t.IdentityUser_Id)
+                .Index(t => t.IdentityUser_Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "IdentityUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "IdentityUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "IdentityUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropForeignKey("dbo.Noticias", "laboratorio_IdLaboratorio", "dbo.Laboratorios");
+            DropForeignKey("dbo.Eventos", "Laboratorio_IdLaboratorio", "dbo.Laboratorios");
+            DropIndex("dbo.AspNetUserLogins", new[] { "IdentityUser_Id" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.AspNetUserRoles", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Noticias", new[] { "laboratorio_IdLaboratorio" });
+            DropIndex("dbo.Eventos", new[] { "Laboratorio_IdLaboratorio" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Noticias");
+            DropTable("dbo.Laboratorios");
+            DropTable("dbo.Eventos");
         }
     }
 }
