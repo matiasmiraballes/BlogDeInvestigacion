@@ -1,5 +1,5 @@
 ﻿// Hide submenus
-$("#body-row .collapse").collapse('hide');
+$('#body-row .collapse').collapse('hide');
 
 // Collapse/Expand icon
 $('#collapse-icon').addClass('fa-angle-double-left');
@@ -26,3 +26,9 @@ function SidebarCollapse() {
     // Collapse/Expand icon
     $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
 }
+
+/* Page Scripts */
+
+$("#btnMostrarNoticia").on("click", document, function () {
+    $("#btnMostrarNoticia").modal('show');
+});

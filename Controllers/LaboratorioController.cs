@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BlogDeInvestigacion.Data_Management;
 using BlogDeInvestigacion.Models;
+using BlogDeInvestigacion.ViewModels;
 
 namespace BlogDeInvestigacion.Controllers
 {
@@ -116,9 +117,61 @@ namespace BlogDeInvestigacion.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Laboratorio()
+        // MOSTRAR LABORATORIO
+
+        //[ValidateAntiForgeryToken]
+        public ActionResult Laboratorio(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Laboratorio laboratorio = db.Laboratorios.Find(id);
+
+            if (laboratorio == null)
+            {
+                return HttpNotFound();
+            }
+
+            var Comentarios1 = new List<Comentario>
+            {
+                new Comentario { IdComentario = 1, NombreDeUsuario = "Matias Miraballes" ,Texto = "Comentario-1", TiempoCreacion = DateTime.Now},
+                new Comentario { IdComentario = 2, NombreDeUsuario = "Nicolas Palomeque" , Texto = "Comentario-2", TiempoCreacion = DateTime.Now}
+            };
+
+            var Comentarios2 = new List<Comentario>
+            {
+                new Comentario { IdComentario = 3, NombreDeUsuario = "Nicolas Palomeque" ,Texto = "Comentario-3", TiempoCreacion = DateTime.Now},
+                new Comentario { IdComentario = 4, NombreDeUsuario = "Matias Miraballes" , Texto = "Comentario-4", TiempoCreacion = DateTime.Now},
+                new Comentario { IdComentario = 5, NombreDeUsuario = "Matias Miraballes" , Texto = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", TiempoCreacion = DateTime.Now}
+            };
+
+            var conversaciones = new List<Conversacion>
+            {
+                new Conversacion
+                {
+                    IdConversacion = 1,
+                    IdLaboratorio = 1,
+                    TiempoCreacion = DateTime.Now,
+                    Comentarios = Comentarios1
+                },
+                new Conversacion
+                {
+                    IdConversacion = 2,
+                    IdLaboratorio = 1,
+                    TiempoCreacion = DateTime.Now,
+                    Comentarios = Comentarios2
+                }
+            };
+
+            LaboratorioViewModel labViewModel = new LaboratorioViewModel
+            {
+                Laboratorio = laboratorio,
+                Conversaciones = conversaciones
+            };
+
+            return View(labViewModel);
         }
 
         protected override void Dispose(bool disposing)
