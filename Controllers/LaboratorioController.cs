@@ -134,6 +134,19 @@ namespace BlogDeInvestigacion.Controllers
                 return HttpNotFound();
             }
 
+            var conversaciones = GetConversaciones();
+
+            LaboratorioViewModel labViewModel = new LaboratorioViewModel
+            {
+                Laboratorio = laboratorio,
+                Conversaciones = conversaciones
+            };
+
+            return View(labViewModel);
+        }
+
+        private IList<Conversacion> GetConversaciones()
+        {
             var Comentarios1 = new List<Comentario>
             {
                 new Comentario { IdComentario = 1, NombreDeUsuario = "Matias Miraballes" ,Texto = "Comentario-1", TiempoCreacion = DateTime.Now},
@@ -165,13 +178,7 @@ namespace BlogDeInvestigacion.Controllers
                 }
             };
 
-            LaboratorioViewModel labViewModel = new LaboratorioViewModel
-            {
-                Laboratorio = laboratorio,
-                Conversaciones = conversaciones
-            };
-
-            return View(labViewModel);
+            return conversaciones;
         }
 
         protected override void Dispose(bool disposing)
