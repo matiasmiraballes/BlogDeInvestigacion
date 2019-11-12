@@ -5,36 +5,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>LABORATORIOS</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Laboratorio", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th></th>
-    </tr>
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.Descripcion)</th>
+            @if (User.IsInRole("Administrador"))
+            {
+                <th scope="col"> ADMINISTRAR </th>
+            }
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdLaboratorio }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdLaboratorio }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdLaboratorio })
-        </td>
-    </tr>
-}
-
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Nombre, "Laboratorio", new { id = item.IdLaboratorio })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdLaboratorio })
+                        @Html.Raw("|");
+                        @Html.ActionLink("Details", "Details", new { id = item.IdLaboratorio })
+                        @Html.Raw("|");
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdLaboratorio })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
