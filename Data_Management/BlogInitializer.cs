@@ -4,7 +4,8 @@ using System.Data.Entity;
 
 namespace BlogDeInvestigacion.Data_Management
 {
-    public class BlogInitializer : DropCreateDatabaseIfModelChanges<BlogContext>
+    //public class BlogInitializer : DropCreateDatabaseIfModelChanges<BlogContext>
+    public class BlogInitializer : DropCreateDatabaseAlways<BlogContext>
     {
         //Más informacion en https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application#create-the-database-context
         protected override void Seed(BlogContext context)
@@ -20,6 +21,7 @@ namespace BlogDeInvestigacion.Data_Management
 
             laboratorios.ForEach(l => context.Laboratorios.Add(l));
             context.SaveChanges();
+            //base.Seed(context);
         }
     }
 }

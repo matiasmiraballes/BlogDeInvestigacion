@@ -17,6 +17,11 @@ namespace BlogDeInvestigacion.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
+        //public void SeedDatabase(BlogContext context)
+        //{
+        //    Seed(context);
+        //}
+
         protected override void Seed(BlogContext context)
         {
             //  This method will be called after migrating to the latest version.
