@@ -8,12 +8,25 @@ using System.Web;
 using System.Web.Mvc;
 using BlogDeInvestigacion.Data_Management;
 using BlogDeInvestigacion.Models;
+using BlogDeInvestigacion.Services;
 using BlogDeInvestigacion.ViewModels;
 
 namespace BlogDeInvestigacion.Controllers
 {
     public class LaboratorioController : Controller
     {
+        private ServicioComentarios CommentsSerives;
+
+        private ServicioComentarios getCommentsService()
+        {
+            if (CommentsSerives == null)
+            {
+                this.CommentsSerives = new ServicioComentarios();
+            }
+
+            return this.CommentsSerives;
+        }
+
         private BlogContext db = new BlogContext();
 
         // GET: Laboratorio
@@ -134,7 +147,8 @@ namespace BlogDeInvestigacion.Controllers
                 return HttpNotFound();
             }
 
-            var conversaciones = GetConversaciones();
+            var service = getCommentsService();
+            IList<Conversacion> conversaciones = service.ObtenerConversaciones();
 
             LaboratorioViewModel labViewModel = new LaboratorioViewModel
             {
@@ -143,42 +157,6 @@ namespace BlogDeInvestigacion.Controllers
             };
 
             return View(labViewModel);
-        }
-
-        private IList<Conversacion> GetConversaciones()
-        {
-            var Comentarios1 = new List<Comentario>
-            {
-                new Comentario { IdComentario = 1, NombreDeUsuario = "Matias Miraballes" ,Texto = "Comentario-1", TiempoCreacion = DateTime.Now},
-                new Comentario { IdComentario = 2, NombreDeUsuario = "Nicolas Palomeque" , Texto = "Comentario-2", TiempoCreacion = DateTime.Now}
-            };
-
-            var Comentarios2 = new List<Comentario>
-            {
-                new Comentario { IdComentario = 3, NombreDeUsuario = "Nicolas Palomeque" ,Texto = "Comentario-3", TiempoCreacion = DateTime.Now},
-                new Comentario { IdComentario = 4, NombreDeUsuario = "Matias Miraballes" , Texto = "Comentario-4", TiempoCreacion = DateTime.Now},
-                new Comentario { IdComentario = 5, NombreDeUsuario = "Matias Miraballes" , Texto = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", TiempoCreacion = DateTime.Now}
-            };
-
-            var conversaciones = new List<Conversacion>
-            {
-                new Conversacion
-                {
-                    IdConversacion = 1,
-                    IdLaboratorio = 1,
-                    TiempoCreacion = DateTime.Now,
-                    Comentarios = Comentarios1
-                },
-                new Conversacion
-                {
-                    IdConversacion = 2,
-                    IdLaboratorio = 1,
-                    TiempoCreacion = DateTime.Now,
-                    Comentarios = Comentarios2
-                }
-            };
-
-            return conversaciones;
         }
 
         protected override void Dispose(bool disposing)

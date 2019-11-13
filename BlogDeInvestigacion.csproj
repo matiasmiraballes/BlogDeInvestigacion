@@ -183,6 +183,10 @@
     <Compile Include="Migrations\201908252249581_CleanMigration.Designer.cs">
       <DependentUpon>201908252249581_CleanMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910290234536_Conversaciones-y-Comentarios.cs" />
+    <Compile Include="Migrations\201910290234536_Conversaciones-y-Comentarios.Designer.cs">
+      <DependentUpon>201910290234536_Conversaciones-y-Comentarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -194,6 +198,7 @@
     <Compile Include="Models\OpcionMenu.cs" />
     <Compile Include="Models\SeccionMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ServicioComentarios.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\LaboratorioViewModel.cs" />
   </ItemGroup>
@@ -331,6 +336,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201908252249581_CleanMigration.resx">
       <DependentUpon>201908252249581_CleanMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910290234536_Conversaciones-y-Comentarios.resx">
+      <DependentUpon>201910290234536_Conversaciones-y-Comentarios.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
