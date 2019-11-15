@@ -1,8 +1,10 @@
-﻿using BlogDeInvestigacion.Models;
+﻿using BlogDeInvestigacion.Data_Management;
+using BlogDeInvestigacion.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace BlogDeInvestigacion.Services
 {
@@ -44,6 +46,30 @@ namespace BlogDeInvestigacion.Services
             return conversaciones;
         }
 
+        public void GuardarConversacion(Conversacion conversacion)
+        {
 
+            using (BlogContext db = new BlogContext())
+            {
+                var convExistente = db.Conversaciones.Include(c => c.Comentarios)
+                                                      .Where(c => c.IdConversacion == conversacion.IdConversacion)
+                                                      .SingleOrDefault();
+
+                //si la conversacion ya existe, se borra y crea de nuevo
+                if (convExistente != null)
+                {
+                    foreach (Comentario comentario in convExistente.Comentarios.ToList())
+                    {
+                        db.Comentarios.Remove(comentario);
+                    }
+
+                    db.Conversaciones.Remove(convExistente);
+                }
+
+                db.Conversaciones.Add(conversacion);
+                db.SaveChanges();
+            }
+
+        }
     }
 }
