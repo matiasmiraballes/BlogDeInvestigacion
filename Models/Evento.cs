@@ -8,7 +8,7 @@ using System.Web;
 namespace BlogDeInvestigacion.Models
 {
     [Table("Eventos")]
-    public class Evento
+    public class Evento : IElementoMuro
     {
         [Key]
         public int IdEvento { get; set; }
@@ -27,5 +27,10 @@ namespace BlogDeInvestigacion.Models
 
         [Required]
         public DateTime Fin { get; set; }
+
+        public DateTime GetFechaDePublicacion()
+        {
+            return Inicio;
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BlogDeInvestigacion.Models
 {
-    public class Conversacion
+    public class Conversacion : IElementoMuro
     {
         [Key]
         public int IdConversacion { get; set; }
@@ -16,5 +16,10 @@ namespace BlogDeInvestigacion.Models
         public DateTime TiempoCreacion { get; set; }
 
         public IList<Comentario> Comentarios { get; set; }
+
+        public DateTime GetFechaDePublicacion()
+        {
+            return TiempoCreacion;
+        }
     }
 }
