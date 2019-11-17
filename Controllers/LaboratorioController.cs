@@ -159,6 +159,28 @@ namespace BlogDeInvestigacion.Controllers
             return View(labViewModel);
         }
 
+
+       //public ActionResult CrearEvento(string nombre, string descripcion, string Inicio, string fin)
+       public ActionResult CrearEvento(Evento evento)
+       {
+
+            Evento eventoN = new Evento
+            {
+                Nombre = evento.Nombre,
+                Descripcion = evento.Descripcion,
+                Inicio = evento.Inicio,
+                Fin = evento.Fin,
+
+            };
+
+            var ServicioEvento = new ServicioEvento();
+
+           ServicioEvento.GuardarEvento(eventoN);
+
+            return RedirectToAction("Index");
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

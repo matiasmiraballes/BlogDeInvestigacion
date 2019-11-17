@@ -187,6 +187,14 @@
     <Compile Include="Migrations\201910290234536_Conversaciones-y-Comentarios.Designer.cs">
       <DependentUpon>201910290234536_Conversaciones-y-Comentarios.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911171637355_FehcaFinSinRequired.cs" />
+    <Compile Include="Migrations\201911171637355_FehcaFinSinRequired.Designer.cs">
+      <DependentUpon>201911171637355_FehcaFinSinRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911171711373_DatatimeADataTime2.cs" />
+    <Compile Include="Migrations\201911171711373_DatatimeADataTime2.Designer.cs">
+      <DependentUpon>201911171711373_DatatimeADataTime2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -199,6 +207,7 @@
     <Compile Include="Models\SeccionMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServicioComentarios.cs" />
+    <Compile Include="Services\ServicioEvento.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\LaboratorioViewModel.cs" />
   </ItemGroup>
@@ -339,6 +348,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910290234536_Conversaciones-y-Comentarios.resx">
       <DependentUpon>201910290234536_Conversaciones-y-Comentarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911171637355_FehcaFinSinRequired.resx">
+      <DependentUpon>201911171637355_FehcaFinSinRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911171711373_DatatimeADataTime2.resx">
+      <DependentUpon>201911171711373_DatatimeADataTime2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -25,7 +25,7 @@ namespace BlogDeInvestigacion.Models
         [Required]
         public DateTime Inicio { get; set; }
 
-        [Required]
         public DateTime Fin { get; set; }
+
     }
 }
