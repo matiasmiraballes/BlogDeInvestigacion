@@ -15,13 +15,13 @@ namespace BlogDeInvestigacion.Controllers
 {
     public class LaboratorioController : Controller
     {
-        private ServicioComentarios CommentsSerives;
+        private ServicioEventos CommentsSerives;
 
-        private ServicioComentarios getCommentsService()
+        private ServicioEventos getCommentsService()
         {
             if (CommentsSerives == null)
             {
-                this.CommentsSerives = new ServicioComentarios();
+                this.CommentsSerives = new ServicioEventos();
             }
 
             return this.CommentsSerives;
@@ -177,8 +177,9 @@ namespace BlogDeInvestigacion.Controllers
 
            ServicioEvento.GuardarEvento(eventoN);
 
-            return RedirectToAction("Index");
+            return View("~/Views/Evento/Index.cshtml",db.Eventos.ToList());
         }
+
 
 
         protected override void Dispose(bool disposing)

@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LaboratorioController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -194,6 +195,10 @@
     <Compile Include="Migrations\201911171711373_DatatimeADataTime2.cs" />
     <Compile Include="Migrations\201911171711373_DatatimeADataTime2.Designer.cs">
       <DependentUpon>201911171711373_DatatimeADataTime2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911172040088_LaboratorioRequired.cs" />
+    <Compile Include="Migrations\201911172040088_LaboratorioRequired.Designer.cs">
+      <DependentUpon>201911172040088_LaboratorioRequired.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -334,6 +339,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_SideBarSection.cshtml" />
     <Content Include="Views\Shared\_MasterLayout.cshtml" />
+    <Content Include="Views\Evento\Index.cshtml" />
+    <Content Include="Views\Evento\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -354,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911171711373_DatatimeADataTime2.resx">
       <DependentUpon>201911171711373_DatatimeADataTime2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911172040088_LaboratorioRequired.resx">
+      <DependentUpon>201911172040088_LaboratorioRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

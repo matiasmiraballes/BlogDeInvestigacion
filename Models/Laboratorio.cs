@@ -12,9 +12,11 @@ namespace BlogDeInvestigacion.Models
         public int IdLaboratorio { get; set; }
 
         [StringLength(50)]
+        [Required]
         public string Nombre { get; set; }
 
         [StringLength(500)]
+        [Required]
         public string Descripcion { get; set; }
     }
 }
