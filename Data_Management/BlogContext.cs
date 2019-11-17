@@ -58,6 +58,9 @@ namespace BlogDeInvestigacion.Data_Management
             modelBuilder.Entity<IdentityUserRole>().HasKey((IdentityUserRole r) => new { UserId = r.UserId, RoleId = r.RoleId }).ToTable("dbo.AspNetUserRoles");
 
             modelBuilder.Entity<IdentityUserLogin>().ToTable("dbo.AspNetUserLogins");
+
+            modelBuilder.Entity<Evento>().Property(e => e.Inicio).HasColumnType("datetime2");
+            modelBuilder.Entity<Evento>().Property(e => e.Fin).HasColumnType("datetime2");
         }
 
         public static BlogContext Create()

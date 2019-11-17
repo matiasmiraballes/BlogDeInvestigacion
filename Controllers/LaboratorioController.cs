@@ -15,13 +15,13 @@ namespace BlogDeInvestigacion.Controllers
 {
     public class LaboratorioController : Controller
     {
-        private ServicioComentarios CommentsSerives;
+        private ServicioEventos CommentsSerives;
 
-        private ServicioComentarios getCommentsService()
+        private ServicioEventos getCommentsService()
         {
             if (CommentsSerives == null)
             {
-                this.CommentsSerives = new ServicioComentarios();
+                this.CommentsSerives = new ServicioEventos();
             }
 
             return this.CommentsSerives;
@@ -158,6 +158,29 @@ namespace BlogDeInvestigacion.Controllers
 
             return View(labViewModel);
         }
+
+
+       //public ActionResult CrearEvento(string nombre, string descripcion, string Inicio, string fin)
+       public ActionResult CrearEvento(Evento evento)
+       {
+
+            Evento eventoN = new Evento
+            {
+                Nombre = evento.Nombre,
+                Descripcion = evento.Descripcion,
+                Inicio = evento.Inicio,
+                Fin = evento.Fin,
+
+            };
+
+            var ServicioEvento = new ServicioEvento();
+
+           ServicioEvento.GuardarEvento(eventoN);
+
+            return View("~/Views/Evento/Index.cshtml",db.Eventos.ToList());
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

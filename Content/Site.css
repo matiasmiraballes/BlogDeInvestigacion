@@ -22,3 +22,6 @@ select,
 textarea {
     max-width: 280px;
 }
+.btnblk {
+    background-color: #1a1a1a
+}

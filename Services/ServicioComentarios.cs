@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace BlogDeInvestigacion.Services
 {
-    public class ServicioComentarios
+    public class ServicioEventos
     {
         public IList<Conversacion> ObtenerConversaciones()
         {
