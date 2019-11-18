@@ -15,13 +15,13 @@ namespace BlogDeInvestigacion.Controllers
 {
     public class LaboratorioController : Controller
     {
-        private ServicioEventos CommentsSerives;
+        private ServicioComentarios CommentsSerives;
 
-        private ServicioEventos getCommentsService()
+        private ServicioComentarios getCommentsService()
         {
             if (CommentsSerives == null)
             {
-                this.CommentsSerives = new ServicioEventos();
+                this.CommentsSerives = new ServicioComentarios();
             }
 
             return this.CommentsSerives;
@@ -157,6 +157,32 @@ namespace BlogDeInvestigacion.Controllers
             };
 
             return View(labViewModel);
+        }
+
+        public ActionResult GuardarComentario(int? IdConversacion, int IdLaboratorio, string Texto)
+        {
+            var service = getCommentsService();
+
+            if (IdConversacion != null)
+            {
+                var IdConv = IdConversacion ?? default(int); // Si IdConversacion = null, asigna IdConv = null
+                var conversacionExistente = service.BuscarConversacion(IdConv);
+
+                var nuevoComentario = new Comentario
+                {
+                    NombreDeUsuario = User.Identity.Name,
+                    Texto = Texto,
+                    TiempoCreacion = DateTime.Now,
+                    IdConversacion = IdConv,
+                    IdComentario = conversacionExistente.Comentarios.LastOrDefault().IdComentario + 1
+                };
+
+                conversacionExistente.Comentarios.Add(nuevoComentario);
+
+                service.GuardarConversacion(conversacionExistente);
+            }
+
+            return View("~/Views/Evento/Index.cshtml", db.Eventos.ToList());
         }
 
 

@@ -8,42 +8,32 @@ using System.Data.Entity;
 
 namespace BlogDeInvestigacion.Services
 {
-    public class ServicioEventos
+    public class ServicioComentarios
     {
         public IList<Conversacion> ObtenerConversaciones()
         {
-            var Comentarios1 = new List<Comentario>
-            {
-                new Comentario { IdComentario = 1, NombreDeUsuario = "Matias Miraballes" ,Texto = "Comentario-1", TiempoCreacion = DateTime.Now},
-                new Comentario { IdComentario = 2, NombreDeUsuario = "Nicolas Palomeque" , Texto = "Comentario-2", TiempoCreacion = DateTime.Now}
-            };
+            List<Conversacion> conversaciones;
 
-            var Comentarios2 = new List<Comentario>
+            using (BlogContext db = new BlogContext())
             {
-                new Comentario { IdComentario = 3, NombreDeUsuario = "Nicolas Palomeque" ,Texto = "Comentario-3", TiempoCreacion = DateTime.Now},
-                new Comentario { IdComentario = 4, NombreDeUsuario = "Matias Miraballes" , Texto = "Comentario-4", TiempoCreacion = DateTime.Now},
-                new Comentario { IdComentario = 5, NombreDeUsuario = "Matias Miraballes" , Texto = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", TiempoCreacion = DateTime.Now}
-            };
-
-            var conversaciones = new List<Conversacion>
-            {
-                new Conversacion
-                {
-                    IdConversacion = 1,
-                    IdLaboratorio = 1,
-                    TiempoCreacion = DateTime.Now,
-                    Comentarios = Comentarios1
-                },
-                new Conversacion
-                {
-                    IdConversacion = 2,
-                    IdLaboratorio = 1,
-                    TiempoCreacion = DateTime.Now,
-                    Comentarios = Comentarios2
-                }
-            };
+                conversaciones = db.Conversaciones.Include(c => c.Comentarios).ToList();
+            }
 
             return conversaciones;
+        }
+
+        public Conversacion BuscarConversacion(int id)
+        {
+            Conversacion conversacion;
+
+            using (BlogContext db = new BlogContext())
+            {
+                conversacion = db.Conversaciones.Include(c => c.Comentarios)
+                                                .Where(c => c.IdConversacion == id)
+                                                .SingleOrDefault();
+            }
+
+            return conversacion;
         }
 
         public void GuardarConversacion(Conversacion conversacion)
@@ -66,8 +56,12 @@ namespace BlogDeInvestigacion.Services
                     db.Conversaciones.Remove(convExistente);
                 }
 
+                //db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Comentarios ON");
+                //db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Conversacions ON");
                 db.Conversaciones.Add(conversacion);
                 db.SaveChanges();
+                //db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Conversacions OFF");
+                //db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Comentarios OFF");
             }
 
         }

@@ -12,6 +12,7 @@ namespace BlogDeInvestigacion.Controllers
     public class HomeController : Controller
     {
         private ServicioComentarios CommentsSerives;
+        private ServicioEvento EventsServices;
 
         private ServicioComentarios getCommentsService()
         {
@@ -21,6 +22,16 @@ namespace BlogDeInvestigacion.Controllers
             }
 
             return this.CommentsSerives;
+        }
+
+        private ServicioEvento getEventsService()
+        {
+            if (EventsServices == null)
+            {
+                this.EventsServices = new ServicioEvento();
+            }
+
+            return this.EventsServices;
         }
 
         public ActionResult Index()

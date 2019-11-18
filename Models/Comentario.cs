@@ -16,5 +16,9 @@ namespace BlogDeInvestigacion.Models
         public DateTime TiempoCreacion { get; set; }
 
         public string Texto { get; set; }
+
+        //Clave Foranea para Conversacion
+        public int IdConversacion { get; set; }
+        public Conversacion Conversacion { get; set; }
     }
 }

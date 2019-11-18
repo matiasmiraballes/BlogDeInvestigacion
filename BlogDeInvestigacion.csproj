@@ -200,6 +200,14 @@
     <Compile Include="Migrations\201911172040088_LaboratorioRequired.Designer.cs">
       <DependentUpon>201911172040088_LaboratorioRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911172131003_MergeBranch.cs" />
+    <Compile Include="Migrations\201911172131003_MergeBranch.Designer.cs">
+      <DependentUpon>201911172131003_MergeBranch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911181807454_ClaveForaneaConversacionEnComentario.cs" />
+    <Compile Include="Migrations\201911181807454_ClaveForaneaConversacionEnComentario.Designer.cs">
+      <DependentUpon>201911181807454_ClaveForaneaConversacionEnComentario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -366,6 +374,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911172040088_LaboratorioRequired.resx">
       <DependentUpon>201911172040088_LaboratorioRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911172131003_MergeBranch.resx">
+      <DependentUpon>201911172131003_MergeBranch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911181807454_ClaveForaneaConversacionEnComentario.resx">
+      <DependentUpon>201911181807454_ClaveForaneaConversacionEnComentario.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
