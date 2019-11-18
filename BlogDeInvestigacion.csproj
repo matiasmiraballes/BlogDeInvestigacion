@@ -180,9 +180,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201908252249581_CleanMigration.cs" />
-    <Compile Include="Migrations\201908252249581_CleanMigration.Designer.cs">
-      <DependentUpon>201908252249581_CleanMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201911182105345_Noticiaasdas.cs" />
+    <Compile Include="Migrations\201911182105345_Noticiaasdas.Designer.cs">
+      <DependentUpon>201911182105345_Noticiaasdas.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201910290234536_Conversaciones-y-Comentarios.cs" />
     <Compile Include="Migrations\201910290234536_Conversaciones-y-Comentarios.Designer.cs">
@@ -220,9 +220,11 @@
     <Compile Include="Models\OpcionMenu.cs" />
     <Compile Include="Models\SeccionMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ServicioNoticia.cs" />
     <Compile Include="Services\ServicioComentarios.cs" />
     <Compile Include="Services\ServicioEvento.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\NoticiaViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LaboratorioViewModel.cs" />
   </ItemGroup>
@@ -351,10 +353,12 @@
     <Content Include="Views\Shared\_MasterLayout.cshtml" />
     <Content Include="Views\Evento\Index.cshtml" />
     <Content Include="Views\Evento\Create.cshtml" />
+    <Content Include="Views\Evento\Delete.cshtml" />
+    <Content Include="Views\Evento\Details.cshtml" />
+    <Content Include="Views\Noticia\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -387,6 +391,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201911182105345_Noticiaasdas.resx">
+      <DependentUpon>201911182105345_Noticiaasdas.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

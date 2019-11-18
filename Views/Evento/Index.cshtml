@@ -1,17 +1,16 @@
-﻿
+﻿@model IEnumerable<BlogDeInvestigacion.Models.Evento>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model IEnumerable<BlogDeInvestigacion.Models.Evento>
 
 <h2>EVENTOS</h2>
-
 
 <p>
     @Html.ActionLink("Crear Evento", "Create", null, new { @class = "btn btnblk" })
 </p>
-    
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -29,7 +28,7 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(item.Nombre, "Evento", new { id = item.IdEvento})
+                    @Html.ActionLink(item.Nombre, "Details", new { id = item.IdEvento })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Descripcion)
@@ -37,11 +36,11 @@
                 <td>
                     @if (User.IsInRole("Administrador"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IdEvento})
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdEvento })
                         @Html.Raw("|");
-                        @Html.ActionLink("Details", "Details", new { id = item.IdEvento})
+                        @Html.ActionLink("Details", "Details", new { id = item.IdEvento })
                         @Html.Raw("|");
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IdEvento})
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdEvento })
                     }
                 </td>
             </tr>

@@ -12,6 +12,7 @@ namespace BlogDeInvestigacion.Models
         [Key]
         public int IdNoticia { get; set; }
 
+        [Display(Name = "Laboratorio")]
         public Laboratorio laboratorio { get; set; }
 
         [Required]

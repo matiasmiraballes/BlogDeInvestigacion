@@ -1,10 +1,12 @@
-﻿@model BlogDeInvestigacion.Models.Laboratorio
+﻿@model BlogDeInvestigacion.Models.Evento
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Borrar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <h3>¿Está seguro de que desea borrar este laboratorio?</h3>
+
+
+<h3>¿Está seguro de que desea borrar este evento?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -24,9 +26,22 @@
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
 
+        <dd>
+            @Html.LabelFor(model => model.Inicio)
+            <br />
+            @Html.DisplayFor(model => model.Inicio)
+        </dd>
+
+        <dd>
+            @Html.LabelFor(model => model.Fin)
+            <br />
+            @Html.DisplayFor(model => model.Fin)
+        </dd>
+
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

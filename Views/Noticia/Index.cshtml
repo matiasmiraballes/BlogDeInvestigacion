@@ -1,6 +1,54 @@
-﻿@{
-    ViewBag.Title = "Noticias";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model IEnumerable<BlogDeInvestigacion.Models.Noticia>
 
-<h2>Noticias</h2>
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>NOTICIA</h2>
+
+    <p>
+        @Html.ActionLink("Crear Noticia", "Create", null, new { @class = "btn btnblk" })
+    </p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.Titulo)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Descripcion)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.laboratorio)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FechaCreacion)</th>
+                @if (User.IsInRole("Administrador"))
+                {
+                    <th scope="col"> ADMINISTRAR </th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (BlogDeInvestigacion.Models.Noticia item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Titulo, "Noticia", new { id = item.IdNoticia })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.laboratorio.IdLaboratorio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaCreacion)
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdNoticia })
+                        @Html.Raw("|");
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdNoticia })
+                    }
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>

@@ -40,6 +40,21 @@ namespace BlogDeInvestigacion.Controllers
 
             return View(evento);
         }
+        // boton Details
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Evento evento = db.Eventos.Find(id);
+            if (evento == null)
+            {
+                return HttpNotFound();
+            }
+            return View(evento);
+        }
+        //Aca es cuando lo busca para poder borrarlo
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -54,5 +69,15 @@ namespace BlogDeInvestigacion.Controllers
             return View(evento);
         }
 
+        //Aca es cuando lo borra
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Evento evento = db.Eventos.Find(id);
+            db.Eventos.Remove(evento);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

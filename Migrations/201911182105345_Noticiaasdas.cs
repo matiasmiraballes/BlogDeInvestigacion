@@ -3,10 +3,34 @@ namespace BlogDeInvestigacion.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CleanMigration : DbMigration
+    public partial class Noticiaasdas : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Comentarios",
+                c => new
+                    {
+                        IdComentario = c.Int(nullable: false, identity: true),
+                        NombreDeUsuario = c.String(),
+                        TiempoCreacion = c.DateTime(nullable: false),
+                        Texto = c.String(),
+                        Conversacion_IdConversacion = c.Int(),
+                    })
+                .PrimaryKey(t => t.IdComentario)
+                .ForeignKey("dbo.Conversacions", t => t.Conversacion_IdConversacion)
+                .Index(t => t.Conversacion_IdConversacion);
+            
+            CreateTable(
+                "dbo.Conversacions",
+                c => new
+                    {
+                        IdConversacion = c.Int(nullable: false, identity: true),
+                        IdLaboratorio = c.Int(nullable: false),
+                        TiempoCreacion = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.IdConversacion);
+            
             CreateTable(
                 "dbo.Eventos",
                 c => new
@@ -14,8 +38,8 @@ namespace BlogDeInvestigacion.Migrations
                         IdEvento = c.Int(nullable: false, identity: true),
                         Nombre = c.String(nullable: false, maxLength: 100),
                         Descripcion = c.String(maxLength: 500),
-                        Inicio = c.DateTime(nullable: false),
-                        Fin = c.DateTime(nullable: false),
+                        Inicio = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        Fin = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Laboratorio_IdLaboratorio = c.Int(),
                     })
                 .PrimaryKey(t => t.IdEvento)
@@ -27,8 +51,8 @@ namespace BlogDeInvestigacion.Migrations
                 c => new
                     {
                         IdLaboratorio = c.Int(nullable: false, identity: true),
-                        Nombre = c.String(maxLength: 50),
-                        Descripcion = c.String(maxLength: 500),
+                        Nombre = c.String(nullable: false, maxLength: 50),
+                        Descripcion = c.String(nullable: false, maxLength: 500),
                     })
                 .PrimaryKey(t => t.IdLaboratorio);
             
@@ -128,6 +152,7 @@ namespace BlogDeInvestigacion.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Noticias", "laboratorio_IdLaboratorio", "dbo.Laboratorios");
             DropForeignKey("dbo.Eventos", "Laboratorio_IdLaboratorio", "dbo.Laboratorios");
+            DropForeignKey("dbo.Comentarios", "Conversacion_IdConversacion", "dbo.Conversacions");
             DropIndex("dbo.AspNetUserLogins", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUserClaims", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -136,6 +161,7 @@ namespace BlogDeInvestigacion.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Noticias", new[] { "laboratorio_IdLaboratorio" });
             DropIndex("dbo.Eventos", new[] { "Laboratorio_IdLaboratorio" });
+            DropIndex("dbo.Comentarios", new[] { "Conversacion_IdConversacion" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
@@ -144,6 +170,8 @@ namespace BlogDeInvestigacion.Migrations
             DropTable("dbo.Noticias");
             DropTable("dbo.Laboratorios");
             DropTable("dbo.Eventos");
+            DropTable("dbo.Conversacions");
+            DropTable("dbo.Comentarios");
         }
     }
 }
