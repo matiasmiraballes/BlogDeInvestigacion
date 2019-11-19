@@ -32,6 +32,9 @@ namespace BlogDeInvestigacion.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
+            ResetDatabase(context);
+
+
             var laboratorios = new List<Laboratorio>
             {
             new Laboratorio{IdLaboratorio = 1, Nombre="LINES",Descripcion="LINES - Laboratorio de Ingeniería en Sistemas de Información, Misión: Efectuar desarrollos de avanzada e investigación aplicada, sobre temas relacionados con las necesidades y características informáticas del sistema productivo local, nacional e internacional. En temas relacionados a desarrollo de software a medida, auditorias, consultoría, redes y comunicaciones."},
@@ -41,22 +44,22 @@ namespace BlogDeInvestigacion.Migrations
             new Laboratorio{IdLaboratorio = 5, Nombre="LM",Descripcion="Lean Manufacturing (LM)"}
             };
 
-            using (var transaction = context.Database.BeginTransaction())
-            {
-                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Laboratorios ON");
+            //using (var transaction = context.Database.BeginTransaction())
+            //{
+            //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Laboratorios ON");
 
-                context.Database.ExecuteSqlCommand("INSERT INTO dbo.Laboratorios ([IdLaboratorio], [Nombre], [Descripcion]) VALUES (1, 'LINES', 'LINES - Laboratorio de Ingeniería en Sistemas de Información, Misión: Efectuar desarrollos de avanzada e investigación aplicada, sobre temas relacionados con las necesidades y características informáticas del sistema productivo local, nacional e internacional. En temas relacionados a desarrollo de software a medida, auditorias, consultoría, redes y comunicaciones.')");
-                context.Database.ExecuteSqlCommand("INSERT INTO dbo.Laboratorios ([IdLaboratorio], [Nombre], [Descripcion]) VALUES (2, 'LINSI', 'LINSI - Laboratorio de Innovaciones en sistemas de Información, Misión: Dar Apoyo académico en áreas de competencia del Departamento de Sistemas de Información (DSI) que componen el Departamento de Ingeniería en Sistemas de Información, además de desarrollar actividades de investigación y desarrollo de distintos proyectos tecnológicos.')");
-                context.Database.ExecuteSqlCommand("INSERT INTO dbo.Laboratorios ([IdLaboratorio], [Nombre], [Descripcion]) VALUES (3, 'GIDAS', 'GIDAS - Grupo de Investigación y Desarrollo aplicado a Sistemas de Información, Misión: Aportar al mejoramiento de Sistemas informáticos en distintas áreas del medio socio productivo, a través de tecnología innovadora.')");
-                context.Database.ExecuteSqlCommand("INSERT INTO dbo.Laboratorios ([IdLaboratorio], [Nombre], [Descripcion]) VALUES (4, 'GyTE', 'Grupo de I+D de Gestión y Tecnología Energética')");
-                context.Database.ExecuteSqlCommand("INSERT INTO dbo.Laboratorios ([IdLaboratorio], [Nombre], [Descripcion]) VALUES (5, 'LM', 'Lean Manufacturing (LM)')");
+            //    context.Database.ExecuteSqlCommand("INSERT INTO dbo.Laboratorios ([IdLaboratorio], [Nombre], [Descripcion]) VALUES (1, 'LINES', 'LINES - Laboratorio de Ingeniería en Sistemas de Información, Misión: Efectuar desarrollos de avanzada e investigación aplicada, sobre temas relacionados con las necesidades y características informáticas del sistema productivo local, nacional e internacional. En temas relacionados a desarrollo de software a medida, auditorias, consultoría, redes y comunicaciones.')");
+            //    context.Database.ExecuteSqlCommand("INSERT INTO dbo.Laboratorios ([IdLaboratorio], [Nombre], [Descripcion]) VALUES (2, 'LINSI', 'LINSI - Laboratorio de Innovaciones en sistemas de Información, Misión: Dar Apoyo académico en áreas de competencia del Departamento de Sistemas de Información (DSI) que componen el Departamento de Ingeniería en Sistemas de Información, además de desarrollar actividades de investigación y desarrollo de distintos proyectos tecnológicos.')");
+            //    context.Database.ExecuteSqlCommand("INSERT INTO dbo.Laboratorios ([IdLaboratorio], [Nombre], [Descripcion]) VALUES (3, 'GIDAS', 'GIDAS - Grupo de Investigación y Desarrollo aplicado a Sistemas de Información, Misión: Aportar al mejoramiento de Sistemas informáticos en distintas áreas del medio socio productivo, a través de tecnología innovadora.')");
+            //    context.Database.ExecuteSqlCommand("INSERT INTO dbo.Laboratorios ([IdLaboratorio], [Nombre], [Descripcion]) VALUES (4, 'GyTE', 'Grupo de I+D de Gestión y Tecnología Energética')");
+            //    context.Database.ExecuteSqlCommand("INSERT INTO dbo.Laboratorios ([IdLaboratorio], [Nombre], [Descripcion]) VALUES (5, 'LM', 'Lean Manufacturing (LM)')");
 
-                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Laboratorios OFF");
-                transaction.Commit();
-            }
+            //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Laboratorios OFF");
+            //    transaction.Commit();
+            //}
 
-            //noticias.ForEach(l => context.Laboratorios.Add(l));
-            //SaveChanges(context);
+            laboratorios.ForEach(l => context.Laboratorios.Add(l));
+            SaveChanges(context);
 
             var noticias = new List<Noticia>
             {
@@ -117,6 +120,27 @@ namespace BlogDeInvestigacion.Migrations
             SaveChanges(context);
         }
 
+        private void ResetDatabase(BlogContext context)
+        {
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Comentarios',RESEED,0);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Conversacions',RESEED,0);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Eventos',RESEED,0);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Noticias',RESEED,0);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Laboratorios',RESEED,0);");
+
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[AspNetRoles]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[AspNetUserClaims]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[AspNetUserLogins]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[AspNetUserRoles]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[AspNetUsers]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Comentarios]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Conversacions]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Eventos]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Noticias]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Laboratorios]");
+
+            context.SaveChanges();
+        }
 
         /// <summary>
         /// Wrapper for SaveChanges adding the Validation Messages to the generated exception

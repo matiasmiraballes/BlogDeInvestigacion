@@ -1,0 +1,81 @@
+﻿@model BlogDeInvestigacion.ViewModels.NoticiaViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Noticias</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @**Carga el Titulo*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Noticia.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Noticia.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Noticia.Titulo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @**Carga la Descripcion*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Noticia.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Noticia.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Noticia.Descripcion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @**Dropdown laboratorio*@   
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Noticia.IdLaboratorio, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+            }
+
+            @foreach (var laboratorio in Model.Laboratorios)
+            {
+                listItems.Add(new SelectListItem
+                {
+                    Text = laboratorio.Nombre,
+                    Value = laboratorio.IdLaboratorio.ToString()
+                });
+            }
+
+            @Html.DropDownListFor(model => model.Noticia.IdLaboratorio, listItems, "-- Seleccionar Laboratorio --")
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear" class="btn btn-default btnblk" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btnblk" })
+        </div>
+    </div>
+
+</div>
+
+}
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+   
