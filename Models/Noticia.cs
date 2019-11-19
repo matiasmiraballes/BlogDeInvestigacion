@@ -14,6 +14,7 @@ namespace BlogDeInvestigacion.Models
 
         [Display(Name = "Laboratorio")]
         public Laboratorio laboratorio { get; set; }
+        public int IdLaboratorio { get; set; }
 
         [Required]
         [MaxLength(50)]

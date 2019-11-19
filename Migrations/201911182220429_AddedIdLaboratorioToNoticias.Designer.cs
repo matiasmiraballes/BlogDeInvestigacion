@@ -7,13 +7,13 @@ namespace BlogDeInvestigacion.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class MergeBranch : IMigrationMetadata
+    public sealed partial class AddedIdLaboratorioToNoticias : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MergeBranch));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedIdLaboratorioToNoticias));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911172131003_MergeBranch"; }
+            get { return "201911182220429_AddedIdLaboratorioToNoticias"; }
         }
         
         string IMigrationMetadata.Source

@@ -7,13 +7,13 @@ namespace BlogDeInvestigacion.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ClaveForaneaConversacionEnComentario : IMigrationMetadata
+    public sealed partial class CleanMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ClaveForaneaConversacionEnComentario));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CleanMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911181807454_ClaveForaneaConversacionEnComentario"; }
+            get { return "201911182206283_Clean-Migration"; }
         }
         
         string IMigrationMetadata.Source
