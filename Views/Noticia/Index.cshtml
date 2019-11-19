@@ -29,13 +29,13 @@
             {
             <tr>
                 <td>
-                    @Html.ActionLink(item.Titulo, "Noticia", new { id = item.IdNoticia })
+                    @Html.ActionLink(item.Titulo, "Details", new { id = item.IdNoticia })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.laboratorio.IdLaboratorio)
+                    @Html.DisplayFor(modelItem => item.laboratorio.Nombre)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaCreacion)

@@ -43,8 +43,21 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Noticia.laboratorio, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Noticia.laboratorio.IdLaboratorio, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Noticia.laboratorio.IdLaboratorio, "", new { @class = "text-danger" })
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+                foreach (var laboratorio in Model.Laboratorios)
+                {
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = laboratorio.Nombre,
+                        Value = laboratorio.IdLaboratorio.ToString(),
+                    });
+                }
+                ;
+
+             }
+
+            @Html.DropDownListFor(model => model.Noticia.IdLaboratorio,listItems , "Seleccione laboratorio")
         </div>
 
     </div>

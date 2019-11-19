@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace BlogDeInvestigacion.Controllers
 {
@@ -27,10 +28,12 @@ namespace BlogDeInvestigacion.Controllers
         BlogContext db = new BlogContext();
         public ActionResult Index()
         {
-           return View(db.Noticias.ToList());
+            var model = db.Noticias.Include(n => n.laboratorio) 
+                                   .ToList();
+           return View(model);
         }
         //Crea Noticia
-        public ActionResult Create([Bind(Include = "IdNoticia,Titulo,Descripcion,FechaCreacion,laboratorio.IdLaboratorio")] Noticia noticia)
+        public ActionResult Create([Bind(Include = "IdNoticia,Titulo,Descripcion,FechaCreacion,IdLaboratorio")] Noticia noticia)
         {
             if (ModelState.IsValid)
             {

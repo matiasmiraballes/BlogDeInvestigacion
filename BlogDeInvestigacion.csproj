@@ -184,6 +184,10 @@
     <Compile Include="Migrations\201911182105345_Noticiaasdas.Designer.cs">
       <DependentUpon>201911182105345_Noticiaasdas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911190006377_Idlab.cs" />
+    <Compile Include="Migrations\201911190006377_Idlab.Designer.cs">
+      <DependentUpon>201911190006377_Idlab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -330,6 +334,8 @@
     <Content Include="Views\Evento\Delete.cshtml" />
     <Content Include="Views\Evento\Details.cshtml" />
     <Content Include="Views\Noticia\Create.cshtml" />
+    <Content Include="Views\Noticia\Delete.cshtml" />
+    <Content Include="Views\Noticia\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -346,6 +352,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911182105345_Noticiaasdas.resx">
       <DependentUpon>201911182105345_Noticiaasdas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911190006377_Idlab.resx">
+      <DependentUpon>201911190006377_Idlab.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
