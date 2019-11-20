@@ -19,23 +19,10 @@
         {
             Titulo = "ADMINISTRAR LABORATORIO",
             Opciones = new List<OpcionMenu>
-                {
+        {
                         new OpcionMenu { Nombre = "Crear Evento", Link = "#mdlCrearEvento", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Crear Noticia", Link = "#mdlCrearNoticia", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Crear Encuesta", Link = "#", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
-                    }
-        });
-    }
-
-    @{
-        Html.RenderPartial("_SideBarSection", new SeccionMenu
-        {
-            Titulo = "MI CUSTOM MENU, CAPO",
-            Opciones = new List<OpcionMenu>
-                {
-                        new OpcionMenu { Nombre = "Opcion 1", Link = "#", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
-                        new OpcionMenu { Nombre = "Opcion 2, Maquina", Link = "#mdlCrearNoticia", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
-                        new OpcionMenu { Nombre = "Opc.3", Link = "#", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                     }
         });
     }
@@ -51,98 +38,140 @@
 <link href="@Url.Content("/Content/App/Laboratorio/Comentarios.css")" rel="stylesheet" type="text/css" />
 
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1> @Model.Laboratorio.Nombre </h1>
-        <p class="lead"> @Model.Laboratorio.Descripcion </p>
-    </div>
-</div>
-
-@*===================*@
-@*Seccion comentarios*@
-
-<div>
-    <div class="container">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Comentar</span>
-            </div>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
-        </div>
-    </div>
-</div>
-
-
-
 <div class="container">
+    <div class="row">
+
+        @*COLUMNA BODY*@
+        <div class="col-9">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1> @Model.Laboratorio.Nombre </h1>
+                    <p class="lead"> @Model.Laboratorio.Descripcion </p>
+                </div>
+            </div>
 
 
-    @foreach (var conversacion in Model.Conversaciones)
-    {
-        <div class="row">
+            @*SECCION COMENTARIOS*@
 
-            @if (conversacion.Comentarios.Any() && conversacion.IdLaboratorio == Model.Laboratorio.IdLaboratorio)
+        <div class="containerComentarios">
+
+            @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
             {
-                <!-- FIRST ACTION -->
-                <div class="media comment-box">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">@conversacion.Comentarios.First().NombreDeUsuario</h4>
-                        <p>@conversacion.Comentarios.First().Texto</p>
-                        <!-- FIRST ACTION -->
 
-                        @foreach (var comentario in conversacion.Comentarios.Skip(1))
+                @Html.Hidden("IdConversacion", 0);
+                @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
+                @Html.TextArea("Texto", null, new { @class = "form-control" });
+
+                <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
+            }
+
+            <div class="container">
+
+                @foreach (var conversacion in Model.Conversaciones)
+                {
+                    <div class="row">
+
+                        @if (conversacion.Comentarios.Any() && conversacion.IdLaboratorio == Model.Laboratorio.IdLaboratorio)
                         {
-                            <!-- FOR EACH-1 -->
-                            <div class="media">
+                            <!-- FIRST ACTION -->
+                            <div class="media comment-box">
                                 <div class="media-left">
                                     <a href="#">
                                         <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="media-heading">@comentario.NombreDeUsuario</h4>
-                                    <p>@comentario.Texto</p>
+                                    <h4 class="media-heading">@conversacion.Comentarios.First().NombreDeUsuario</h4>
+                                    <p>@conversacion.Comentarios.First().Texto</p>
+                                    <!-- FIRST ACTION -->
+
+                                    @foreach (var comentario in conversacion.Comentarios.Skip(1))
+                                    {
+                                        <!-- FOR EACH-1 -->
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <a href="#">
+                                                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">@comentario.NombreDeUsuario</h4>
+                                                <p>@comentario.Texto</p>
+                                            </div>
+                                        </div>
+                                        <!-- FOR EACH-1 -->
+                                    }
+
+                                    @*INICIO POST COMENTARIO*@
+
+                                    @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
+                                    {
+
+                                        @Html.Hidden("IdConversacion", conversacion.IdConversacion);
+                                        @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
+                                        @Html.TextArea("Texto", null, new { @class = "form-control" });
+
+                                        <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
+                                    }
+
+
+                                    @*FIN POST COMENTARIO*@
+
                                 </div>
                             </div>
-                            <!-- FOR EACH-1 -->
+
                         }
-
-                        @*INICIO POST COMENTARIO*@
-
-                        @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
-                        {
-
-                            @Html.Hidden("IdConversacion",conversacion.IdConversacion);
-                            @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
-                            @Html.TextArea("Texto");
-
-                            <input type="submit" value="POSTEAR COMENTARIO"/>
-                        }
-
-
-                        @*FIN POST COMENTARIO*@
-
-
-
-                        <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
-                        <br>
-                        <button type="button" class="btn btn-info pull-right">Post</button>
-                        <div class="clearfix"></div>
-
                     </div>
-                </div>
+                }
 
-            }
+            </div>
+
         </div>
-    }
 
+        </div>
 
+        @*COLUMNA SIDEBAR*@
+
+        <div class="col-3">
+            <div class="right-sidebar">
+
+                <div class="jumbotron">
+                    <p>Noticia Titulo1</p>
+                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+                </div>
+                <div class="jumbotron">
+                    <p>Noticia Titulo2</p>
+                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+                </div>
+                <div class="jumbotron">
+                    <p>Noticia Titulo3</p>
+                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+                </div>
+                <div class="jumbotron">
+                    <p>Noticia Titulo4</p>
+                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+                </div>
+                <div class="jumbotron">
+                    <p>Noticia Titulo1</p>
+                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+                </div>
+                <div class="jumbotron">
+                    <p>Noticia Titulo2</p>
+                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+                </div>
+                <div class="jumbotron">
+                    <p>Noticia Titulo3</p>
+                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+                </div>
+                <div class="jumbotron">
+                    <p>Noticia Titulo4</p>
+                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 
 @*MODALS SECTION*@
@@ -207,7 +236,7 @@
                     <br />
                     <br />
                     <br />
-                   
+
 
                 </div>
                 <div class="modal-footer">
@@ -238,7 +267,7 @@
             console.log("changed");
         }
     });
-     document.getElementById("flatpickrcontainer2").flatpickr({
+    document.getElementById("flatpickrcontainer2").flatpickr({
         enableTime: true,
         dateFormat: "Y-m-d H:i",
         wrap: true,

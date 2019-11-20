@@ -74,3 +74,11 @@
     text-align: right;
     padding-left: 10px;
 }
+
+.barraN {
+    position: fixed; 
+    right: 0; 
+    top: 200px;
+    z-index: 2000;  
+    
+}

@@ -3,4 +3,9 @@
 .container.body-content {
     margin-left: 0px;
     padding-left: 0px;
+    max-width: 1366px;
+}
+
+.right-sidebar p{
+    word-wrap: break-word;
 }

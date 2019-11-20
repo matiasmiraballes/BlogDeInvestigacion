@@ -11,5 +11,7 @@ namespace BlogDeInvestigacion.ViewModels
         public Laboratorio Laboratorio { get; set; }
 
         public IList<Conversacion> Conversaciones { get; set; }
+
+        public IList<Noticia> Noticias { get; set; }
     }
 }
