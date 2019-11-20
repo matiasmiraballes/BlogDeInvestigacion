@@ -153,27 +153,26 @@ namespace BlogDeInvestigacion.Controllers
             LaboratorioViewModel labViewModel = new LaboratorioViewModel
             {
                 Laboratorio = laboratorio,
-                Conversaciones = conversaciones
+                Conversaciones = conversaciones.OrderByDescending(c => c.TiempoCreacion).ToList()
             };
 
             return View(labViewModel);
         }
 
-        public ActionResult GuardarComentario(int? IdConversacion, int IdLaboratorio, string Texto)
+        public ActionResult GuardarComentario(int IdConversacion, int IdLaboratorio, string Texto)
         {
             var service = getCommentsService();
 
-            if (IdConversacion != null)
+            if (IdConversacion != 0)    //Cuando se crea una nueva conversacion, IdConversacion llega en 0
             {
-                var IdConv = IdConversacion ?? default(int); // Si IdConversacion = null, asigna IdConv = null
-                var conversacionExistente = service.BuscarConversacion(IdConv);
+                var conversacionExistente = service.BuscarConversacion(IdConversacion);
 
                 var nuevoComentario = new Comentario
                 {
                     NombreDeUsuario = User.Identity.Name,
                     Texto = Texto,
                     TiempoCreacion = DateTime.Now,
-                    IdConversacion = IdConv,
+                    IdConversacion = IdConversacion,
                     IdComentario = conversacionExistente.Comentarios.LastOrDefault().IdComentario + 1
                 };
 
@@ -181,8 +180,29 @@ namespace BlogDeInvestigacion.Controllers
 
                 service.GuardarConversacion(conversacionExistente);
             }
+            else
+            {
+                var nuevoComentario = new List<Comentario>
+                {
+                    new Comentario
+                    {
+                        NombreDeUsuario = User.Identity.Name,
+                        Texto = Texto,
+                        TiempoCreacion = DateTime.Now
+                    }
+                };
 
-            return View("~/Views/Evento/Index.cshtml", db.Eventos.ToList());
+                var nuevaConversacion = new Conversacion()
+                {
+                    Comentarios = nuevoComentario,
+                    TiempoCreacion = DateTime.Now,
+                    IdLaboratorio = IdLaboratorio
+                };
+
+                service.GuardarConversacion(nuevaConversacion);
+            }
+
+            return RedirectToAction("Laboratorio", new { id = IdLaboratorio });
         }
 
 
