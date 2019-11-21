@@ -153,7 +153,8 @@ namespace BlogDeInvestigacion.Controllers
             LaboratorioViewModel labViewModel = new LaboratorioViewModel
             {
                 Laboratorio = laboratorio,
-                Conversaciones = conversaciones.OrderByDescending(c => c.TiempoCreacion).ToList()
+                Conversaciones = conversaciones.OrderByDescending(c => c.TiempoCreacion).ToList(),
+                Noticias = db.Noticias.Where(n => n.IdLaboratorio == id).ToList()
             };
 
             return View(labViewModel);

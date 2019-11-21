@@ -135,38 +135,46 @@
         <div class="col-3">
             <div class="right-sidebar">
 
-                <div class="jumbotron">
-                    <p>Noticia Titulo1</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            @Html.ActionLink("Subscribirse", "ActionName", "RouteValues", new { @class = "btn btn-outline-success" })
+                        </div>
+                    </div>
                 </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo2</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+
+                @foreach (Noticia noticia in Model.Noticias)
+                {
+                    <div class="jumbotron">
+                        @Html.ActionLink(noticia.Titulo, "Details", "Noticia", new { id = noticia.IdNoticia }, null)
+                        <p>@noticia.Descripcion</p>
+                    </div>
+                }
+
+                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Noticia Sample 1</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Primary card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
                 </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo3</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+
+                <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Noticia Sample 2</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Secondary card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
                 </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo4</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+
+                <div class="card bg-light mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Noticia Sample 3</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Light card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
                 </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo1</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
-                </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo2</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
-                </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo3</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
-                </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo4</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
-                </div>
+
             </div>
         </div>
     </div>
