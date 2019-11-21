@@ -305,11 +305,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Consultas.cshtml" />
     <Content Include="Views\Home\Estadisticas.cshtml" />
-    <Content Include="Views\Home\Eventos.cshtml" />
-    <Content Include="Views\Home\Laboratorios.cshtml" />
-    <Content Include="Views\Home\Perfil.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Noticia\Index.cshtml" />
     <Content Include="Views\Laboratorio\Create.cshtml" />
