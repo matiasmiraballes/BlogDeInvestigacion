@@ -227,7 +227,19 @@ namespace BlogDeInvestigacion.Controllers
             return View("~/Views/Evento/Index.cshtml",db.Eventos.ToList());
         }
 
+        public ActionResult Subscribirse(int? idLaboratorio)
+        {
+            //Llamado al servicio para subscribirse
 
+            return RedirectToAction("Laboratorio", new { id = idLaboratorio });
+        }
+
+        public ActionResult CancelarSubscripcion(int? idLaboratorio)
+        {
+            //Llamado al servicio para CancelarSubscripcion
+
+            return RedirectToAction("Laboratorio", new { id = idLaboratorio });
+        }
 
         protected override void Dispose(bool disposing)
         {
