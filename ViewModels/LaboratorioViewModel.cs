@@ -13,5 +13,7 @@ namespace BlogDeInvestigacion.ViewModels
         public IList<Conversacion> Conversaciones { get; set; }
 
         public IList<Noticia> Noticias { get; set; }
+
+        public bool IsSubscripted { get; set; }
     }
 }

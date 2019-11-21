@@ -19,7 +19,7 @@
         {
             Titulo = "ADMINISTRAR LABORATORIO",
             Opciones = new List<OpcionMenu>
-        {
+{
                         new OpcionMenu { Nombre = "Crear Evento", Link = "#mdlCrearEvento", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Crear Noticia", Link = "#mdlCrearNoticia", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Crear Encuesta", Link = "#", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
@@ -53,80 +53,80 @@
 
             @*SECCION COMENTARIOS*@
 
-        <div class="containerComentarios">
+            <div class="containerComentarios">
 
-            @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
-            {
-
-                @Html.Hidden("IdConversacion", 0);
-                @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
-                @Html.TextArea("Texto", null, new { @class = "form-control" });
-
-                <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
-            }
-
-            <div class="container">
-
-                @foreach (var conversacion in Model.Conversaciones)
+                @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
                 {
-                    <div class="row">
 
-                        @if (conversacion.Comentarios.Any() && conversacion.IdLaboratorio == Model.Laboratorio.IdLaboratorio)
-                        {
-                            <!-- FIRST ACTION -->
-                            <div class="media comment-box">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">@conversacion.Comentarios.First().NombreDeUsuario</h4>
-                                    <p>@conversacion.Comentarios.First().Texto</p>
-                                    <!-- FIRST ACTION -->
+                    @Html.Hidden("IdConversacion", 0);
+                    @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
+                    @Html.TextArea("Texto", null, new { @class = "form-control" });
 
-                                    @foreach (var comentario in conversacion.Comentarios.Skip(1))
-                                    {
-                                        <!-- FOR EACH-1 -->
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading">@comentario.NombreDeUsuario</h4>
-                                                <p>@comentario.Texto</p>
-                                            </div>
-                                        </div>
-                                        <!-- FOR EACH-1 -->
-                                    }
-
-                                    @*INICIO POST COMENTARIO*@
-
-                                    @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
-                                    {
-
-                                        @Html.Hidden("IdConversacion", conversacion.IdConversacion);
-                                        @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
-                                        @Html.TextArea("Texto", null, new { @class = "form-control" });
-
-                                        <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
-                                    }
-
-
-                                    @*FIN POST COMENTARIO*@
-
-                                </div>
-                            </div>
-
-                        }
-                    </div>
+                    <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
                 }
 
-            </div>
+                <div class="container">
 
-        </div>
+                    @foreach (var conversacion in Model.Conversaciones)
+                    {
+                        <div class="row">
+
+                            @if (conversacion.Comentarios.Any() && conversacion.IdLaboratorio == Model.Laboratorio.IdLaboratorio)
+                            {
+                                <!-- FIRST ACTION -->
+                                <div class="media comment-box">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">@conversacion.Comentarios.First().NombreDeUsuario</h4>
+                                        <p>@conversacion.Comentarios.First().Texto</p>
+                                        <!-- FIRST ACTION -->
+
+                                        @foreach (var comentario in conversacion.Comentarios.Skip(1))
+                                        {
+                                            <!-- FOR EACH-1 -->
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">@comentario.NombreDeUsuario</h4>
+                                                    <p>@comentario.Texto</p>
+                                                </div>
+                                            </div>
+                                            <!-- FOR EACH-1 -->
+                                        }
+
+                                        @*INICIO POST COMENTARIO*@
+
+                                        @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
+                                        {
+
+                                            @Html.Hidden("IdConversacion", conversacion.IdConversacion);
+                                            @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
+                                            @Html.TextArea("Texto", null, new { @class = "form-control" });
+
+                                            <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
+                                        }
+
+
+                                        @*FIN POST COMENTARIO*@
+
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                    }
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -138,7 +138,23 @@
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            @Html.ActionLink("Subscribirse", "ActionName", "RouteValues", new { @class = "btn btn-outline-success" })
+
+                            @if (!Model.IsSubscripted)
+                            {
+                                if (User.Identity.IsAuthenticated)
+                                {
+                                    @Html.ActionLink("Subscribirse", "Subscribirse", new { idLaboratorio = Model.Laboratorio.IdLaboratorio }, new { @class = "btn btn-outline-success" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Login to Subscribe", "Login", "Account", null, new { @class = "btn btn-outline-success" })
+                                }
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Cancelar Subscripcion", "CancelarSubscripcion", new { idLaboratorio = Model.Laboratorio.IdLaboratorio }, new { @class = "btn btn-success" })
+                            }
+
                         </div>
                     </div>
                 </div>
