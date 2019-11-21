@@ -18,15 +18,6 @@ namespace BlogDeInvestigacion.Services
                 subscripciones = db.Subscripciones.ToList();
             }
 
-            //var subscripcion = new Subscripcion()
-            //{
-            //    IdLaboratorio = 1,
-            //    IdSubscripcion = 1,
-            //    Username = "admin@mail.com"
-            //};
-
-            //subscripciones.Add(subscripcion);
-
             return subscripciones;
         }
 
