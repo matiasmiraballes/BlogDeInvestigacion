@@ -19,6 +19,12 @@ namespace BlogDeInvestigacion.Controllers
             ServicioComentarios servicioComentarios = getCommentsService();
             List<Conversacion> conversaciones = servicioComentarios.ObtenerConversaciones();
 
+            ServicioNoticia servicioNoticia = getNewsService();
+            List<Noticia> noticias = servicioNoticia.ObtenerNoticias();
+
+            ServicioEvento servicioEvento = getEventService();
+            List<Evento> eventos = servicioEvento.ObtenerEventos();
+
             List<IElementoMuro> elementosMuro = new List<IElementoMuro>();
 
 
@@ -26,11 +32,24 @@ namespace BlogDeInvestigacion.Controllers
             {
                 List<Conversacion> convRelacionadas = conversaciones.Where(c => c.IdLaboratorio == s.IdLaboratorio).ToList();
 
-                foreach (var item in convRelacionadas)
+                foreach (Conversacion item in convRelacionadas)
                 {
                     elementosMuro.Add(item);
                 }
-                
+
+                List<Noticia> noticiasRelacionadas = noticias.Where(n => n.IdLaboratorio == s.IdLaboratorio).ToList();
+
+                foreach (Noticia item in noticiasRelacionadas)
+                {
+                    elementosMuro.Add(item);
+                }
+
+                List<Evento> eventosRelacionados = eventos.Where(e => e.IdLaboratorio == s.IdLaboratorio).ToList();
+
+                foreach (Evento item in eventosRelacionados)
+                {
+                    elementosMuro.Add(item);
+                }
             }
 
             var orderedElementos = elementosMuro.OrderByDescending(e => e.GetFechaDePublicacion()).ToList();

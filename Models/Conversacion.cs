@@ -21,5 +21,10 @@ namespace BlogDeInvestigacion.Models
         {
             return TiempoCreacion;
         }
+
+        public string GetTipoDePublicacion()
+        {
+            return "Conversacion";
+        }
     }
 }

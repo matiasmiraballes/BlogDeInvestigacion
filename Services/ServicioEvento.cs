@@ -18,5 +18,17 @@ namespace BlogDeInvestigacion.Services
                 db.SaveChanges();
             }
         }
+
+        public List<Evento> ObtenerEventos()
+        {
+            List<Evento> eventos = new List<Evento>();
+
+            using (BlogContext db = new BlogContext())
+            {
+                eventos = db.Eventos.ToList();
+            }
+
+            return eventos;
+        }
     }
 }

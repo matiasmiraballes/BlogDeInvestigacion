@@ -9,5 +9,6 @@ namespace BlogDeInvestigacion.Models
     public interface IElementoMuro
     {
         DateTime GetFechaDePublicacion();
+        string GetTipoDePublicacion();
     }
 }

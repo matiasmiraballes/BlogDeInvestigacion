@@ -8,13 +8,36 @@
 <link href="@Url.Content("/Content/App/Laboratorio/Comentarios.css")" rel="stylesheet" type="text/css" />
 
 <div class="container">
-    @foreach (var item in Model.ElementosMuro)
+    @foreach (IElementoMuro item in Model.ElementosMuro)
     {
-        <div class="container ElementoContainer">
-            @{
-                Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", new List<Conversacion> { item as Conversacion });
-            }
-        </div>
+    <div class="container ElementoContainer">
+
+        @if (item.GetTipoDePublicacion() == "Conversacion")
+        {
+            Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", new List<Conversacion> { item as Conversacion });
+        }
+        @if (item.GetTipoDePublicacion() == "Noticia")
+        {
+            <div class="card border-dark mb-3" style="max-width: 20rem;">
+                <div class="card-header">@((item as Noticia).Titulo)</div>
+                <div class="card-body">
+                    <p class="card-text">@((item as Noticia).Descripcion)</p>
+                </div>
+            </div>
+        }
+        @if (item.GetTipoDePublicacion() == "Evento")
+        {
+            <div class="card border-dark mb-3" style="max-width: 20rem;">
+                <div class="card-header">@((item as Evento).Nombre)</div>
+                <div class="card-body">
+                    <p class="card-text">@((item as Evento).Descripcion)</p>
+
+                    <p class="card-text">@((item as Evento).Inicio)</p>
+                    <p class="card-text">@((item as Evento).Fin)</p>
+                </div>
+            </div>
+        }
+    </div>
     }
 </div>
 

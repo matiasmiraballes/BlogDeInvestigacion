@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BlogDeInvestigacion.Models
 {
-    public class Noticia
+    public class Noticia : IElementoMuro
     {
         [Key]
         public int IdNoticia { get; set; }
@@ -23,5 +23,15 @@ namespace BlogDeInvestigacion.Models
         [MaxLength(500)]
         public string Descripcion { get; set; }
         public DateTime FechaCreacion { get; set; }
+
+        public DateTime GetFechaDePublicacion()
+        {
+            return FechaCreacion;
+        }
+
+        public string GetTipoDePublicacion()
+        {
+            return "Noticia";
+        }
     }
 }

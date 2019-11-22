@@ -186,6 +186,10 @@
     <Compile Include="Migrations\201911212122488_CleanMigration.Designer.cs">
       <DependentUpon>201911212122488_CleanMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911222258542_IdLaboratorioForEvents.cs" />
+    <Compile Include="Migrations\201911222258542_IdLaboratorioForEvents.Designer.cs">
+      <DependentUpon>201911222258542_IdLaboratorioForEvents.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -353,6 +357,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911212122488_CleanMigration.resx">
       <DependentUpon>201911212122488_CleanMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911222258542_IdLaboratorioForEvents.resx">
+      <DependentUpon>201911222258542_IdLaboratorioForEvents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

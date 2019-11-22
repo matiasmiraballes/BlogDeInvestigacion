@@ -18,5 +18,17 @@ namespace BlogDeInvestigacion.Services
                 db.SaveChanges();
             }
         }
+
+        public List<Noticia> ObtenerNoticias()
+        {
+            List<Noticia> noticias = new List<Noticia>();
+
+            using (BlogContext db = new BlogContext())
+            {
+                noticias = db.Noticias.ToList();
+            }
+
+            return noticias;
+        }
     }
 }
