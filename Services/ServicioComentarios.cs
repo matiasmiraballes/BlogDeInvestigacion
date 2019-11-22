@@ -10,13 +10,28 @@ namespace BlogDeInvestigacion.Services
 {
     public class ServicioComentarios
     {
-        public IList<Conversacion> ObtenerConversaciones()
+        public List<Conversacion> ObtenerConversaciones()
         {
             List<Conversacion> conversaciones;
 
             using (BlogContext db = new BlogContext())
             {
                 conversaciones = db.Conversaciones.Include(c => c.Comentarios).ToList();
+            }
+
+            return conversaciones;
+        }
+
+        public List<Conversacion> ObtenerConversaciones(int idLaboratorio)
+        {
+            List<Conversacion> conversaciones;
+
+            using (BlogContext db = new BlogContext())
+            {
+                conversaciones = db.Conversaciones
+                                    .Include(c => c.Comentarios)
+                                    .Where(c => c.IdLaboratorio == idLaboratorio)
+                                    .ToList();
             }
 
             return conversaciones;

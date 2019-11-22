@@ -9,3 +9,8 @@
 .right-sidebar p{
     word-wrap: break-word;
 }
+
+.right-sidebar {
+    max-height: 600px;
+    overflow: auto;
+}

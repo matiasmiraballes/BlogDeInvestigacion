@@ -13,7 +13,7 @@ namespace BlogDeInvestigacion.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201911182206283_Clean-Migration"; }
+            get { return "201911212122488_CleanMigration"; }
         }
         
         string IMigrationMetadata.Source

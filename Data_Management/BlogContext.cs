@@ -38,6 +38,7 @@ namespace BlogDeInvestigacion.Data_Management
         public DbSet<Evento> Eventos { get; set; }
         public DbSet<Conversacion> Conversaciones { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
+        public DbSet<Subscripcion> Subscripciones { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

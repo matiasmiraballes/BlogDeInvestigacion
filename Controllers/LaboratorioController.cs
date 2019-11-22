@@ -16,6 +16,7 @@ namespace BlogDeInvestigacion.Controllers
     public class LaboratorioController : Controller
     {
         private ServicioComentarios CommentsSerives;
+        private ServicioSubscripcion SubscriptionService;
 
         private ServicioComentarios getCommentsService()
         {
@@ -25,6 +26,16 @@ namespace BlogDeInvestigacion.Controllers
             }
 
             return this.CommentsSerives;
+        }
+
+        private ServicioSubscripcion getSubscriptionService()
+        {
+            if (SubscriptionService == null)
+            {
+                this.SubscriptionService = new ServicioSubscripcion();
+            }
+
+            return this.SubscriptionService;
         }
 
         private BlogContext db = new BlogContext();
@@ -130,7 +141,7 @@ namespace BlogDeInvestigacion.Controllers
             return RedirectToAction("Index");
         }
 
-        // MOSTRAR LABORATORIO
+        // MOSTRAR LABORATORIO //
 
         //[ValidateAntiForgeryToken]
         public ActionResult Laboratorio(int? id)
@@ -146,26 +157,32 @@ namespace BlogDeInvestigacion.Controllers
             {
                 return HttpNotFound();
             }
+            
+            ServicioComentarios commentsService = getCommentsService();
+            List<Conversacion> conversaciones = commentsService.ObtenerConversaciones(laboratorio.IdLaboratorio);
 
-            var service = getCommentsService();
-            IList<Conversacion> conversaciones = service.ObtenerConversaciones();
+            ServicioSubscripcion subscriptionService = getSubscriptionService();
+            bool isSubscripted = subscriptionService.IsSubscripted((int)id, User.Identity.Name);
 
             LaboratorioViewModel labViewModel = new LaboratorioViewModel
             {
                 Laboratorio = laboratorio,
-                Conversaciones = conversaciones.OrderByDescending(c => c.TiempoCreacion).ToList()
+                Conversaciones = conversaciones.OrderByDescending(c => c.TiempoCreacion).ToList(),
+                Noticias = db.Noticias.Where(n => n.IdLaboratorio == id).ToList(),
+                IsSubscripted = isSubscripted
             };
 
             return View(labViewModel);
         }
 
+        // COMENTARIOS //
         public ActionResult GuardarComentario(int IdConversacion, int IdLaboratorio, string Texto)
         {
-            var service = getCommentsService();
+            var servicioComentarios = getCommentsService();
 
             if (IdConversacion != 0)    //Cuando se crea una nueva conversacion, IdConversacion llega en 0
             {
-                var conversacionExistente = service.BuscarConversacion(IdConversacion);
+                var conversacionExistente = servicioComentarios.BuscarConversacion(IdConversacion);
 
                 var nuevoComentario = new Comentario
                 {
@@ -178,7 +195,7 @@ namespace BlogDeInvestigacion.Controllers
 
                 conversacionExistente.Comentarios.Add(nuevoComentario);
 
-                service.GuardarConversacion(conversacionExistente);
+                servicioComentarios.GuardarConversacion(conversacionExistente);
             }
             else
             {
@@ -199,13 +216,13 @@ namespace BlogDeInvestigacion.Controllers
                     IdLaboratorio = IdLaboratorio
                 };
 
-                service.GuardarConversacion(nuevaConversacion);
+                servicioComentarios.GuardarConversacion(nuevaConversacion);
             }
 
             return RedirectToAction("Laboratorio", new { id = IdLaboratorio });
         }
 
-
+       // EVENTOS //
        //public ActionResult CrearEvento(string nombre, string descripcion, string Inicio, string fin)
        public ActionResult CrearEvento(Evento evento)
        {
@@ -226,8 +243,34 @@ namespace BlogDeInvestigacion.Controllers
             return View("~/Views/Evento/Index.cshtml",db.Eventos.ToList());
         }
 
+        // SUBSCRIPCIONES //
+        public ActionResult Subscribirse(int? idLaboratorio)
+        {
+            if (idLaboratorio == null)
+            {
+                return HttpNotFound();
+            }
 
+            ServicioSubscripcion subscriptionService = getSubscriptionService();
+            subscriptionService.Subscribirse((int)idLaboratorio, User.Identity.Name);
 
+            return RedirectToAction("Laboratorio", new { id = idLaboratorio });
+        }
+
+        public ActionResult CancelarSubscripcion(int? idLaboratorio)
+        {
+            if (idLaboratorio == null)
+            {
+                return HttpNotFound();
+            }
+
+            ServicioSubscripcion subscriptionService = getSubscriptionService();
+            subscriptionService.CancelarSubscripcion((int)idLaboratorio, User.Identity.Name);
+
+            return RedirectToAction("Laboratorio", new { id = idLaboratorio });
+        }
+
+        // DISPOSE DB //
         protected override void Dispose(bool disposing)
         {
             if (disposing)

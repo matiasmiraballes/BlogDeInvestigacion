@@ -19,7 +19,7 @@
         {
             Titulo = "ADMINISTRAR LABORATORIO",
             Opciones = new List<OpcionMenu>
-        {
+{
                         new OpcionMenu { Nombre = "Crear Evento", Link = "#mdlCrearEvento", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Crear Noticia", Link = "#mdlCrearNoticia", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Crear Encuesta", Link = "#", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
@@ -55,6 +55,8 @@
 
         <div class="containerComentarios">
 
+            @*CREAR CONVERSACION*@
+
             @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
             {
 
@@ -65,67 +67,11 @@
                 <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
             }
 
-            <div class="container">
+            @*SECCION CONVERSACIONES*@
 
-                @foreach (var conversacion in Model.Conversaciones)
-                {
-                    <div class="row">
-
-                        @if (conversacion.Comentarios.Any() && conversacion.IdLaboratorio == Model.Laboratorio.IdLaboratorio)
-                        {
-                            <!-- FIRST ACTION -->
-                            <div class="media comment-box">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">@conversacion.Comentarios.First().NombreDeUsuario</h4>
-                                    <p>@conversacion.Comentarios.First().Texto</p>
-                                    <!-- FIRST ACTION -->
-
-                                    @foreach (var comentario in conversacion.Comentarios.Skip(1))
-                                    {
-                                        <!-- FOR EACH-1 -->
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading">@comentario.NombreDeUsuario</h4>
-                                                <p>@comentario.Texto</p>
-                                            </div>
-                                        </div>
-                                        <!-- FOR EACH-1 -->
-                                    }
-
-                                    @*INICIO POST COMENTARIO*@
-
-                                    @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
-                                    {
-
-                                        @Html.Hidden("IdConversacion", conversacion.IdConversacion);
-                                        @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
-                                        @Html.TextArea("Texto", null, new { @class = "form-control" });
-
-                                        <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
-                                    }
-
-
-                                    @*FIN POST COMENTARIO*@
-
-                                </div>
-                            </div>
-
-                        }
-                    </div>
-                }
-
-            </div>
-
+            @{
+                Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", Model.Conversaciones);
+            }
         </div>
 
         </div>
@@ -135,38 +81,62 @@
         <div class="col-3">
             <div class="right-sidebar">
 
-                <div class="jumbotron">
-                    <p>Noticia Titulo1</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+
+                            @if (!Model.IsSubscripted)
+                            {
+                                if (User.Identity.IsAuthenticated)
+                                {
+                                    @Html.ActionLink("Subscribirse", "Subscribirse", new { idLaboratorio = Model.Laboratorio.IdLaboratorio }, new { @class = "btn btn-outline-success" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Login to Subscribe", "Login", "Account", null, new { @class = "btn btn-outline-success" })
+                                }
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Cancelar Subscripcion", "CancelarSubscripcion", new { idLaboratorio = Model.Laboratorio.IdLaboratorio }, new { @class = "btn btn-success" })
+                            }
+
+                        </div>
+                    </div>
                 </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo2</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+
+                @foreach (Noticia noticia in Model.Noticias)
+                {
+                    <div class="jumbotron">
+                        @Html.ActionLink(noticia.Titulo, "Details", "Noticia", new { id = noticia.IdNoticia }, null)
+                        <p>@noticia.Descripcion</p>
+                    </div>
+                }
+
+                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Noticia Sample 1</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Primary card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
                 </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo3</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+
+                <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Noticia Sample 2</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Secondary card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
                 </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo4</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
+
+                <div class="card bg-light mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Noticia Sample 3</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Light card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
                 </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo1</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
-                </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo2</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
-                </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo3</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
-                </div>
-                <div class="jumbotron">
-                    <p>Noticia Titulo4</p>
-                    <p>adasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasdadasdasdasdasdasd</p>
-                </div>
+
             </div>
         </div>
     </div>

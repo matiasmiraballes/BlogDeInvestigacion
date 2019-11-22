@@ -1,0 +1,63 @@
+﻿@using BlogDeInvestigacion.Models
+@model IList<Conversacion>
+
+<div class="container">
+
+    @foreach (var conversacion in Model)
+    {
+        <div class="row">
+
+            @if (conversacion.Comentarios.Any())
+            {
+                <!-- FIRST ACTION -->
+                <div class="media comment-box">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">@conversacion.Comentarios.First().NombreDeUsuario</h4>
+                        <p>@conversacion.Comentarios.First().Texto</p>
+                        <!-- FIRST ACTION -->
+
+                        @foreach (var comentario in conversacion.Comentarios.Skip(1))
+                        {
+                            <!-- FOR EACH-1 -->
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">@comentario.NombreDeUsuario</h4>
+                                    <p>@comentario.Texto</p>
+                                </div>
+                            </div>
+                            <!-- FOR EACH-1 -->
+                        }
+
+                        @*INICIO POST COMENTARIO*@
+
+                        @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
+                        {
+
+                            @Html.Hidden("IdConversacion", conversacion.IdConversacion);
+                            @Html.Hidden("IdLaboratorio", conversacion.IdLaboratorio);
+                            @Html.TextArea("Texto", null, new { @class = "form-control" });
+
+                            <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
+                        }
+
+
+                        @*FIN POST COMENTARIO*@
+
+                    </div>
+                </div>
+
+            }
+        </div>
+    }
+
+</div>
