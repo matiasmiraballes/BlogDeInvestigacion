@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlogDeInvestigacion.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,6 @@ namespace BlogDeInvestigacion.Controllers
 {
     public class ConversacionController : BaseController
     {
-
-
-
-
         // COMENTARIOS //
         public ActionResult GuardarComentario(int IdConversacion, int IdLaboratorio, string Texto)
         {
@@ -56,7 +53,7 @@ namespace BlogDeInvestigacion.Controllers
                 servicioComentarios.GuardarConversacion(nuevaConversacion);
             }
 
-            return RedirectToAction("Laboratorio", new { id = IdLaboratorio });
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }
