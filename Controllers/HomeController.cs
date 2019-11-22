@@ -9,42 +9,8 @@ using System.Web.Mvc;
 
 namespace BlogDeInvestigacion.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private ServicioComentarios CommentsSerives;
-        private ServicioEvento EventsServices;
-        private ServicioSubscripcion SubscriptionsServices;
-
-        private ServicioComentarios getCommentsService()
-        {
-            if (CommentsSerives == null)
-            {
-                this.CommentsSerives = new ServicioComentarios();
-            }
-
-            return this.CommentsSerives;
-        }
-
-        private ServicioEvento getEventsService()
-        {
-            if (EventsServices == null)
-            {
-                this.EventsServices = new ServicioEvento();
-            }
-
-            return this.EventsServices;
-        }
-
-        private ServicioSubscripcion getSubscriptionService()
-        {
-            if (SubscriptionsServices == null)
-            {
-                this.SubscriptionsServices = new ServicioSubscripcion();
-            }
-
-            return this.SubscriptionsServices;
-        }
-
         public ActionResult Index()
         {
             ServicioSubscripcion servicioSubscripcion = getSubscriptionService();

@@ -10,19 +10,8 @@ using System.Web.Mvc;
 
 namespace BlogDeInvestigacion.Controllers
 {
-    public class EventoController : Controller
+    public class EventoController : BaseController
     {
-        private ServicioEvento getEventService()
-        {
-            if (EventsService == null)
-            {
-                this.EventsService = new ServicioEvento();
-            }
-
-            return this.EventsService;
-        }
-
-        private ServicioEvento EventsService;
         private BlogContext db = new BlogContext();
         // GET: Evento
         public ActionResult Index()

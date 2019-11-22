@@ -14,18 +14,8 @@ namespace BlogDeInvestigacion.Controllers
 {
     public class NoticiaController : Controller
     {
-
-        private ServicioNoticia NewsSerives;
-        private ServicioNoticia GetNewsService()
-        {
-            if (NewsSerives == null)
-            {
-                this.NewsSerives = new ServicioNoticia();
-            }
-
-            return this.NewsSerives;
-        }
         BlogContext db = new BlogContext();
+
         public ActionResult Index()
         {
             var model = db.Noticias.Include(n => n.laboratorio)
@@ -33,6 +23,7 @@ namespace BlogDeInvestigacion.Controllers
 
             return View(db.Noticias.ToList());
         }
+
         //Crea Noticia
         public ActionResult Create([Bind(Include = "IdNoticia,Titulo,Descripcion,FechaCreacion,IdLaboratorio")] Noticia noticia)
         {
@@ -68,6 +59,7 @@ namespace BlogDeInvestigacion.Controllers
             }
             return View(noticia);
         }
+
         //Aca es cuando lo busca para poder borrarlo
         public ActionResult Delete(int? id)
         {

@@ -13,31 +13,8 @@ using BlogDeInvestigacion.ViewModels;
 
 namespace BlogDeInvestigacion.Controllers
 {
-    public class LaboratorioController : Controller
+    public class LaboratorioController : BaseController
     {
-        private ServicioComentarios CommentsSerives;
-        private ServicioSubscripcion SubscriptionService;
-
-        private ServicioComentarios getCommentsService()
-        {
-            if (CommentsSerives == null)
-            {
-                this.CommentsSerives = new ServicioComentarios();
-            }
-
-            return this.CommentsSerives;
-        }
-
-        private ServicioSubscripcion getSubscriptionService()
-        {
-            if (SubscriptionService == null)
-            {
-                this.SubscriptionService = new ServicioSubscripcion();
-            }
-
-            return this.SubscriptionService;
-        }
-
         private BlogContext db = new BlogContext();
 
         // GET: Laboratorio
