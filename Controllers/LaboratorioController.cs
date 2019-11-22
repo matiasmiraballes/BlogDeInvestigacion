@@ -159,7 +159,7 @@ namespace BlogDeInvestigacion.Controllers
             }
             
             ServicioComentarios commentsService = getCommentsService();
-            IList<Conversacion> conversaciones = commentsService.ObtenerConversaciones(laboratorio.IdLaboratorio);
+            List<Conversacion> conversaciones = commentsService.ObtenerConversaciones(laboratorio.IdLaboratorio);
 
             ServicioSubscripcion subscriptionService = getSubscriptionService();
             bool isSubscripted = subscriptionService.IsSubscripted((int)id, User.Identity.Name);

@@ -21,6 +21,20 @@ namespace BlogDeInvestigacion.Services
             return subscripciones;
         }
 
+        public List<Subscripcion> GetSubscripciones(string username)
+        {
+            List<Subscripcion> subscripciones;
+
+            using (BlogContext db = new BlogContext())
+            {
+                subscripciones = db.Subscripciones
+                                    .Where(s => s.Username == username)
+                                    .ToList();
+            }
+
+            return subscripciones;
+        }
+
         public bool IsSubscripted(int? idLaboratorio, string username)
         {
             if (username == "") { return false; }

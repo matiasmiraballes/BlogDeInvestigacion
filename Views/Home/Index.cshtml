@@ -1,10 +1,26 @@
-﻿
+﻿@using BlogDeInvestigacion.Models
+@using BlogDeInvestigacion.ViewModels
+@model HomeViewModel
 @{
     ViewBag.Title = "Home Page";
 }
 
+<link href="@Url.Content("/Content/App/Laboratorio/Comentarios.css")" rel="stylesheet" type="text/css" />
+
 <div class="container">
-    
+    @foreach (var item in Model.ElementosMuro)
+    {
+        <div class="container ElementoContainer">
+            @{
+                Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", new List<Conversacion> { item as Conversacion });
+            }
+        </div>
+    }
+</div>
+
+
+<div class="container">
+
     <div class="container" id="containerMuro">
 
         @*SNIPPET SAMPLE: https://bootsnipp.com/snippets/yNa0V*@

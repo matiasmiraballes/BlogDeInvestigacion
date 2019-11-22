@@ -13,6 +13,7 @@ namespace BlogDeInvestigacion.Controllers
     {
         private ServicioComentarios CommentsSerives;
         private ServicioEvento EventsServices;
+        private ServicioSubscripcion SubscriptionsServices;
 
         private ServicioComentarios getCommentsService()
         {
@@ -34,17 +35,36 @@ namespace BlogDeInvestigacion.Controllers
             return this.EventsServices;
         }
 
+        private ServicioSubscripcion getSubscriptionService()
+        {
+            if (SubscriptionsServices == null)
+            {
+                this.SubscriptionsServices = new ServicioSubscripcion();
+            }
+
+            return this.SubscriptionsServices;
+        }
+
         public ActionResult Index()
         {
-            var servicioComentarios = getCommentsService();
+            ServicioSubscripcion servicioSubscripcion = getSubscriptionService();
+            List<Subscripcion> subscipciones = servicioSubscripcion.GetSubscripciones(User.Identity.Name);
 
-            var comentarios = servicioComentarios.ObtenerConversaciones();
+            ServicioComentarios servicioComentarios = getCommentsService();
+            List<Conversacion> conversaciones = servicioComentarios.ObtenerConversaciones();
 
-            var elementosMuro = new List<IElementoMuro>();
+            List<IElementoMuro> elementosMuro = new List<IElementoMuro>();
 
-            foreach (var c in comentarios)
+
+            foreach (Subscripcion s in subscipciones)
             {
-                elementosMuro.Add(c);
+                List<Conversacion> convRelacionadas = conversaciones.Where(c => c.IdLaboratorio == s.IdLaboratorio).ToList();
+
+                foreach (var item in convRelacionadas)
+                {
+                    elementosMuro.Add(item);
+                }
+                
             }
 
             var orderedElementos = elementosMuro.OrderByDescending(e => e.GetFechaDePublicacion()).ToList();
@@ -54,7 +74,7 @@ namespace BlogDeInvestigacion.Controllers
                 ElementosMuro = orderedElementos
             };
 
-            return View();
+            return View(homeViewModel);
         }
 
         [HttpPost]

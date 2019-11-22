@@ -10,7 +10,7 @@ namespace BlogDeInvestigacion.Services
 {
     public class ServicioComentarios
     {
-        public IList<Conversacion> ObtenerConversaciones()
+        public List<Conversacion> ObtenerConversaciones()
         {
             List<Conversacion> conversaciones;
 
@@ -22,7 +22,7 @@ namespace BlogDeInvestigacion.Services
             return conversaciones;
         }
 
-        public IList<Conversacion> ObtenerConversaciones(int idLaboratorio)
+        public List<Conversacion> ObtenerConversaciones(int idLaboratorio)
         {
             List<Conversacion> conversaciones;
 
