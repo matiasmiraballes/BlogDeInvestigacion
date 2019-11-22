@@ -205,6 +205,7 @@
     <Compile Include="ViewModels\NoticiaViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LaboratorioViewModel.cs" />
+    <Compile Include="ViewModels\SeccionComentariosViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\App\Laboratorio\Laboratorio.css" />
@@ -332,6 +333,7 @@
     <Content Include="Views\Noticia\Create.cshtml" />
     <Content Include="Views\Noticia\Delete.cshtml" />
     <Content Include="Views\Noticia\Details.cshtml" />
+    <Content Include="Views\Shared\_SeccionComentarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

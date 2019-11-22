@@ -54,78 +54,9 @@
             @*SECCION COMENTARIOS*@
 
             <div class="containerComentarios">
-
-                @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
-                {
-
-                    @Html.Hidden("IdConversacion", 0);
-                    @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
-                    @Html.TextArea("Texto", null, new { @class = "form-control" });
-
-                    <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
-                }
-
-                <div class="container">
-
-                    @foreach (var conversacion in Model.Conversaciones)
-                    {
-                        <div class="row">
-
-                            @if (conversacion.Comentarios.Any() && conversacion.IdLaboratorio == Model.Laboratorio.IdLaboratorio)
-                            {
-                                <!-- FIRST ACTION -->
-                                <div class="media comment-box">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">@conversacion.Comentarios.First().NombreDeUsuario</h4>
-                                        <p>@conversacion.Comentarios.First().Texto</p>
-                                        <!-- FIRST ACTION -->
-
-                                        @foreach (var comentario in conversacion.Comentarios.Skip(1))
-                                        {
-                                            <!-- FOR EACH-1 -->
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <a href="#">
-                                                        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">@comentario.NombreDeUsuario</h4>
-                                                    <p>@comentario.Texto</p>
-                                                </div>
-                                            </div>
-                                            <!-- FOR EACH-1 -->
-                                        }
-
-                                        @*INICIO POST COMENTARIO*@
-
-                                        @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
-                                        {
-
-                                            @Html.Hidden("IdConversacion", conversacion.IdConversacion);
-                                            @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
-                                            @Html.TextArea("Texto", null, new { @class = "form-control" });
-
-                                            <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
-                                        }
-
-
-                                        @*FIN POST COMENTARIO*@
-
-                                    </div>
-                                </div>
-
-                            }
-                        </div>
-                    }
-
-                </div>
-
+            @{ 
+                Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", new SeccionComentariosViewModel { Conversaciones = Model.Conversaciones, Laboratorio = Model.Laboratorio });
+            }
             </div>
 
         </div>
