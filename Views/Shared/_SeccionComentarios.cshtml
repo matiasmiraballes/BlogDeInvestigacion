@@ -1,23 +1,13 @@
-﻿@using BlogDeInvestigacion.ViewModels
-@model SeccionComentariosViewModel
-
-@using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
-{
-
-    @Html.Hidden("IdConversacion", 0);
-    @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
-    @Html.TextArea("Texto", null, new { @class = "form-control" });
-
-    <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
-}
+﻿@using BlogDeInvestigacion.Models
+@model IList<Conversacion>
 
 <div class="container">
 
-    @foreach (var conversacion in Model.Conversaciones)
+    @foreach (var conversacion in Model)
     {
         <div class="row">
 
-            @if (conversacion.Comentarios.Any() && conversacion.IdLaboratorio == Model.Laboratorio.IdLaboratorio)
+            @if (conversacion.Comentarios.Any())
             {
                 <!-- FIRST ACTION -->
                 <div class="media comment-box">
@@ -54,7 +44,7 @@
                         {
 
                             @Html.Hidden("IdConversacion", conversacion.IdConversacion);
-                            @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
+                            @Html.Hidden("IdLaboratorio", conversacion.IdLaboratorio);
                             @Html.TextArea("Texto", null, new { @class = "form-control" });
 
                             <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />

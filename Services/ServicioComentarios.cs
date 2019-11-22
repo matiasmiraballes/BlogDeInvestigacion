@@ -22,6 +22,21 @@ namespace BlogDeInvestigacion.Services
             return conversaciones;
         }
 
+        public IList<Conversacion> ObtenerConversaciones(int idLaboratorio)
+        {
+            List<Conversacion> conversaciones;
+
+            using (BlogContext db = new BlogContext())
+            {
+                conversaciones = db.Conversaciones
+                                    .Include(c => c.Comentarios)
+                                    .Where(c => c.IdLaboratorio == idLaboratorio)
+                                    .ToList();
+            }
+
+            return conversaciones;
+        }
+
         public Conversacion BuscarConversacion(int id)
         {
             Conversacion conversacion;

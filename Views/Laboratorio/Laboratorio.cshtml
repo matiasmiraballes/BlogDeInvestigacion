@@ -53,11 +53,26 @@
 
             @*SECCION COMENTARIOS*@
 
-            <div class="containerComentarios">
-            @{ 
-                Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", new SeccionComentariosViewModel { Conversaciones = Model.Conversaciones, Laboratorio = Model.Laboratorio });
+        <div class="containerComentarios">
+
+            @*CREAR CONVERSACION*@
+
+            @using (Html.BeginForm("GuardarComentario", "Laboratorio", FormMethod.Post))
+            {
+
+                @Html.Hidden("IdConversacion", 0);
+                @Html.Hidden("IdLaboratorio", Model.Laboratorio.IdLaboratorio);
+                @Html.TextArea("Texto", null, new { @class = "form-control" });
+
+                <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
             }
-            </div>
+
+            @*SECCION CONVERSACIONES*@
+
+            @{
+                Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", Model.Conversaciones);
+            }
+        </div>
 
         </div>
 
