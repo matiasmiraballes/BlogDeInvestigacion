@@ -10,7 +10,7 @@
             @if (conversacion.Comentarios.Any())
             {
                 <!-- FIRST ACTION -->
-                <div class="media comment-box">
+                <div class="media comment-box m-2">
                     <div class="media-left">
                         <a href="#">
                             <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
@@ -45,9 +45,9 @@
 
                             @Html.Hidden("IdConversacion", conversacion.IdConversacion);
                             @Html.Hidden("IdLaboratorio", conversacion.IdLaboratorio);
-                            @Html.TextArea("Texto", null, new { @class = "form-control" });
+                            @Html.TextArea("Texto", null, new { @class = "form-control CajaDeComentarios mt-3" });
 
-                            <input type="submit" class="btn btn-info" value="POSTEAR COMENTARIO" />
+                            <input type="submit" class="btn btn-info mt-2" value="POSTEAR COMENTARIO" />
                         }
 
 
