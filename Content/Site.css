@@ -25,3 +25,19 @@ textarea {
 .btnblk {
     background-color: #1a1a1a
 }
+
+.linkN {
+    color: rgba(255, 255, 255, 0.5);
+}
+.linkN:hover {
+    color: white;
+    text-decoration: none;
+}
+linkNS {
+    color: black;
+}
+
+.linkNS:hover {
+    color: white;
+    text-decoration: none;
+}
