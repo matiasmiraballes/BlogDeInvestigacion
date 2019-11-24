@@ -12,11 +12,11 @@
     {
         <div class="container ElementoContainer">
 
-            @if (item.GetTipoDePublicacion() == "Conversacion")
+            @if (item.GetTipoDePublicacion() == TipoPublicacion.Conversacion)
             {
                 Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", new List<Conversacion> { item as Conversacion });
             }
-            @if (item.GetTipoDePublicacion() == "Noticia")
+            @if (item.GetTipoDePublicacion() == TipoPublicacion.Noticia)
             {
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
                     <div class="card-header">@((item as Noticia).Titulo)</div>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             }
-            @if (item.GetTipoDePublicacion() == "Evento")
+            @if (item.GetTipoDePublicacion() == TipoPublicacion.Evento)
             {
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
                     <div class="card-header">@((item as Evento).Nombre)</div>

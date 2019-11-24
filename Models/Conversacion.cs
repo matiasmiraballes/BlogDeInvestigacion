@@ -24,7 +24,7 @@ namespace BlogDeInvestigacion.Models
 
         public string GetTipoDePublicacion()
         {
-            return "Conversacion";
+            return TipoPublicacion.Conversacion;
         }
     }
 }

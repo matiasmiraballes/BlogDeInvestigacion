@@ -36,7 +36,7 @@ namespace BlogDeInvestigacion.Models
 
         public string GetTipoDePublicacion()
         {
-            return "Evento";
+            return TipoPublicacion.Evento;
         }
     }
 }
