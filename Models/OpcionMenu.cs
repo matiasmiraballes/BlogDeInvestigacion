@@ -9,6 +9,7 @@ namespace BlogDeInvestigacion.Models
     {
         public string Nombre { get; set; }
         public string Link { get; set; }
+        public string Tipo { get; set; }
         public string ClaseIcono { get; set; }
     }
 }

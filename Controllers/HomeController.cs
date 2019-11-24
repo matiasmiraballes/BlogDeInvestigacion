@@ -11,7 +11,7 @@ namespace BlogDeInvestigacion.Controllers
 {
     public class HomeController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(string parametro)
         {
             ServicioSubscripcion servicioSubscripcion = getSubscriptionService();
             List<Subscripcion> subscipciones = servicioSubscripcion.GetSubscripciones(User.Identity.Name);
@@ -27,28 +27,46 @@ namespace BlogDeInvestigacion.Controllers
 
             List<IElementoMuro> elementosMuro = new List<IElementoMuro>();
 
+            if (parametro == null || parametro == "")
+            {
+                parametro = TipoPublicacion.Todos;
+            }
 
             foreach (Subscripcion s in subscipciones)
             {
-                List<Conversacion> convRelacionadas = conversaciones.Where(c => c.IdLaboratorio == s.IdLaboratorio).ToList();
-
-                foreach (Conversacion item in convRelacionadas)
+                if (parametro == TipoPublicacion.Conversacion || parametro == TipoPublicacion.Todos)
                 {
-                    elementosMuro.Add(item);
+                    List<Conversacion> convRelacionadas = conversaciones.Where(c => c.IdLaboratorio == s.IdLaboratorio).ToList();
+
+                    foreach (Conversacion item in convRelacionadas)
+                    {
+                        elementosMuro.Add(item);
+                    }
                 }
 
-                List<Noticia> noticiasRelacionadas = noticias.Where(n => n.IdLaboratorio == s.IdLaboratorio).ToList();
-
-                foreach (Noticia item in noticiasRelacionadas)
+                if (parametro == TipoPublicacion.Noticia || parametro == TipoPublicacion.Todos)
                 {
-                    elementosMuro.Add(item);
+                    List<Noticia> noticiasRelacionadas = noticias.Where(n => n.IdLaboratorio == s.IdLaboratorio).ToList();
+
+                    foreach (Noticia item in noticiasRelacionadas)
+                    {
+                        elementosMuro.Add(item);
+                    }
                 }
 
-                List<Evento> eventosRelacionados = eventos.Where(e => e.IdLaboratorio == s.IdLaboratorio).ToList();
-
-                foreach (Evento item in eventosRelacionados)
+                if (parametro == TipoPublicacion.Evento || parametro == TipoPublicacion.Todos)
                 {
-                    elementosMuro.Add(item);
+                    List<Evento> eventosRelacionados = eventos.Where(e => e.IdLaboratorio == s.IdLaboratorio).ToList();
+
+                    foreach (Evento item in eventosRelacionados)
+                    {
+                        elementosMuro.Add(item);
+                    }
+                }
+
+                if (parametro == TipoPublicacion.Encuesta || parametro == TipoPublicacion.Todos)
+                {
+
                 }
             }
 
