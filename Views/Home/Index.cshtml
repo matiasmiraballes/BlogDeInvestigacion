@@ -16,95 +16,21 @@
                         new OpcionMenu { Nombre = "Ver Conversaciones", Tipo = TipoOpcion.Action, Link = "/Home/Index?parametro=" + TipoPublicacion.Conversacion, ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Ver Eventos", Tipo = TipoOpcion.Action, Link = "/Home/Index?parametro=" + TipoPublicacion.Evento, ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Ver Noticias", Tipo = TipoOpcion.Action, Link = "/Home/Index?parametro=" + TipoPublicacion.Noticia, ClaseIcono = "fa fa-tasks fa-fw mr-3" },
+                        new OpcionMenu { Nombre = "Ver Todos", Tipo = TipoOpcion.Action, Link = "/Home/Index?parametro=" + TipoPublicacion.Todos, ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                     }
         });
     }
 }
 
-    <link href="@Url.Content("/Content/App/Laboratorio/Comentarios.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("/Content/App/Laboratorio/Comentarios.css")" rel="stylesheet" type="text/css" />
 
-    <div class="container">
-        @foreach (IElementoMuro item in Model.ElementosMuro)
-        {
-            <div class="container ElementoContainer">
-
-                @if (item.GetTipoDePublicacion() == TipoPublicacion.Conversacion)
-                {
-                    Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", new List<Conversacion> { item as Conversacion });
-                }
-                @if (item.GetTipoDePublicacion() == TipoPublicacion.Noticia)
-                {
-                    <div class="card border-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-header">@((item as Noticia).Titulo)</div>
-                        <div class="card-body">
-                            <p class="card-text">@((item as Noticia).Descripcion)</p>
-                        </div>
-                    </div>
-                }
-                @if (item.GetTipoDePublicacion() == TipoPublicacion.Evento)
-                {
-                    <div class="card border-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-header">@((item as Evento).Nombre)</div>
-                        <div class="card-body">
-                            <p class="card-text">@((item as Evento).Descripcion)</p>
-
-                            <p class="card-text">@((item as Evento).Inicio)</p>
-                            <p class="card-text">@((item as Evento).Fin)</p>
-                        </div>
-                    </div>
-                }
-            </div>
-        }
-    </div>
-
-
-
-
-
+<div class="container">
     @foreach (IElementoMuro item in Model.ElementosMuro)
     {
-        <div class="container ElementoContainer">
+    <div class="container ElementoContainer">
 
-            @if (item.GetTipoDePublicacion() == "Conversacion")
-            {
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0">LABORATORIO: @((item as Conversacion).IdLaboratorio)</div>
-                                    <div class="h7 text-muted">Miracles Lee Cross</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="right-corner">
-                                    @item.GetFechaDePublicacion()
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="card-body">
-                        @{Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", new List<Conversacion> { item as Conversacion }); }
-                    </div>
-                    <div class="card-footer">
-                    </div>
-                </div>
-            }
-
-        </div>
-    }
-
-
-    <div class="container">
-
-        <div class="container" id="containerMuro">
-
-            @*SNIPPET SAMPLE: https://bootsnipp.com/snippets/yNa0V*@
-
+        @if (item.GetTipoDePublicacion() == TipoPublicacion.Conversacion)
+        {
             <div class="card gedf-card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
@@ -113,33 +39,97 @@
                                 <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                             </div>
                             <div class="ml-2">
-                                <div class="h5 m-0">LeeCross</div>
+                                <div class="h5 m-0">LABORATORIO: @((item as Conversacion).IdLaboratorio)</div>
                                 <div class="h7 text-muted">Miracles Lee Cross</div>
                             </div>
                         </div>
                         <div>
                             <div class="right-corner">
-                                ...
+                                @item.GetFechaDePublicacion()
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="card-body">
-                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                    <a class="card-link" href="#">
-                        <h5 class="card-title">TITLE</h5>
-                    </a>
+                    @{Html.RenderPartial("~/Views/Shared/_SeccionComentarios.cshtml", new List<Conversacion> { item as Conversacion }); }
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        }
 
-                    <p class="card-text">
-                        PUBLISH TYPE...
-                    </p>
+
+        @if (item.GetTipoDePublicacion() == TipoPublicacion.Noticia)
+        {
+            <div class="card gedf-card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mr-2">
+                                <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                            </div>
+                            <div class="ml-2">
+                                <div class="h5 m-0">LABORATORIO: @((item as Noticia).IdLaboratorio)</div>
+                                <div class="h7 text-muted">Miracles Lee Cross</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="right-corner">
+                                @item.GetFechaDePublicacion().ToString("MM/dd/yyyy HH:mm")
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <h5>@((item as Noticia).Titulo)</h5>
+                    <hr class="my-4">
+                    <p class="pb-2 text-primary">@((item as Noticia).Descripcion)</p>
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        }
+
+        @if (item.GetTipoDePublicacion() == TipoPublicacion.Evento)
+        {
+            <div class="card gedf-card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mr-2">
+                                <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                            </div>
+                            <div class="ml-2">
+                                <div class="h5 m-0">LABORATORIO: @((item as Evento).IdLaboratorio)</div>
+                                <div class="h7 text-muted">Miracles Lee Cross</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="right-corner">
+                                @item.GetFechaDePublicacion().ToString("MM/dd/yyyy HH:mm")
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+
+                    <h5>@((item as Evento).Nombre)</h5>
+                    <hr class="my-4">
+                    <p class="pb-2 text-primary">@((item as Evento).Descripcion)</p>
+
+                    <span class="float-left"> <span class="text-primary">Desde: </span>@((item as Evento).Inicio.ToString("MM/dd/yyyy HH:mm"))</span>
+                    <span class="float-right"><span class="text-primary">Hasta: </span>@((item as Evento).Fin.ToString("MM/dd/yyyy HH:mm"))</span>
+
 
                 </div>
                 <div class="card-footer">
                 </div>
             </div>
-
-        </div>
-
+        }
     </div>
+    }
+</div>
+
