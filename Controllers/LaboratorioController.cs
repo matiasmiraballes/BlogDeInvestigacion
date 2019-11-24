@@ -146,6 +146,7 @@ namespace BlogDeInvestigacion.Controllers
                 Laboratorio = laboratorio,
                 Conversaciones = conversaciones.OrderByDescending(c => c.TiempoCreacion).ToList(),
                 Noticias = db.Noticias.Where(n => n.IdLaboratorio == id).ToList(),
+                Eventos = db.Eventos.Where(e => e.IdEvento==id).ToList(),
                 IsSubscripted = isSubscripted
             };
 
@@ -171,6 +172,23 @@ namespace BlogDeInvestigacion.Controllers
 
             return View("~/Views/Evento/Index.cshtml",db.Eventos.ToList());
         }
+
+        //NOTICIAS//
+       public ActionResult CrearNoticia(Noticia noticia)
+       {
+            Noticia noticiaN = new Noticia
+            {
+                Titulo = noticia.Titulo,
+                Descripcion = noticia.Descripcion,
+                FechaCreacion = System.DateTime.Now,
+            };
+
+            var ServicioNoticia = new ServicioNoticia();
+
+            ServicioNoticia.GuardarNoticia(noticiaN);
+
+            return Redirect(Request.UrlReferrer.ToString());
+       }
 
         // SUBSCRIPCIONES //
         public ActionResult Subscribirse(int? idLaboratorio)

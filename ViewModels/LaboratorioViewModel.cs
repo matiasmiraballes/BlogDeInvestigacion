@@ -14,6 +14,8 @@ namespace BlogDeInvestigacion.ViewModels
 
         public IList<Noticia> Noticias { get; set; }
 
+        public IList<Evento> Eventos { get; set; }
+
         public bool IsSubscripted { get; set; }
     }
 }

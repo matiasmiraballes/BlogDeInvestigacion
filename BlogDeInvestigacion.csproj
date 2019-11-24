@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201911222258542_IdLaboratorioForEvents.Designer.cs">
       <DependentUpon>201911222258542_IdLaboratorioForEvents.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911241632454_pepe.cs" />
+    <Compile Include="Migrations\201911241632454_pepe.Designer.cs">
+      <DependentUpon>201911241632454_pepe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -360,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911222258542_IdLaboratorioForEvents.resx">
       <DependentUpon>201911222258542_IdLaboratorioForEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911241632454_pepe.resx">
+      <DependentUpon>201911241632454_pepe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
