@@ -5,28 +5,29 @@ namespace BlogDeInvestigacion.Controllers
 {
     public class BaseController : Controller
     {
-        private ServicioComentarios CommentsSerives;
+        private ServicioComentarios CommentsService;
         private ServicioSubscripcion SubscriptionService;
         private ServicioEvento EventsService;
-        private ServicioNoticia NewsSerives;
+        private ServicioNoticia NewsService;
+        private ServicioEncuesta QuestionnairesService;
 
         protected ServicioNoticia getNewsService()
         {
-            if (NewsSerives == null)
+            if (NewsService == null)
             {
-                this.NewsSerives = new ServicioNoticia();
+                this.NewsService = new ServicioNoticia();
             }
 
-            return this.NewsSerives;
+            return this.NewsService;
         }
         protected ServicioComentarios getCommentsService()
         {
-            if (CommentsSerives == null)
+            if (CommentsService == null)
             {
-                this.CommentsSerives = new ServicioComentarios();
+                this.CommentsService = new ServicioComentarios();
             }
 
-            return this.CommentsSerives;
+            return this.CommentsService;
         }
 
         protected ServicioSubscripcion getSubscriptionService()
@@ -47,6 +48,16 @@ namespace BlogDeInvestigacion.Controllers
             }
 
             return this.EventsService;
+        }
+
+        protected ServicioEncuesta getQuestionnaireService()
+        {
+            if (QuestionnairesService == null)
+            {
+                this.QuestionnairesService = new ServicioEncuesta();
+            }
+
+            return this.QuestionnairesService;
         }
     }
 }

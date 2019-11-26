@@ -193,7 +193,21 @@ namespace BlogDeInvestigacion.Controllers
         //NOTICIAS//
         public ActionResult CrearEncuesta(string Titulo, string[] Pregunta)
         {
-            
+            List<Pregunta> Preguntas = new List<Pregunta>();
+
+            for (int i = 0; i < Pregunta.Length; i++)
+            {
+                Preguntas.Add(new Pregunta { IdPregunta = i+1, Descripcion = Pregunta[i] });
+            }
+
+            var Encuesta = new Encuesta
+            {
+                Titulo = Titulo,
+                Preguntas = Preguntas
+            };
+
+            ServicioEncuesta questionnaireService = getQuestionnaireService();
+            questionnaireService.GuardarEncuesta(Encuesta);
 
             return Redirect(Request.UrlReferrer.ToString());
         }

@@ -208,6 +208,7 @@
     <Compile Include="Models\SeccionMenu.cs" />
     <Compile Include="Models\Subscripcion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ServicioEncuesta.cs" />
     <Compile Include="Services\ServicioNoticia.cs" />
     <Compile Include="Services\ServicioComentarios.cs" />
     <Compile Include="Services\ServicioEvento.cs" />
