@@ -174,8 +174,8 @@ namespace BlogDeInvestigacion.Controllers
         }
 
         //NOTICIAS//
-       public ActionResult CrearNoticia(Noticia noticia)
-       {
+        public ActionResult CrearNoticia(Noticia noticia)
+        {
             Noticia noticiaN = new Noticia
             {
                 Titulo = noticia.Titulo,
@@ -188,7 +188,14 @@ namespace BlogDeInvestigacion.Controllers
             ServicioNoticia.GuardarNoticia(noticiaN);
 
             return Redirect(Request.UrlReferrer.ToString());
-       }
+        }
+
+        //NOTICIAS//
+        public ActionResult CrearEncuesta(string Titulo, string[] Pregunta)
+        {
+            
+            return Redirect(Request.UrlReferrer.ToString());
+        }
 
         // SUBSCRIPCIONES //
         public ActionResult Subscribirse(int? idLaboratorio)

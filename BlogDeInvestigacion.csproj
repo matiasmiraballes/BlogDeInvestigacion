@@ -199,12 +199,16 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comentario.cs" />
     <Compile Include="Models\Conversacion.cs" />
+    <Compile Include="Models\Encuesta.cs" />
+    <Compile Include="Models\EncuestaCompletada.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\IElementoMuro.cs" />
     <Compile Include="Models\Laboratorio.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Noticia.cs" />
     <Compile Include="Models\OpcionMenu.cs" />
+    <Compile Include="Models\Pregunta.cs" />
+    <Compile Include="Models\Respuesta.cs" />
     <Compile Include="Models\SeccionMenu.cs" />
     <Compile Include="Models\Subscripcion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

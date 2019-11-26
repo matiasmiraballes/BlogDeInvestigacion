@@ -39,6 +39,10 @@ namespace BlogDeInvestigacion.Data_Management
         public DbSet<Conversacion> Conversaciones { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Subscripcion> Subscripciones { get; set; }
+        public DbSet<Encuesta> Encuestas { get; set; }
+        public DbSet<Pregunta> Preguntas { get; set; }
+        public DbSet<Respuesta> Respuestas { get; set; }
+        public DbSet<EncuestaCompletada> EncuestasCompletadas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

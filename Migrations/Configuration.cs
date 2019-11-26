@@ -118,6 +118,42 @@ namespace BlogDeInvestigacion.Migrations
 
             conversaciones.ForEach(c => context.Conversaciones.Add(c));
             SaveChanges(context);
+
+            var encuestas = new List<Encuesta>()
+            {
+                new Encuesta { IdEncuesta = 1, Titulo = "Presentacion sobre Blockchain" }
+            };
+
+            encuestas.ForEach(e => context.Encuestas.Add(e));
+            SaveChanges(context);
+
+            var preguntas = new List<Pregunta>()
+            {
+                new Pregunta { IdPregunta = 1, IdEncuesta = 1, Descripcion = "¿Que tal les parecio la presentacion?" },
+                new Pregunta { IdPregunta = 2, IdEncuesta = 1, Descripcion = "¿Fue interesante la parte práctica?" },
+                new Pregunta { IdPregunta = 3, IdEncuesta = 1, Descripcion = "¿Fue interesante la parte teórica?" }
+            };
+
+            preguntas.ForEach(p => context.Preguntas.Add(p));
+            SaveChanges(context);
+
+            var respuestas = new List<Respuesta>()
+            {
+                new Respuesta { IdRespuesta = 1, IdEncuesta = 1, IdPregunta = 1, Detalle = 3},
+                new Respuesta { IdRespuesta = 1, IdEncuesta = 1, IdPregunta = 1, Detalle = 2},
+                new Respuesta { IdRespuesta = 1, IdEncuesta = 1, IdPregunta = 1, Detalle = 3}
+            };
+
+            respuestas.ForEach(r => context.Respuestas.Add(r));
+            SaveChanges(context);
+
+            var encuestasCompletadas = new List<EncuestaCompletada>()
+            {
+                new EncuestaCompletada { IdEncuestaCompletada = 1, IdEncuesta = 1, Usuario = "admin@mail.com" }
+            };
+
+            encuestasCompletadas.ForEach(e => context.EncuestasCompletadas.Add(e));
+            SaveChanges(context);
         }
 
         private void ResetDatabase(BlogContext context)
