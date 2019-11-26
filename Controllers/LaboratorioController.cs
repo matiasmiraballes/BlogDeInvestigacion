@@ -194,6 +194,7 @@ namespace BlogDeInvestigacion.Controllers
         public ActionResult CrearEncuesta(string Titulo, string[] Pregunta)
         {
             
+
             return Redirect(Request.UrlReferrer.ToString());
         }
 

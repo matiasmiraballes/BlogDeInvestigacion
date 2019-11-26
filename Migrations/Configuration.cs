@@ -119,29 +119,49 @@ namespace BlogDeInvestigacion.Migrations
             conversaciones.ForEach(c => context.Conversaciones.Add(c));
             SaveChanges(context);
 
+            // HAY DOS FORMAS DE INSERTAR OBJETOS ANIDADOS A LA BASE DE DATOS: 
+            // #1:
+
+            //var encuestas = new List<Encuesta>()
+            //{
+            //    new Encuesta { IdEncuesta = 1, Titulo = "Presentacion sobre Blockchain" }
+            //};
+
+            //encuestas.ForEach(e => context.Encuestas.Add(e));
+            //SaveChanges(context);
+
+            //var preguntas = new List<Pregunta>()
+            //{
+            //    new Pregunta { IdPregunta = 1, IdEncuesta = 1, Descripcion = "¿Que tal les parecio la presentacion?" },
+            //    new Pregunta { IdPregunta = 2, IdEncuesta = 1, Descripcion = "¿Fue interesante la parte práctica?" },
+            //    new Pregunta { IdPregunta = 3, IdEncuesta = 1, Descripcion = "¿Fue interesante la parte teórica?" }
+            //};
+
+            //preguntas.ForEach(p => context.Preguntas.Add(p));
+            //SaveChanges(context);
+
+
+            // #2:
+            var preguntas = new List<Pregunta>()
+            {
+                new Pregunta { IdPregunta = 1, Descripcion = "¿Que tal les parecio la presentacion?" },
+                new Pregunta { IdPregunta = 2, Descripcion = "¿Fue interesante la parte práctica?" },
+                new Pregunta { IdPregunta = 3, Descripcion = "¿Fue interesante la parte teórica?" }
+            };
+
             var encuestas = new List<Encuesta>()
             {
-                new Encuesta { IdEncuesta = 1, Titulo = "Presentacion sobre Blockchain" }
+                new Encuesta { Titulo = "Presentacion sobre Blockchain", Preguntas = preguntas }
             };
 
             encuestas.ForEach(e => context.Encuestas.Add(e));
             SaveChanges(context);
 
-            var preguntas = new List<Pregunta>()
-            {
-                new Pregunta { IdPregunta = 1, IdEncuesta = 1, Descripcion = "¿Que tal les parecio la presentacion?" },
-                new Pregunta { IdPregunta = 2, IdEncuesta = 1, Descripcion = "¿Fue interesante la parte práctica?" },
-                new Pregunta { IdPregunta = 3, IdEncuesta = 1, Descripcion = "¿Fue interesante la parte teórica?" }
-            };
-
-            preguntas.ForEach(p => context.Preguntas.Add(p));
-            SaveChanges(context);
-
             var respuestas = new List<Respuesta>()
             {
-                new Respuesta { IdRespuesta = 1, IdEncuesta = 1, IdPregunta = 1, Detalle = 3},
-                new Respuesta { IdRespuesta = 1, IdEncuesta = 1, IdPregunta = 1, Detalle = 2},
-                new Respuesta { IdRespuesta = 1, IdEncuesta = 1, IdPregunta = 1, Detalle = 3}
+                new Respuesta { IdRespuesta = 1, IdPregunta = 1, Detalle = 3},
+                new Respuesta { IdRespuesta = 2, IdPregunta = 2, Detalle = 2},
+                new Respuesta { IdRespuesta = 3, IdPregunta = 3, Detalle = 3}
             };
 
             respuestas.ForEach(r => context.Respuestas.Add(r));
@@ -163,6 +183,10 @@ namespace BlogDeInvestigacion.Migrations
             context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Eventos',RESEED,0);");
             context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Noticias',RESEED,0);");
             context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Laboratorios',RESEED,0);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.EncuestaCompletadas',RESEED,0);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Respuestas',RESEED,0);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Preguntas',RESEED,0);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('dbo.Encuestas',RESEED,0);");
 
             context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[AspNetRoles]");
             context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[AspNetUserClaims]");
@@ -174,6 +198,10 @@ namespace BlogDeInvestigacion.Migrations
             context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Eventos]");
             context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Noticias]");
             context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Laboratorios]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[EncuestaCompletadas]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Respuestas]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Preguntas]");
+            context.Database.ExecuteSqlCommand("DELETE FROM[dbo].[Encuestas]");
 
             context.SaveChanges();
         }
@@ -186,45 +214,10 @@ namespace BlogDeInvestigacion.Migrations
         {
             try
             {
-
-                //using (var transaction = context.Database.BeginTransaction())
-                //{
-                //    //var item = new IdentityItem { Id = 418, Name = "Abrahadabra" };
-                //    //context.IdentityItems.Add(item);
-                //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Comentarios ON");
-                //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Conversacions ON");
-                //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Eventos ON");
-                //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Noticias ON");
-                //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Laboratorios ON");
-                //    context.SaveChanges();
-                //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Comentarios OFF");
-                //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Conversacions OFF");
-                //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Eventos OFF");
-                //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Noticias OFF");
-                //    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Laboratorios OFF");
-                //    transaction.Commit();
-                //}
-
-
-                //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Comentarios ON");
-                //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Conversacions ON");
-                //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Eventos ON");
-                //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Noticias ON");
-                //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Laboratorios ON");
-
-
                 context.SaveChanges();
-
-
-                //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Comentarios OFF");
-                //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Conversacions OFF");
-                //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Eventos OFF");
-                //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Noticias OFF");
-                //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Laboratorios OFF");
             }
             catch (DbEntityValidationException ex)
             {
-                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Conversacions OFF");
                 StringBuilder sb = new StringBuilder();
 
                 foreach (var failure in ex.EntityValidationErrors)

@@ -3,7 +3,7 @@ namespace BlogDeInvestigacion.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class pepe : DbMigration
+    public partial class FixEncuestas : DbMigration
     {
         public override void Up()
         {
