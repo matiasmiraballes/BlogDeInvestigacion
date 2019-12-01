@@ -13,6 +13,14 @@ namespace BlogDeInvestigacion.Controllers
     {
         public ActionResult Index(string parametro)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return View(new HomeViewModel()
+                {
+                    ElementosMuro = new List<IElementoMuro>()
+                });
+            }
+
             ServicioSubscripcion servicioSubscripcion = getSubscriptionService();
             List<Subscripcion> subscipciones = servicioSubscripcion.GetSubscripciones(User.Identity.Name);
 
