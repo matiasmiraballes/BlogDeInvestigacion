@@ -16,6 +16,8 @@ namespace BlogDeInvestigacion.ViewModels
 
         public IList<Evento> Eventos { get; set; }
 
+        public IList<Encuesta> Encuestas { get; set; }
+
         public bool IsSubscripted { get; set; }
     }
 }

@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201911260056463_FixEncuestas.Designer.cs">
       <DependentUpon>201911260056463_FixEncuestas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911270119063_Added-IdLaboratorio.cs" />
+    <Compile Include="Migrations\201911270119063_Added-IdLaboratorio.Designer.cs">
+      <DependentUpon>201911270119063_Added-IdLaboratorio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -366,6 +370,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911260056463_FixEncuestas.resx">
       <DependentUpon>201911260056463_FixEncuestas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911270119063_Added-IdLaboratorio.resx">
+      <DependentUpon>201911270119063_Added-IdLaboratorio.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

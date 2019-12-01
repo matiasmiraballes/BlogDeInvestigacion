@@ -78,52 +78,61 @@
 
         @*COLUMNA SIDEBAR*@
 
-        <div class="col-3">
-            <div class="right-sidebar position-relative" style="max-width:20rem;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col text-center">
+    <div class="col-3">
+        <div class="right-sidebar position-relative" style="max-width:20rem;">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
 
-                            @if (!Model.IsSubscripted)
+                        @if (!Model.IsSubscripted)
+                        {
+                            if (User.Identity.IsAuthenticated)
                             {
-                                if (User.Identity.IsAuthenticated)
-                                {
-                                    @Html.ActionLink("Subscribirse", "Subscribirse", new { idLaboratorio = Model.Laboratorio.IdLaboratorio }, new { @class = "btn btn-outline-success" })
-                                }
-                                else
-                                {
-                                    @Html.ActionLink("Login to Subscribe", "Login", "Account", null, new { @class = "btn btn-outline-success" })
-                                }
+                                @Html.ActionLink("Subscribirse", "Subscribirse", new { idLaboratorio = Model.Laboratorio.IdLaboratorio }, new { @class = "btn btn-outline-success" })
                             }
                             else
                             {
-                                @Html.ActionLink("Cancelar Subscripcion", "CancelarSubscripcion", new { idLaboratorio = Model.Laboratorio.IdLaboratorio }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Login to Subscribe", "Login", "Account", null, new { @class = "btn btn-outline-success" })
                             }
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Cancelar Subscripcion", "CancelarSubscripcion", new { idLaboratorio = Model.Laboratorio.IdLaboratorio }, new { @class = "btn btn-success" })
+                        }
 
-                        </div>
                     </div>
                 </div>
             </div>
-            <br />
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-header" style="color:aliceblue">NOTICIAS</div>
-                @foreach (Noticia noticia in Model.Noticias)
-                {
-                    <div class="card-body table-primary">
-                        @Html.ActionLink(noticia.Titulo, "Details", "Noticia", new { id = noticia.IdNoticia }, new { @class = "linkNS" })
-                    </div>
-                }
-            </div>
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-header" style="color:aliceblue">EVENTOS</div>
-                @foreach (Evento evento in Model.Eventos)
-                {
-                    <div class="card-body table-primary">
-                        @Html.ActionLink(evento.Nombre, "Details", "Evento", new { id = evento.IdEvento }, new { @class = "linkNS" })
-                    </div>
-                }
-            </div>
         </div>
+        <br />
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">NOTICIAS</div>
+            @foreach (Noticia noticia in Model.Noticias)
+            {
+                <div class="card-body table-primary">
+                    @Html.ActionLink(noticia.Titulo, "Details", "Noticia", new { id = noticia.IdNoticia }, new { @class = "linkNS" })
+                </div>
+            }
+        </div>
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">EVENTOS</div>
+            @foreach (Evento evento in Model.Eventos)
+            {
+                <div class="card-body table-primary">
+                    @Html.ActionLink(evento.Nombre, "Details", "Evento", new { id = evento.IdEvento }, new { @class = "linkNS" })
+                </div>
+            }
+        </div>
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">EVENTOS</div>
+            @foreach (Evento evento in Model.Eventos)
+            {
+                <div class="card-body table-primary">
+                    @Html.ActionLink(evento.Nombre, "Details", "Evento", new { id = evento.IdEvento }, new { @class = "linkNS" })
+                </div>
+            }
+        </div>
+    </div>
     </div>
 </div>
 

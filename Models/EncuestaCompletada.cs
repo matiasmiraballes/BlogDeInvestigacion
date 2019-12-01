@@ -11,6 +11,7 @@ namespace BlogDeInvestigacion.Models
         [Key]
         public int IdEncuestaCompletada { get; set; }
         public int IdEncuesta { get; set; }
+        public Encuesta Encuesta { get; set; }
         public string Usuario { get; set; }
     }
 }

@@ -10,8 +10,8 @@ namespace BlogDeInvestigacion.Models
     {
         [Key]
         public int IdEncuesta { get; set; }
+        public int IdLaboratorio { get; set; }
         public string Titulo { get; set; }
-
         public IList<Pregunta> Preguntas { get; set; }
     }
 }

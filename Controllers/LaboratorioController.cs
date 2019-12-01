@@ -141,12 +141,17 @@ namespace BlogDeInvestigacion.Controllers
             ServicioSubscripcion subscriptionService = getSubscriptionService();
             bool isSubscripted = subscriptionService.IsSubscripted((int)id, User.Identity.Name);
 
+            ServicioEncuesta questionnaireService = getQuestionnaireService();
+            List<Encuesta> encuestas = questionnaireService.ObtenerEncuestas();
+
+
             LaboratorioViewModel labViewModel = new LaboratorioViewModel
             {
                 Laboratorio = laboratorio,
                 Conversaciones = conversaciones.OrderByDescending(c => c.TiempoCreacion).ToList(),
                 Noticias = db.Noticias.Where(n => n.IdLaboratorio == id).ToList(),
-                Eventos = db.Eventos.Where(e => e.IdEvento==id).ToList(),
+                Eventos = db.Eventos.Where(e => e.IdEvento == id).ToList(),
+                Encuestas = encuestas,
                 IsSubscripted = isSubscripted
             };
 
