@@ -21,17 +21,17 @@ namespace BlogDeInvestigacion.Controllers
                 });
             }
 
-            ServicioSubscripcion servicioSubscripcion = getSubscriptionService();
-            List<Subscripcion> subscipciones = servicioSubscripcion.GetSubscripciones(User.Identity.Name);
+            ServicioSuscripciones servicioSuscripciones = getServicioSuscripciones();
+            List<Suscripcion> suscripciones = servicioSuscripciones.GetSuscripciones(User.Identity.Name);
 
-            ServicioComentarios servicioComentarios = getCommentsService();
+            ServicioComentarios servicioComentarios = getServicioComentarios();
             List<Conversacion> conversaciones = servicioComentarios.ObtenerConversaciones();
 
-            ServicioNoticia servicioNoticia = getNewsService();
-            List<Noticia> noticias = servicioNoticia.ObtenerNoticias();
+            ServicioNoticias servicioNoticias = getServicioNoticias();
+            List<Noticia> noticias = servicioNoticias.ObtenerNoticias();
 
-            ServicioEvento servicioEvento = getEventService();
-            List<Evento> eventos = servicioEvento.ObtenerEventos();
+            ServicioEventos servicioEventos = getServicioEventos();
+            List<Evento> eventos = servicioEventos.ObtenerEventos();
 
             List<IElementoMuro> elementosMuro = new List<IElementoMuro>();
 
@@ -40,7 +40,7 @@ namespace BlogDeInvestigacion.Controllers
                 parametro = TipoPublicacion.Todos;
             }
 
-            foreach (Subscripcion s in subscipciones)
+            foreach (Suscripcion s in suscripciones)
             {
                 if (parametro == TipoPublicacion.Conversacion || parametro == TipoPublicacion.Todos)
                 {

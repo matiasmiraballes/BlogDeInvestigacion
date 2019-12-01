@@ -8,7 +8,7 @@ using System.Web;
 
 namespace BlogDeInvestigacion.Services
 {
-    public class ServicioEncuesta
+    public class ServicioEncuestas
     {
         public void GuardarEncuesta(Encuesta encuesta)
         {

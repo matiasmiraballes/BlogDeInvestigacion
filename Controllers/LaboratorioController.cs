@@ -139,16 +139,16 @@ namespace BlogDeInvestigacion.Controllers
             List<Encuesta> encuestas = new List<Encuesta>();
             bool isSubscribed;
 
-            ServicioComentarios commentsService = getCommentsService();
-            conversaciones = commentsService.ObtenerConversaciones(laboratorio.IdLaboratorio);
+            ServicioComentarios servicioComentarios = getServicioComentarios();
+            conversaciones = servicioComentarios.ObtenerConversaciones(laboratorio.IdLaboratorio);
 
             if (User.Identity.IsAuthenticated)
             {
-                ServicioSubscripcion subscriptionService = getSubscriptionService();
-                isSubscribed = subscriptionService.IsSubscribed((int)id, User.Identity.Name);
+                ServicioSuscripciones servicioSuscripciones = getServicioSuscripciones();
+                isSubscribed = servicioSuscripciones.IsSubscribed((int)id, User.Identity.Name);
 
-                ServicioEncuesta questionnaireService = getQuestionnaireService();
-                encuestas = questionnaireService.ObtenerEncuestasSinCompletar((int)id, User.Identity.Name);
+                ServicioEncuestas servicioEncuestas = getServicioEncuestas();
+                encuestas = servicioEncuestas.ObtenerEncuestasSinCompletar((int)id, User.Identity.Name);
             }
             else
             {
@@ -182,7 +182,7 @@ namespace BlogDeInvestigacion.Controllers
 
             };
 
-            var ServicioEvento = new ServicioEvento();
+            var ServicioEvento = new ServicioEventos();
 
            ServicioEvento.GuardarEvento(eventoN);
 
@@ -199,7 +199,7 @@ namespace BlogDeInvestigacion.Controllers
                 FechaCreacion = System.DateTime.Now,
             };
 
-            var ServicioNoticia = new ServicioNoticia();
+            var ServicioNoticia = new ServicioNoticias();
 
             ServicioNoticia.GuardarNoticia(noticiaN);
 
@@ -222,8 +222,8 @@ namespace BlogDeInvestigacion.Controllers
                 Preguntas = Preguntas
             };
 
-            ServicioEncuesta questionnaireService = getQuestionnaireService();
-            questionnaireService.GuardarEncuesta(Encuesta);
+            ServicioEncuestas servicioEncuestas = getServicioEncuestas();
+            servicioEncuestas.GuardarEncuesta(Encuesta);
 
             return Redirect(Request.UrlReferrer.ToString());
         }
@@ -236,8 +236,8 @@ namespace BlogDeInvestigacion.Controllers
                 return HttpNotFound();
             }
 
-            ServicioSubscripcion subscriptionService = getSubscriptionService();
-            subscriptionService.Subscribirse((int)idLaboratorio, User.Identity.Name);
+            ServicioSuscripciones servicioSuscripciones = getServicioSuscripciones();
+            servicioSuscripciones.Suscribirse((int)idLaboratorio, User.Identity.Name);
 
             return RedirectToAction("Laboratorio", new { id = idLaboratorio });
         }
@@ -249,8 +249,8 @@ namespace BlogDeInvestigacion.Controllers
                 return HttpNotFound();
             }
 
-            ServicioSubscripcion subscriptionService = getSubscriptionService();
-            subscriptionService.CancelarSubscripcion((int)idLaboratorio, User.Identity.Name);
+            ServicioSuscripciones servicioSuscripciones = getServicioSuscripciones();
+            servicioSuscripciones.CancelarSuscripcion((int)idLaboratorio, User.Identity.Name);
 
             return RedirectToAction("Laboratorio", new { id = idLaboratorio });
         }

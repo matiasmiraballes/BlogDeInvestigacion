@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BlogDeInvestigacion.Models
 {
-    public class Subscripcion
+    public class Suscripcion
     {
         [Key]
         public int IdSubscripcion { get; set; }

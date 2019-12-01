@@ -7,28 +7,28 @@ using System.Web;
 
 namespace BlogDeInvestigacion.Services
 {
-    public class ServicioNoticia
+    public class ServicioEventos
     {
-        public void GuardarNoticia(Noticia noticia)
+        public void GuardarEvento(Evento evento)
         {
 
             using (BlogContext db = new BlogContext())
             {
-                db.Noticias.Add(noticia);
+                db.Eventos.Add(evento);
                 db.SaveChanges();
             }
         }
 
-        public List<Noticia> ObtenerNoticias()
+        public List<Evento> ObtenerEventos()
         {
-            List<Noticia> noticias = new List<Noticia>();
+            List<Evento> eventos = new List<Evento>();
 
             using (BlogContext db = new BlogContext())
             {
-                noticias = db.Noticias.ToList();
+                eventos = db.Eventos.ToList();
             }
 
-            return noticias;
+            return eventos;
         }
     }
 }

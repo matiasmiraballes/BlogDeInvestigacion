@@ -5,59 +5,59 @@ namespace BlogDeInvestigacion.Controllers
 {
     public class BaseController : Controller
     {
-        private ServicioComentarios CommentsService;
-        private ServicioSubscripcion SubscriptionService;
-        private ServicioEvento EventsService;
-        private ServicioNoticia NewsService;
-        private ServicioEncuesta QuestionnairesService;
+        private ServicioComentarios ServicioComentarios;
+        private ServicioSuscripciones ServicioSuscripciones;
+        private ServicioEventos ServicioEventos;
+        private ServicioNoticias ServicioNoticias;
+        private ServicioEncuestas ServicioEncuestas;
 
-        protected ServicioNoticia getNewsService()
+        protected ServicioNoticias getServicioNoticias()
         {
-            if (NewsService == null)
+            if (ServicioNoticias == null)
             {
-                this.NewsService = new ServicioNoticia();
+                this.ServicioNoticias = new ServicioNoticias();
             }
 
-            return this.NewsService;
+            return this.ServicioNoticias;
         }
-        protected ServicioComentarios getCommentsService()
+        protected ServicioComentarios getServicioComentarios()
         {
-            if (CommentsService == null)
+            if (ServicioComentarios == null)
             {
-                this.CommentsService = new ServicioComentarios();
+                this.ServicioComentarios = new ServicioComentarios();
             }
 
-            return this.CommentsService;
-        }
-
-        protected ServicioSubscripcion getSubscriptionService()
-        {
-            if (SubscriptionService == null)
-            {
-                this.SubscriptionService = new ServicioSubscripcion();
-            }
-
-            return this.SubscriptionService;
+            return this.ServicioComentarios;
         }
 
-        protected ServicioEvento getEventService()
+        protected ServicioSuscripciones getServicioSuscripciones()
         {
-            if (EventsService == null)
+            if (ServicioSuscripciones == null)
             {
-                this.EventsService = new ServicioEvento();
+                this.ServicioSuscripciones = new ServicioSuscripciones();
             }
 
-            return this.EventsService;
+            return this.ServicioSuscripciones;
         }
 
-        protected ServicioEncuesta getQuestionnaireService()
+        protected ServicioEventos getServicioEventos()
         {
-            if (QuestionnairesService == null)
+            if (ServicioEventos == null)
             {
-                this.QuestionnairesService = new ServicioEncuesta();
+                this.ServicioEventos = new ServicioEventos();
             }
 
-            return this.QuestionnairesService;
+            return this.ServicioEventos;
+        }
+
+        protected ServicioEncuestas getServicioEncuestas()
+        {
+            if (ServicioEncuestas == null)
+            {
+                this.ServicioEncuestas = new ServicioEncuestas();
+            }
+
+            return this.ServicioEncuestas;
         }
     }
 }

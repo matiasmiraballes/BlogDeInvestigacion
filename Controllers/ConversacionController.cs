@@ -12,7 +12,7 @@ namespace BlogDeInvestigacion.Controllers
         // COMENTARIOS //
         public ActionResult GuardarComentario(int IdConversacion, int IdLaboratorio, string Texto)
         {
-            var servicioComentarios = getCommentsService();
+            var servicioComentarios = getServicioComentarios();
 
             if (IdConversacion != 0)    //Cuando se crea una nueva conversacion, IdConversacion llega en 0
             {

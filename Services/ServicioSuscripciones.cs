@@ -7,39 +7,39 @@ using System.Web;
 
 namespace BlogDeInvestigacion.Services
 {
-    public class ServicioSubscripcion
+    public class ServicioSuscripciones
     {
-        public List<Subscripcion> GetSubscripciones()
+        public List<Suscripcion> GetSuscripciones()
         {
-            List<Subscripcion> subscripciones;
+            List<Suscripcion> suscripciones;
 
             using (BlogContext db = new BlogContext())
             {
-                subscripciones = db.Subscripciones.ToList();
+                suscripciones = db.Subscripciones.ToList();
             }
 
-            return subscripciones;
+            return suscripciones;
         }
 
-        public List<Subscripcion> GetSubscripciones(string username)
+        public List<Suscripcion> GetSuscripciones(string username)
         {
-            List<Subscripcion> subscripciones;
+            List<Suscripcion> suscripciones;
 
             using (BlogContext db = new BlogContext())
             {
-                subscripciones = db.Subscripciones
+                suscripciones = db.Subscripciones
                                     .Where(s => s.Username == username)
                                     .ToList();
             }
 
-            return subscripciones;
+            return suscripciones;
         }
 
         public bool IsSubscribed(int? idLaboratorio, string username)
         {
             if (username == "") { return false; }
 
-            Subscripcion subscripcion;
+            Suscripcion subscripcion;
 
             using (BlogContext db = new BlogContext())
             {
@@ -51,17 +51,17 @@ namespace BlogDeInvestigacion.Services
             return (subscripcion != null);
         }
 
-        public void Subscribirse(int idLaboratorio, string username)
+        public void Suscribirse(int idLaboratorio, string username)
         {
             using (BlogContext db = new BlogContext())
             {
-                Subscripcion subscripcion = db.Subscripciones
+                Suscripcion suscripcion = db.Subscripciones
                                     .Where(s => s.IdLaboratorio == idLaboratorio && s.Username == username)
                                     .FirstOrDefault();
 
-                if (subscripcion == null)
+                if (suscripcion == null)
                 {
-                    db.Subscripciones.Add(new Subscripcion
+                    db.Subscripciones.Add(new Suscripcion
                     {
                         IdLaboratorio = idLaboratorio,
                         Username = username
@@ -72,17 +72,17 @@ namespace BlogDeInvestigacion.Services
             }
         }
 
-        public void CancelarSubscripcion(int idLaboratorio, string username)
+        public void CancelarSuscripcion(int idLaboratorio, string username)
         {
             using (BlogContext db = new BlogContext())
             {
-                Subscripcion subscripcion = db.Subscripciones
+                Suscripcion suscripcion = db.Subscripciones
                                     .Where(s => s.IdLaboratorio == idLaboratorio && s.Username == username)
                                     .FirstOrDefault();
 
-                if (subscripcion != null)
+                if (suscripcion != null)
                 {
-                    db.Subscripciones.Remove(subscripcion);
+                    db.Subscripciones.Remove(suscripcion);
                     db.SaveChanges();
                 }
             }

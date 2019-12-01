@@ -38,7 +38,7 @@ namespace BlogDeInvestigacion.Data_Management
         public DbSet<Evento> Eventos { get; set; }
         public DbSet<Conversacion> Conversaciones { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
-        public DbSet<Subscripcion> Subscripciones { get; set; }
+        public DbSet<Suscripcion> Subscripciones { get; set; }
         public DbSet<Encuesta> Encuestas { get; set; }
         public DbSet<Pregunta> Preguntas { get; set; }
         public DbSet<Respuesta> Respuestas { get; set; }
