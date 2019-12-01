@@ -134,15 +134,26 @@ namespace BlogDeInvestigacion.Controllers
             {
                 return HttpNotFound();
             }
-            
+
+            List<Conversacion> conversaciones = new List<Conversacion>();
+            List<Encuesta> encuestas = new List<Encuesta>();
+            bool isSubscribed;
+
             ServicioComentarios commentsService = getCommentsService();
-            List<Conversacion> conversaciones = commentsService.ObtenerConversaciones(laboratorio.IdLaboratorio);
+            conversaciones = commentsService.ObtenerConversaciones(laboratorio.IdLaboratorio);
 
-            ServicioSubscripcion subscriptionService = getSubscriptionService();
-            bool isSubscripted = subscriptionService.IsSubscripted((int)id, User.Identity.Name);
+            if (User.Identity.IsAuthenticated)
+            {
+                ServicioSubscripcion subscriptionService = getSubscriptionService();
+                isSubscribed = subscriptionService.IsSubscribed((int)id, User.Identity.Name);
 
-            ServicioEncuesta questionnaireService = getQuestionnaireService();
-            List<Encuesta> encuestas = questionnaireService.ObtenerEncuestas();
+                ServicioEncuesta questionnaireService = getQuestionnaireService();
+                encuestas = questionnaireService.ObtenerEncuestasSinCompletar((int)id, User.Identity.Name);
+            }
+            else
+            {
+                isSubscribed = false;
+            }
 
 
             LaboratorioViewModel labViewModel = new LaboratorioViewModel
@@ -152,7 +163,7 @@ namespace BlogDeInvestigacion.Controllers
                 Noticias = db.Noticias.Where(n => n.IdLaboratorio == id).ToList(),
                 Eventos = db.Eventos.Where(e => e.IdEvento == id).ToList(),
                 Encuestas = encuestas,
-                IsSubscripted = isSubscripted
+                IsSubscripted = isSubscribed
             };
 
             return View(labViewModel);

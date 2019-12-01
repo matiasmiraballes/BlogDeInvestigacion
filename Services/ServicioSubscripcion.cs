@@ -35,7 +35,7 @@ namespace BlogDeInvestigacion.Services
             return subscripciones;
         }
 
-        public bool IsSubscripted(int? idLaboratorio, string username)
+        public bool IsSubscribed(int? idLaboratorio, string username)
         {
             if (username == "") { return false; }
 

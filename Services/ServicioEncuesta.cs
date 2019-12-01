@@ -31,12 +31,17 @@ namespace BlogDeInvestigacion.Services
             return encuestas;
         }
 
+        /// <summary>
+        /// Devuelve las encuestas sin completar del usuario para un laboratorio
+        /// </summary>
+        /// <param name="idLaboratorio"></param>
+        /// <param name="username"></param>
+        /// <returns>Lista de encuestas sin completar</returns>
         public List<Encuesta> ObtenerEncuestasSinCompletar(int idLaboratorio, string username)
         {
             List<EncuestaCompletada> encCompletadasLabUser = new List<EncuestaCompletada>();
             List<Encuesta> encNoCompletadas = new List<Encuesta>();
             
-
             using (BlogContext db = new BlogContext())
             {
                 encCompletadasLabUser = db.EncuestasCompletadas.Where(ec => ec.Encuesta.IdLaboratorio == idLaboratorio && ec.Usuario == username)

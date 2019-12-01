@@ -132,6 +132,15 @@
                 </div>
             }
         </div>
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">ENCUESTAS SIN COMPLETAR</div>
+            @foreach (Encuesta encuesta in Model.Encuestas)
+            {
+                <div class="card-body table-primary">
+                    @Html.ActionLink(encuesta.Titulo, "Details", "Evento", new { id = encuesta.IdEncuesta }, new { @class = "linkNS" })
+                </div>
+            }
+        </div>
     </div>
     </div>
 </div>
