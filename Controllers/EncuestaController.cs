@@ -17,5 +17,17 @@ namespace BlogDeInvestigacion.Controllers
 
             return View(encuestas);
         }
+
+        public ActionResult Encuesta(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            Encuesta encuesta = getServicioEncuestas().ObtenerEncuesta((int)id);
+
+            return View(encuesta);
+        }
     }
 }

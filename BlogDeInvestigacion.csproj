@@ -343,6 +343,7 @@
     <Content Include="Views\Noticia\Details.cshtml" />
     <Content Include="Views\Shared\_SeccionComentarios.cshtml" />
     <Content Include="Views\Encuesta\Index.cshtml" />
+    <Content Include="Views\Encuesta\Encuesta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

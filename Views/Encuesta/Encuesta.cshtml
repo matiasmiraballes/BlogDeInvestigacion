@@ -1,0 +1,44 @@
+﻿@using BlogDeInvestigacion.Models
+@model Encuesta
+@{
+    ViewBag.Title = "Encuesta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+
+        @*COLUMNA BODY*@
+        <div class="col-9">
+            <div class="jumbotron">
+                <div>
+                    <h1> @Model.Titulo </h1>
+                    <span class="">Votar con números del 1 al 3</span>
+                </div>
+
+                <hr class="my-4">
+
+                <div>
+                    @foreach (Pregunta pregunta in Model.Preguntas)
+                    {
+                        <div class="">
+                            <label class="pt-2">@pregunta.Descripcion</label>
+                        </div>
+                        <div class="">
+                            <label>0</label>
+                            <input type="range" class="custom-range" min="1" max="5" step="1">
+                            <span>5</span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        @*COLUMNA SIDEBAR*@
+
+        <div class="col-3">
+
+        </div>
+    </div>
+</div>
+

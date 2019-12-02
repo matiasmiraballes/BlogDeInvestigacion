@@ -25,10 +25,25 @@ namespace BlogDeInvestigacion.Services
 
             using (BlogContext db = new BlogContext())
             {
-                encuestas = db.Encuestas.ToList();
+                encuestas = db.Encuestas.Include(e => e.Laboratorio).ToList();
             }
 
             return encuestas;
+        }
+
+        public Encuesta ObtenerEncuesta(int idEncuesta)
+        {
+            Encuesta encuesta;
+
+            using (BlogContext db = new BlogContext())
+            {
+                encuesta = db.Encuestas.Include(e => e.Laboratorio)
+                                       .Include(e => e.Preguntas)
+                                       .Where(e => e.IdEncuesta == idEncuesta)
+                                       .SingleOrDefault();
+            }
+
+            return encuesta;
         }
 
         /// <summary>
