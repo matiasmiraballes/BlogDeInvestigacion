@@ -3,7 +3,7 @@ namespace BlogDeInvestigacion.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Encuestas : DbMigration
+    public partial class ModelChanged : DbMigration
     {
         public override void Up()
         {
@@ -36,9 +36,34 @@ namespace BlogDeInvestigacion.Migrations
                 c => new
                     {
                         IdEncuesta = c.Int(nullable: false, identity: true),
+                        IdLaboratorio = c.Int(nullable: false),
                         Titulo = c.String(),
                     })
-                .PrimaryKey(t => t.IdEncuesta);
+                .PrimaryKey(t => t.IdEncuesta)
+                .ForeignKey("dbo.Laboratorios", t => t.IdLaboratorio, cascadeDelete: true)
+                .Index(t => t.IdLaboratorio);
+            
+            CreateTable(
+                "dbo.Laboratorios",
+                c => new
+                    {
+                        IdLaboratorio = c.Int(nullable: false, identity: true),
+                        Nombre = c.String(nullable: false, maxLength: 50),
+                        Descripcion = c.String(nullable: false, maxLength: 500),
+                    })
+                .PrimaryKey(t => t.IdLaboratorio);
+            
+            CreateTable(
+                "dbo.Preguntas",
+                c => new
+                    {
+                        IdPregunta = c.Int(nullable: false, identity: true),
+                        IdEncuesta = c.Int(nullable: false),
+                        Descripcion = c.String(),
+                    })
+                .PrimaryKey(t => t.IdPregunta)
+                .ForeignKey("dbo.Encuestas", t => t.IdEncuesta, cascadeDelete: true)
+                .Index(t => t.IdEncuesta);
             
             CreateTable(
                 "dbo.EncuestaCompletadas",
@@ -48,7 +73,9 @@ namespace BlogDeInvestigacion.Migrations
                         IdEncuesta = c.Int(nullable: false),
                         Usuario = c.String(),
                     })
-                .PrimaryKey(t => t.IdEncuestaCompletada);
+                .PrimaryKey(t => t.IdEncuestaCompletada)
+                .ForeignKey("dbo.Encuestas", t => t.IdEncuesta, cascadeDelete: true)
+                .Index(t => t.IdEncuesta);
             
             CreateTable(
                 "dbo.Eventos",
@@ -66,16 +93,6 @@ namespace BlogDeInvestigacion.Migrations
                 .Index(t => t.IdLaboratorio);
             
             CreateTable(
-                "dbo.Laboratorios",
-                c => new
-                    {
-                        IdLaboratorio = c.Int(nullable: false, identity: true),
-                        Nombre = c.String(nullable: false, maxLength: 50),
-                        Descripcion = c.String(nullable: false, maxLength: 500),
-                    })
-                .PrimaryKey(t => t.IdLaboratorio);
-            
-            CreateTable(
                 "dbo.Noticias",
                 c => new
                     {
@@ -88,18 +105,6 @@ namespace BlogDeInvestigacion.Migrations
                 .PrimaryKey(t => t.IdNoticia)
                 .ForeignKey("dbo.Laboratorios", t => t.IdLaboratorio, cascadeDelete: true)
                 .Index(t => t.IdLaboratorio);
-            
-            CreateTable(
-                "dbo.Preguntas",
-                c => new
-                    {
-                        IdPregunta = c.Int(nullable: false, identity: true),
-                        IdEncuesta = c.Int(nullable: false),
-                        Descripcion = c.String(),
-                    })
-                .PrimaryKey(t => t.IdPregunta)
-                .ForeignKey("dbo.Encuestas", t => t.IdEncuesta, cascadeDelete: true)
-                .Index(t => t.IdEncuesta);
             
             CreateTable(
                 "dbo.Respuestas",
@@ -138,7 +143,7 @@ namespace BlogDeInvestigacion.Migrations
                 .Index(t => t.IdentityUser_Id);
             
             CreateTable(
-                "dbo.Subscripcions",
+                "dbo.Suscripcions",
                 c => new
                     {
                         IdSubscripcion = c.Int(nullable: false, identity: true),
@@ -204,9 +209,11 @@ namespace BlogDeInvestigacion.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "IdentityUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Respuestas", "IdPregunta", "dbo.Preguntas");
-            DropForeignKey("dbo.Preguntas", "IdEncuesta", "dbo.Encuestas");
             DropForeignKey("dbo.Noticias", "IdLaboratorio", "dbo.Laboratorios");
             DropForeignKey("dbo.Eventos", "IdLaboratorio", "dbo.Laboratorios");
+            DropForeignKey("dbo.EncuestaCompletadas", "IdEncuesta", "dbo.Encuestas");
+            DropForeignKey("dbo.Preguntas", "IdEncuesta", "dbo.Encuestas");
+            DropForeignKey("dbo.Encuestas", "IdLaboratorio", "dbo.Laboratorios");
             DropForeignKey("dbo.Comentarios", "IdConversacion", "dbo.Conversacions");
             DropIndex("dbo.AspNetUserLogins", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUserClaims", new[] { "IdentityUser_Id" });
@@ -215,22 +222,24 @@ namespace BlogDeInvestigacion.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Respuestas", new[] { "IdPregunta" });
-            DropIndex("dbo.Preguntas", new[] { "IdEncuesta" });
             DropIndex("dbo.Noticias", new[] { "IdLaboratorio" });
             DropIndex("dbo.Eventos", new[] { "IdLaboratorio" });
+            DropIndex("dbo.EncuestaCompletadas", new[] { "IdEncuesta" });
+            DropIndex("dbo.Preguntas", new[] { "IdEncuesta" });
+            DropIndex("dbo.Encuestas", new[] { "IdLaboratorio" });
             DropIndex("dbo.Comentarios", new[] { "IdConversacion" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Subscripcions");
+            DropTable("dbo.Suscripcions");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Respuestas");
-            DropTable("dbo.Preguntas");
             DropTable("dbo.Noticias");
-            DropTable("dbo.Laboratorios");
             DropTable("dbo.Eventos");
             DropTable("dbo.EncuestaCompletadas");
+            DropTable("dbo.Preguntas");
+            DropTable("dbo.Laboratorios");
             DropTable("dbo.Encuestas");
             DropTable("dbo.Conversacions");
             DropTable("dbo.Comentarios");

@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ConversacionController.cs" />
+    <Compile Include="Controllers\EncuestaController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LaboratorioController.cs" />
@@ -183,17 +184,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911260053269_Encuestas.cs" />
-    <Compile Include="Migrations\201911260053269_Encuestas.Designer.cs">
-      <DependentUpon>201911260053269_Encuestas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911260056463_FixEncuestas.cs" />
-    <Compile Include="Migrations\201911260056463_FixEncuestas.Designer.cs">
-      <DependentUpon>201911260056463_FixEncuestas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911270119063_Added-IdLaboratorio.cs" />
-    <Compile Include="Migrations\201911270119063_Added-IdLaboratorio.Designer.cs">
-      <DependentUpon>201911270119063_Added-IdLaboratorio.cs</DependentUpon>
+    <Compile Include="Migrations\201912012358032_ModelChanged.cs" />
+    <Compile Include="Migrations\201912012358032_ModelChanged.Designer.cs">
+      <DependentUpon>201912012358032_ModelChanged.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -349,6 +342,7 @@
     <Content Include="Views\Noticia\Delete.cshtml" />
     <Content Include="Views\Noticia\Details.cshtml" />
     <Content Include="Views\Shared\_SeccionComentarios.cshtml" />
+    <Content Include="Views\Encuesta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -365,14 +359,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201911260053269_Encuestas.resx">
-      <DependentUpon>201911260053269_Encuestas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911260056463_FixEncuestas.resx">
-      <DependentUpon>201911260056463_FixEncuestas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911270119063_Added-IdLaboratorio.resx">
-      <DependentUpon>201911270119063_Added-IdLaboratorio.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912012358032_ModelChanged.resx">
+      <DependentUpon>201912012358032_ModelChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

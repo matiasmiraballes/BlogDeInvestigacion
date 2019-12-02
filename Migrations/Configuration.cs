@@ -151,7 +151,7 @@ namespace BlogDeInvestigacion.Migrations
 
             var encuestas = new List<Encuesta>()
             {
-                new Encuesta { Titulo = "Presentacion sobre Blockchain", Preguntas = preguntas }
+                new Encuesta { IdLaboratorio = 1, Titulo = "Presentacion sobre Blockchain", Preguntas = preguntas }
             };
 
             encuestas.ForEach(e => context.Encuestas.Add(e));

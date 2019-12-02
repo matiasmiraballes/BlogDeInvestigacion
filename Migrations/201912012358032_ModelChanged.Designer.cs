@@ -7,13 +7,13 @@ namespace BlogDeInvestigacion.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddedIdLaboratorio : IMigrationMetadata
+    public sealed partial class ModelChanged : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedIdLaboratorio));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ModelChanged));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911270119063_Added-IdLaboratorio"; }
+            get { return "201912012358032_ModelChanged"; }
         }
         
         string IMigrationMetadata.Source
