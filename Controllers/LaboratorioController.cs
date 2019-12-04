@@ -206,7 +206,7 @@ namespace BlogDeInvestigacion.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        //NOTICIAS//
+        //ENCUESTA//
         public ActionResult CrearEncuesta(string Titulo, string[] Pregunta)
         {
             List<Pregunta> Preguntas = new List<Pregunta>();

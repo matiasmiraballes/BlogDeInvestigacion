@@ -29,5 +29,12 @@ namespace BlogDeInvestigacion.Controllers
 
             return View(encuesta);
         }
+
+        public ActionResult GuardarEncuesta(int idEncuesta, int[] Pregunta)
+        {
+
+
+            return RedirectToAction("Index");
+        }
     }
 }
