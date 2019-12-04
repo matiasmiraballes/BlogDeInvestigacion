@@ -69,5 +69,26 @@ namespace BlogDeInvestigacion.Services
 
             return encNoCompletadas;
         }
+
+        public void GuardarRespuestas(List<Respuesta> respuestas)
+        {
+            using (BlogContext db = new BlogContext())
+            {
+                foreach (var r in respuestas)
+                {
+                    db.Respuestas.Add(r);
+                }
+                db.SaveChanges();
+            }
+        }
+
+        public void GuardarEncuestaCompletada(EncuestaCompletada encuesta)
+        {
+            using (BlogContext db = new BlogContext())
+            {
+                db.EncuestasCompletadas.Add(encuesta);
+                db.SaveChanges();
+            }
+        }
     }
 }

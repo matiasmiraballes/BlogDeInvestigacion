@@ -12,8 +12,7 @@ namespace BlogDeInvestigacion.Controllers
     {
         public ActionResult Index()
         {
-            ServicioEncuestas servicioEncuestas = getServicioEncuestas();
-            List<Encuesta> encuestas = servicioEncuestas.ObtenerEncuestas();
+            List<Encuesta> encuestas = getServicioEncuestas().ObtenerEncuestas();
 
             return View(encuestas);
         }
@@ -30,9 +29,36 @@ namespace BlogDeInvestigacion.Controllers
             return View(encuesta);
         }
 
-        public ActionResult GuardarEncuesta(int idEncuesta, int[] Pregunta)
+        public ActionResult GuardarEncuesta(int idEncuesta, int[] IdPregunta, int[] Respuesta)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
 
+
+            ServicioEncuestas servicioEncuestas = getServicioEncuestas();
+
+            List<Respuesta> respuestas = new List<Respuesta>();
+
+            for (int i = 0; i < IdPregunta.Length; i++)
+            {
+                respuestas.Add(new Respuesta
+                {
+                    IdPregunta = IdPregunta[i],
+                    Detalle = Respuesta[i]
+                });
+            }
+
+            EncuestaCompletada encCompletada = new EncuestaCompletada
+            {
+                IdEncuesta = idEncuesta,
+                Usuario = User.Identity.Name
+            };
+
+            servicioEncuestas.GuardarRespuestas(respuestas);
+
+            servicioEncuestas.GuardarEncuestaCompletada(encCompletada);
 
             return RedirectToAction("Index");
         }
