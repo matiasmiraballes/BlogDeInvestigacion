@@ -71,6 +71,21 @@ namespace BlogDeInvestigacion.Services
             return encNoCompletadas;
         }
 
+        public List<Encuesta> ObtenerEncuestasSinCompletar(string username)
+        {
+            List<EncuestaCompletada> encCompletadasUser = new List<EncuestaCompletada>();
+            List<Encuesta> encNoCompletadas = new List<Encuesta>();
+
+            using (BlogContext db = new BlogContext())
+            {
+                encCompletadasUser = db.EncuestasCompletadas.Where(ec => ec.Usuario == username).ToList();
+
+                encNoCompletadas = db.Encuestas.ToList().Where(e => !encCompletadasUser.Any(ec => e.IdEncuesta == ec.IdEncuesta)).ToList();
+            }
+
+            return encNoCompletadas;
+        }
+
         public void GuardarRespuestas(List<Respuesta> respuestas)
         {
             using (BlogContext db = new BlogContext())

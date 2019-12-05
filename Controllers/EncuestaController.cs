@@ -12,8 +12,17 @@ namespace BlogDeInvestigacion.Controllers
     {
         public ActionResult Index()
         {
-            List<Encuesta> encuestas = getServicioEncuestas().ObtenerEncuestas();
+            List<Encuesta> encuestas = new List<Encuesta>();
 
+            if (User.Identity.IsAuthenticated)
+            {
+                encuestas = getServicioEncuestas().ObtenerEncuestasSinCompletar(User.Identity.Name);
+            }
+            else
+            {
+                encuestas = getServicioEncuestas().ObtenerEncuestas();
+            }
+            
             return View(encuestas);
         }
 
