@@ -207,7 +207,7 @@ namespace BlogDeInvestigacion.Controllers
         }
 
         //ENCUESTA//
-        public ActionResult CrearEncuesta(string Titulo, string[] Pregunta)
+        public ActionResult CrearEncuesta(int IdLaboratorio, string Titulo, string[] Pregunta)
         {
             List<Pregunta> Preguntas = new List<Pregunta>();
 
@@ -218,6 +218,7 @@ namespace BlogDeInvestigacion.Controllers
 
             var Encuesta = new Encuesta
             {
+                IdLaboratorio = IdLaboratorio,
                 Titulo = Titulo,
                 Preguntas = Preguntas
             };

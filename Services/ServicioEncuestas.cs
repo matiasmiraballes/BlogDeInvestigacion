@@ -55,6 +55,7 @@ namespace BlogDeInvestigacion.Services
         public List<Encuesta> ObtenerEncuestasSinCompletar(int idLaboratorio, string username)
         {
             List<EncuestaCompletada> encCompletadasLabUser = new List<EncuestaCompletada>();
+            List<Encuesta> encLab = new List<Encuesta>();
             List<Encuesta> encNoCompletadas = new List<Encuesta>();
             
             using (BlogContext db = new BlogContext())
@@ -62,9 +63,9 @@ namespace BlogDeInvestigacion.Services
                 encCompletadasLabUser = db.EncuestasCompletadas.Where(ec => ec.Encuesta.IdLaboratorio == idLaboratorio && ec.Usuario == username)
                                                                 .ToList();
 
-                encNoCompletadas = db.Encuestas.Where(e => e.IdLaboratorio == idLaboratorio 
-                                                            && !encCompletadasLabUser.Any(ec => ec.Encuesta.IdLaboratorio == e.IdLaboratorio))
-                                                            .ToList();
+                encLab = db.Encuestas.Where(e => e.IdLaboratorio == idLaboratorio).ToList();
+
+                encNoCompletadas = encLab.Where(e => !encCompletadasLabUser.Any(ec => e.IdEncuesta == ec.IdEncuesta)).ToList();
             }
 
             return encNoCompletadas;

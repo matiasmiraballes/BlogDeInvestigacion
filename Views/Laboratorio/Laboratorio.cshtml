@@ -137,7 +137,7 @@
             @foreach (Encuesta encuesta in Model.Encuestas)
             {
                 <div class="card-body table-primary">
-                    @Html.ActionLink(encuesta.Titulo, "Details", "Evento", new { id = encuesta.IdEncuesta }, new { @class = "linkNS" })
+                    @Html.ActionLink(encuesta.Titulo, "Encuesta", "Encuesta", new { id = encuesta.IdEncuesta }, new { @class = "linkNS" })
                 </div>
             }
         </div>
@@ -230,7 +230,7 @@
             </div>
             <form action="/Laboratorio/CrearEncuesta" method="post">
                 <div class="modal-body">
-
+                    <input type="hidden" name="IdLaboratorio" value="@Model.Laboratorio.IdLaboratorio" />
                     <input type="text" class="form-control" name="Titulo" placeholder="Titulo" required autofocus>
                     <br />
                     <hr class="my-4">
