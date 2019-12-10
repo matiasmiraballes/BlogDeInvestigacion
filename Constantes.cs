@@ -19,4 +19,12 @@ namespace BlogDeInvestigacion
         public const string Action = "action";
         public const string OpenModal = "modal";
     }
+
+    public static class UserRoles
+    {
+        public const string Administrador = "Administrador";
+        public const string Docente = "Docente";
+        public const string Alumno = "Alumno";
+        public const string AdministradorODocente = Administrador + ", " + Docente;
+    }
 }

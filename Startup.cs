@@ -63,10 +63,10 @@ namespace BlogDeInvestigacion
             }
 
             // Verificamos que los demas roles se encuentran creados
-            if (!roleManager.RoleExists("Profesor"))
+            if (!roleManager.RoleExists("Docente"))
             {
                 var role = new IdentityRole();
-                role.Name = "Profesor";
+                role.Name = "Docente";
                 roleManager.Create(role);
             }
 

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BlogDeInvestigacion.Models.Encuesta>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ESTADISTICAS</h2>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">@Html.DisplayNameFor(model => model.Titulo)</th>
+            <th scope="col">LABORATORIO</th>
+            @if (User.IsInRole("Administrador"))
+            {
+                <th scope="col"> ADMINISTRAR </th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Titulo, "Encuesta", new { id = item.IdEncuesta })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Laboratorio.Nombre)
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdLaboratorio })
+                        @Html.Raw("|");
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdLaboratorio })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
