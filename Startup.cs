@@ -40,11 +40,11 @@ namespace BlogDeInvestigacion
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             // Si aun no existe el rol de Administrador, lo creamos junto con un usuario Admin por defecto
-            if (!roleManager.RoleExists("Administrador"))
+            if (!roleManager.RoleExists(UserRoles.Administrador))
             {
                 // Primero creamos el rol Administrador 
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Administrador";
+                var role = new IdentityRole();
+                role.Name = UserRoles.Administrador;
                 roleManager.Create(role);
 
                 // Luego el usuario
@@ -58,23 +58,37 @@ namespace BlogDeInvestigacion
   
                 if (chkUser.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, "Administrador");
+                    UserManager.AddToRole(user.Id, UserRoles.Administrador);
                 }
             }
 
             // Verificamos que los demas roles se encuentran creados
-            if (!roleManager.RoleExists("Docente"))
+            if (!roleManager.RoleExists(UserRoles.Docente))
             {
                 var role = new IdentityRole();
-                role.Name = "Docente";
+                role.Name = UserRoles.Docente;
                 roleManager.Create(role);
+
+                // Luego el usuario
+                var user = new ApplicationUser();
+                user.UserName = "docente@mail.com";
+                user.Email = "docente@mail.com";
+
+                string userPWD = "123456";
+
+                var chkUser = UserManager.Create(user, userPWD);
+
+                if (chkUser.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, UserRoles.Docente);
+                }
             }
 
             // creating Creating Employee role    
-            if (!roleManager.RoleExists("Alumno"))
+            if (!roleManager.RoleExists(UserRoles.Alumno))
             {
                 var role = new IdentityRole();
-                role.Name = "Alumno";
+                role.Name = UserRoles.Alumno;
                 roleManager.Create(role);
             }
         }
