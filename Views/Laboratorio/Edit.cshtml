@@ -34,9 +34,24 @@
             </div>
         </div>
 
+        @{
+            List<SelectListItem> listItems = new List<SelectListItem>();
+        }
+
+        @*@foreach (var laboratorio in Model.Laboratorios)
+        {
+            listItems.Add(new SelectListItem
+            {
+                Text = laboratorio.Nombre,
+                Value = laboratorio.IdLaboratorio.ToString()
+            });
+        }
+
+        @Html.DropDownListFor(model => model.Noticia.IdLaboratorio, listItems, "-- Seleccionar Laboratorio --")*@
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>

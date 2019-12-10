@@ -10,6 +10,17 @@ namespace BlogDeInvestigacion.Controllers
         private ServicioEventos ServicioEventos;
         private ServicioNoticias ServicioNoticias;
         private ServicioEncuestas ServicioEncuestas;
+        private ServicioUsuarios ServicioUsuarios;
+
+        protected ServicioUsuarios getServicioUsuarios()
+        {
+            if (ServicioUsuarios == null)
+            {
+                this.ServicioUsuarios = new ServicioUsuarios();
+            }
+
+            return this.ServicioUsuarios;
+        }
 
         protected ServicioNoticias getServicioNoticias()
         {

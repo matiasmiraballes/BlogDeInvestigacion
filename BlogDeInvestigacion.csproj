@@ -211,6 +211,7 @@
     <Compile Include="Services\ServicioComentarios.cs" />
     <Compile Include="Services\ServicioEventos.cs" />
     <Compile Include="Services\ServicioSuscripciones.cs" />
+    <Compile Include="Services\ServicioUsuarios.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\NoticiaViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />

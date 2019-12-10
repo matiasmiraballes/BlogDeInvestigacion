@@ -64,6 +64,8 @@ namespace BlogDeInvestigacion.Controllers
         // GET: Laboratorio/Edit/5
         public ActionResult Edit(int? id)
         {
+            var users = getServicioUsuarios().ObtenerUsuarios("Docente");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
