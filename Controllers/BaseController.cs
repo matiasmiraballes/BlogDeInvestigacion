@@ -11,6 +11,17 @@ namespace BlogDeInvestigacion.Controllers
         private ServicioNoticias ServicioNoticias;
         private ServicioEncuestas ServicioEncuestas;
         private ServicioUsuarios ServicioUsuarios;
+        private ServicioLaboratorios ServicioLaboratorio;
+
+        protected ServicioLaboratorios getServicioLaboratorios()
+        {
+            if (ServicioLaboratorio == null)
+            {
+                this.ServicioLaboratorio = new ServicioLaboratorios();
+            }
+
+            return this.ServicioLaboratorio;
+        }
 
         protected ServicioUsuarios getServicioUsuarios()
         {

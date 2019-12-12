@@ -64,18 +64,26 @@ namespace BlogDeInvestigacion.Controllers
         // GET: Laboratorio/Edit/5
         public ActionResult Edit(int? id)
         {
-            var users = getServicioUsuarios().ObtenerUsuarios("Docente");
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Laboratorio laboratorio = db.Laboratorios.Find(id);
             if (laboratorio == null)
             {
                 return HttpNotFound();
             }
-            return View(laboratorio);
+
+            var users = getServicioUsuarios().ObtenerUsuarios("Docente");
+
+            var EditLaboratorioViewModel = new EditLaboratorioViewModel()
+            {
+                Laboratorio = laboratorio,
+                Docentes = users
+            };
+
+            return View(EditLaboratorioViewModel);
         }
 
         // POST: Laboratorio/Edit/5
@@ -83,14 +91,19 @@ namespace BlogDeInvestigacion.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdLaboratorio,Nombre,Descripcion")] Laboratorio laboratorio)
+        //public ActionResult Edit([Bind(Include = "IdLaboratorio,Nombre,Descripcion")] Laboratorio laboratorio)
+        public ActionResult Edit([Bind(Include = "IdLaboratorio,Nombre,Descripcion")] Laboratorio laboratorio, string IdDocente)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(laboratorio).State = EntityState.Modified;
                 db.SaveChanges();
+
+                getServicioLaboratorios().AsignarDocente(IdDocente, laboratorio.IdLaboratorio);
+
                 return RedirectToAction("Index");
             }
+
             return View(laboratorio);
         }
 

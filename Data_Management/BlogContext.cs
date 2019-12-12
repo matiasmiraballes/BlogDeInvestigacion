@@ -43,6 +43,7 @@ namespace BlogDeInvestigacion.Data_Management
         public DbSet<Pregunta> Preguntas { get; set; }
         public DbSet<Respuesta> Respuestas { get; set; }
         public DbSet<EncuestaCompletada> EncuestasCompletadas { get; set; }
+        public DbSet<DocenteACargo> DocenteACargo { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

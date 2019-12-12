@@ -20,6 +20,15 @@ namespace BlogDeInvestigacion.Services
             return UserManager.Users.ToList();
         }
 
+        public ApplicationUser ObtenerUsuario(string idUsuario)
+        {
+            BlogContext context = new BlogContext();
+
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            return UserManager.Users.Where(u => u.Id == idUsuario).SingleOrDefault();
+        }
+
         public List<ApplicationUser> ObtenerUsuarios(string rol)
         {
             BlogContext context = new BlogContext();
