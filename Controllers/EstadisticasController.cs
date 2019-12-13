@@ -17,15 +17,26 @@ namespace BlogDeInvestigacion.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-
             List<Encuesta> encuestas = new List<Encuesta>();
 
-            if (User.Identity.IsAuthenticated)
+            if (User.IsInRole(UserRoles.Docente))
             {
-                encuestas = getServicioEncuestas().ObtenerEncuestasSinCompletar(User.Identity.Name);
+                // Solo devolver las encuestas de sus laboratorios a cargo
+
+                var idsLabACargo = getServicioLaboratorios()
+                                        .LaboratoriosACargoByUsername(User.Identity.Name)
+                                        .Select(l => l.IdLaboratorio)
+                                        .ToList();
+
+                encuestas = getServicioEncuestas()
+                                .ObtenerEncuestas()
+                                .Where(e => idsLabACargo.Contains(e.IdLaboratorio))
+                                .ToList();
             }
             else
             {
+                // Si el usuario es admin, mostrar todas las encuestas
+
                 encuestas = getServicioEncuestas().ObtenerEncuestas();
             }
 
