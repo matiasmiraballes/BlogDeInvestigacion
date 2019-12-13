@@ -223,6 +223,7 @@
     <Compile Include="ViewModels\NoticiaViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LaboratorioViewModel.cs" />
+    <Compile Include="ViewModels\ResultadosEncuestaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\App\Laboratorio\Laboratorio.css" />
@@ -354,6 +355,7 @@
     <Content Include="Views\Encuesta\Index.cshtml" />
     <Content Include="Views\Encuesta\Encuesta.cshtml" />
     <Content Include="Views\Estadisticas\Index.cshtml" />
+    <Content Include="Views\Estadisticas\Resultados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

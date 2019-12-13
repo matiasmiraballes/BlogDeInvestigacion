@@ -1,5 +1,6 @@
 ﻿using BlogDeInvestigacion.Data_Management;
 using BlogDeInvestigacion.Models;
+using BlogDeInvestigacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -105,6 +106,41 @@ namespace BlogDeInvestigacion.Services
                 db.EncuestasCompletadas.Add(encuesta);
                 db.SaveChanges();
             }
+        }
+
+        public List<ResultadosEncuestaViewModel> ObtenerResultados(int idEncuesta)
+        {
+            List<ResultadosEncuestaViewModel> resultados = new List<ResultadosEncuestaViewModel>();
+
+            using (BlogContext db = new BlogContext())
+            {
+                var preguntas = db.Preguntas.Where(p => p.IdEncuesta == idEncuesta).ToList();
+
+                foreach (var pregunta in preguntas)
+                {
+                    var respuestas = db.Respuestas
+                                        .Where(r => r.IdPregunta == pregunta.IdPregunta)
+                                        .ToList();
+
+                    int muestras = respuestas.Count();
+
+                    int total = respuestas.Sum(r => r.Detalle);
+
+                    float promedio = total / muestras;
+
+                    ResultadosEncuestaViewModel resultadoPregunta = new ResultadosEncuestaViewModel()
+                    {
+                        Pregunta = pregunta.Descripcion,
+                        Muestras = muestras,
+                        Total = total,
+                        Promedio = promedio
+                    };
+
+                    resultados.Add(resultadoPregunta);
+                }
+            }
+
+            return resultados;
         }
     }
 }

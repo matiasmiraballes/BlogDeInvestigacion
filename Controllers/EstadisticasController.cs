@@ -42,5 +42,16 @@ namespace BlogDeInvestigacion.Controllers
 
             return View(encuestas);
         }
+
+        public ActionResult Resultados(int? idEncuesta)
+        {
+            if (idEncuesta != null)
+            {
+                RedirectToAction("Index");
+            }
+
+
+            return View();
+        }
     }
 }
