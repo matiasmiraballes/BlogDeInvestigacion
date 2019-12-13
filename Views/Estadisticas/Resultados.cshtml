@@ -1,5 +1,5 @@
-﻿@using BlogDeInvestigacion.Models
-@model Encuesta
+﻿@using BlogDeInvestigacion.ViewModels
+@model List<ResultadosEncuestaViewModel>
 @{
     ViewBag.Title = "Resultados";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,43 +12,32 @@
         <div class="col-9">
             <div class="jumbotron">
                 <div>
-                    <h1> @Model.Titulo </h1>
+                    <h1> @ViewBag.Titulo </h1>
+                </div>
+                <div>
+                    <h3> Muestras: @ViewBag.Muestras </h3>
                 </div>
 
                 <hr class="my-4">
 
-                <form action="/Encuesta/GuardarEncuesta" method="post">
-                    <div>
-                        @Html.Hidden("IdEncuesta", Model.IdEncuesta);
-                        @foreach (var pregunta in Model.Preguntas.Select((value, index) => new { value, index }))
-                        {
-                            <input type="hidden" name="IdPregunta[@pregunta.index]" value="@pregunta.value.IdPregunta">
 
-                            <div class="d-flex justify-content-center text-primary">
-                                <label class="">@pregunta.value.Descripcion</label>
-                            </div>
-                            <div class="d-flex justify-content-center mt-1 mb-2">
-                                <span class="font-weight-bold text-warning mr-2 mt-1">1</span>
-                                <input type="range" name="Respuesta[@pregunta.index]" class="custom-range border-0 mt-1" min="1" max="5" />
-                                <span class="font-weight-bold text-success ml-2 mt-1">5</span>
-                            </div>
-                        }
-                    </div>
-                    <div class="d-flex justify-content-between mt-4">
-                        @Html.ActionLink("SALIR", "Index", "Encuesta", null, new { @class = "btn btn-danger" })
+                <div>
+                    @foreach (var resultado in Model)
+                    {
+                        <div class="d-flex justify-content-center text-primary">
+                            <label class="">@resultado.Pregunta</label>
+                        </div>
+                        <div class="d-flex justify-content-center mt-1 mb-2">
+                            <span class="font-weight-bold text-warning mr-2 mt-1">1</span>
+                            <input type="range" class="custom-range border-0 mt-1" min="1" max="5" value="@resultado.Promedio" disabled />
+                            <span class="font-weight-bold text-success ml-2 mt-1">5</span>
+                        </div>
+                    }
+                </div>
+                <div class="d-flex justify-content-lg-start mt-4">
+                    @Html.ActionLink("SALIR", "Index", null, new { @class = "btn btn-danger" })
+                </div>
 
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <input type="submit" class="btn btn-success" value="ENVIAR" />
-                        }
-                        else
-                        {
-                            @Html.ActionLink("LOGUEARSE", "Login", "Account", null, new { @class = "btn btn-outline-success" })
-                        }
-
-
-                    </div>
-                </form>
             </div>
         </div>
 

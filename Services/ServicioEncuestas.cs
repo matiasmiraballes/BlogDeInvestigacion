@@ -123,10 +123,19 @@ namespace BlogDeInvestigacion.Services
                                         .ToList();
 
                     int muestras = respuestas.Count();
+                    int total;
+                    float promedio;
 
-                    int total = respuestas.Sum(r => r.Detalle);
-
-                    float promedio = total / muestras;
+                    if (muestras == 0)
+                    {
+                        total = 0;
+                        promedio = 0;
+                    }
+                    else
+                    {
+                        total = respuestas.Sum(r => r.Detalle);
+                        promedio = total / muestras;
+                    }
 
                     ResultadosEncuestaViewModel resultadoPregunta = new ResultadosEncuestaViewModel()
                     {

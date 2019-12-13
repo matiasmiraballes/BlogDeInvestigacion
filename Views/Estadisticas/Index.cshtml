@@ -24,7 +24,7 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(item.Titulo, "Encuesta", new { id = item.IdEncuesta })
+                    @Html.ActionLink(item.Titulo, "Resultados", new { idEncuesta = item.IdEncuesta })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Laboratorio.Nombre)

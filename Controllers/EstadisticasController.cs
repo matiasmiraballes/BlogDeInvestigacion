@@ -1,4 +1,5 @@
 ﻿using BlogDeInvestigacion.Models;
+using BlogDeInvestigacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,13 +46,17 @@ namespace BlogDeInvestigacion.Controllers
 
         public ActionResult Resultados(int? idEncuesta)
         {
-            if (idEncuesta != null)
+            if (idEncuesta == null)
             {
-                RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
+            List<ResultadosEncuestaViewModel> resultados = getServicioEncuestas().ObtenerResultados((int)idEncuesta);
 
-            return View();
+            ViewBag.Titulo = getServicioEncuestas().ObtenerEncuesta((int)idEncuesta).Titulo;
+            ViewBag.Muestras = resultados.FirstOrDefault().Muestras;
+
+            return View(resultados);
         }
     }
 }
