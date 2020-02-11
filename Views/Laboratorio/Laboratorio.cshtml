@@ -124,15 +124,6 @@
             }
         </div>
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-            <div class="card-header">EVENTOS</div>
-            @foreach (Evento evento in Model.Eventos)
-            {
-                <div class="card-body table-primary">
-                    @Html.ActionLink(evento.Nombre, "Details", "Evento", new { id = evento.IdEvento }, new { @class = "linkNS" })
-                </div>
-            }
-        </div>
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
             <div class="card-header">ENCUESTAS SIN COMPLETAR</div>
             @foreach (Encuesta encuesta in Model.Encuestas)
             {
@@ -156,7 +147,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">CREAR EVENTO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -191,7 +182,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">CREAR NOTICIA</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -223,7 +214,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Crear Encuesta</h5>
+                <h5 class="modal-title">CREAR ENCUESTA</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
