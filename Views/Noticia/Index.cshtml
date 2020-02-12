@@ -15,7 +15,7 @@
             <tr>
                 <th scope="col">@Html.DisplayNameFor(model => model.Titulo)</th>
                 <th scope="col">@Html.DisplayNameFor(model => model.Descripcion)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.laboratorio)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Laboratorio)</th>
                 <th scope="col">@Html.DisplayNameFor(model => model.FechaCreacion)</th>
                 @if (User.IsInRole("Administrador"))
                 {
@@ -35,7 +35,7 @@
                     @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.laboratorio.Nombre)
+                    @Html.DisplayFor(modelItem => item.Laboratorio.Nombre)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaCreacion)

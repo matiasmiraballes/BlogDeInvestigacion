@@ -13,7 +13,7 @@ namespace BlogDeInvestigacion.Models
         public int IdNoticia { get; set; }
 
         [Display(Name = "Laboratorio")]
-        public Laboratorio laboratorio { get; set; }
+        public Laboratorio Laboratorio { get; set; }
         public int IdLaboratorio { get; set; }
 
         [Required]

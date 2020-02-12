@@ -1,13 +1,11 @@
 ﻿@model BlogDeInvestigacion.ViewModels.NoticiaViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-<h2>Create</h2>
 
 @using (Html.BeginForm())
 {
@@ -41,7 +39,7 @@
     @**Dropdown laboratorio*@   
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Noticia.IdLaboratorio, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Laboratorio", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
             @{
@@ -57,7 +55,7 @@
                 });
             }
 
-            @Html.DropDownListFor(model => model.Noticia.IdLaboratorio, listItems, "-- Seleccionar Laboratorio --")
+            @Html.DropDownListFor(model => model.Noticia.IdLaboratorio, listItems, "-- Seleccionar Laboratorio --", new { @class = "form-control" })
         </div>
 
     </div>

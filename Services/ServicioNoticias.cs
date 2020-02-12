@@ -2,6 +2,7 @@
 using BlogDeInvestigacion.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -29,6 +30,20 @@ namespace BlogDeInvestigacion.Services
             }
 
             return noticias;
+        }
+
+        public Noticia ObtenerNoticia(int id)
+        {
+            Noticia noticia;
+
+            using (BlogContext db = new BlogContext())
+            {
+                noticia = db.Noticias.Where(n => n.IdNoticia == id)
+                                     .Include(n => n.Laboratorio)
+                                     .SingleOrDefault();
+            }
+
+            return noticia;        
         }
     }
 }

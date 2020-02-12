@@ -12,13 +12,13 @@ using System.Data.Entity;
 
 namespace BlogDeInvestigacion.Controllers
 {
-    public class NoticiaController : Controller
+    public class NoticiaController : BaseController
     {
         BlogContext db = new BlogContext();
 
         public ActionResult Index()
         {
-            var model = db.Noticias.Include(n => n.laboratorio)
+            var model = db.Noticias.Include(n => n.Laboratorio)
                 .ToList();
 
             return View(db.Noticias.ToList());
@@ -52,7 +52,7 @@ namespace BlogDeInvestigacion.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Noticia noticia = db.Noticias.Find(id);
+            Noticia noticia = getServicioNoticias().ObtenerNoticia((int)id);
             if (noticia == null)
             {
                 return HttpNotFound();
