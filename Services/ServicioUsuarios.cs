@@ -45,5 +45,21 @@ namespace BlogDeInvestigacion.Services
 
             return usuarios;
         }
+
+        public List<string> ObtenerRolesDeUsuario(string userId)
+        {
+            BlogContext context = new BlogContext();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            var roles = roleManager.Roles
+                               .Include(r => r.Users)
+                               .Where(r => (r.Users.Select(u => u.UserId).Contains(userId)))
+                               .Select(r => r.Name)
+                               .ToList();
+                               
+            return roles;
+        }
     }
 }

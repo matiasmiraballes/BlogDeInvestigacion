@@ -11,7 +11,7 @@ using BlogDeInvestigacion.Models;
 namespace BlogDeInvestigacion.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -55,22 +55,24 @@ namespace BlogDeInvestigacion.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Su contraseña fue cambiada."
+                : message == ManageMessageId.SetPasswordSuccess ? "Su contraseña fue asignada."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Su proveedor de autenticación de doble factor fue asignado."
+                : message == ManageMessageId.Error ? "Ha ocurrido un error."
+                : message == ManageMessageId.AddPhoneSuccess ? "Su numero de teléfono fue agregado."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Su numero de teléfono fue removido."
                 : "";
 
             var userId = User.Identity.GetUserId();
+
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                UserRole = getServicioUsuarios().ObtenerRolesDeUsuario(userId).FirstOrDefault()
             };
             return View(model);
         }
