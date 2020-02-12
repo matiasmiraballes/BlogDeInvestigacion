@@ -62,7 +62,8 @@
 
         @if (item.GetTipoDePublicacion() == TipoPublicacion.Noticia)
         {
-            <div class="card gedf-card">
+            <span class="badge badge-success">Noticia</span>
+            <div class="card gedf-card border-success">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex justify-content-between align-items-center">
@@ -94,7 +95,8 @@
 
         @if (item.GetTipoDePublicacion() == TipoPublicacion.Evento)
         {
-            <div class="card gedf-card">
+            <span class="badge badge-info">Evento</span>
+            <div class="card gedf-card border-info">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex justify-content-between align-items-center">
