@@ -61,5 +61,19 @@ namespace BlogDeInvestigacion.Services
                                
             return roles;
         }
+
+        public void EliminarUsuario(string username)
+        {
+            BlogContext context = new BlogContext();
+
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            ApplicationUser user = UserManager.FindByName(username);
+
+            if (user != null)
+            {
+                UserManager.Delete(user);
+            }
+        }
     }
 }

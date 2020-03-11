@@ -1,6 +1,9 @@
-﻿using BlogDeInvestigacion.Models;
+﻿using BlogDeInvestigacion.Data_Management;
+using BlogDeInvestigacion.Models;
 using BlogDeInvestigacion.Services;
 using BlogDeInvestigacion.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +20,8 @@ namespace BlogDeInvestigacion.Controllers
             {
                 return View(new HomeViewModel()
                 {
-                    ElementosMuro = new List<IElementoMuro>()
+                    ElementosMuro = new List<IElementoMuro>(),
+                    ListaDocentes = getServicioUsuarios().ObtenerUsuarios(UserRoles.Docente)
                 });
             }
 
@@ -82,40 +86,45 @@ namespace BlogDeInvestigacion.Controllers
 
             var homeViewModel = new HomeViewModel()
             {
-                ElementosMuro = orderedElementos
+                ElementosMuro = orderedElementos,
+                ListaDocentes = getServicioUsuarios().ObtenerUsuarios(UserRoles.Docente)
             };
 
             return View(homeViewModel);
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
-        public ActionResult Eventos()
+        public ActionResult CrearDocente(string Usuario, string Contraseña)
         {
-            ViewBag.Message = "Your application description page.";
+            BlogContext context = new BlogContext();
 
-            return View();
-        }
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-        public ActionResult Consultas()
-        {
-            ViewBag.Message = "Your contact page.";
+            var user = new ApplicationUser();
+            user.UserName = Usuario;
+            user.Email = Usuario;
 
-            return View();
+            string userPWD = Contraseña;
+
+            var chkUser = UserManager.Create(user, userPWD);
+
+            if (chkUser.Succeeded)
+            {
+                UserManager.AddToRole(user.Id, UserRoles.Docente);
+            }
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         [Authorize(Roles = "Administrador")]
-        public ActionResult Estadisticas()
+        [HttpPost]
+        public ActionResult BorrarDocente(string Usuario)
         {
-            ViewBag.Message = "Estadisticas";
+            getServicioUsuarios().EliminarUsuario(Usuario);
 
-            return View();
-        }
-
-        public ActionResult Perfil()
-        {
-            ViewBag.Message = "Perfil";
-
-            return View();
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }
