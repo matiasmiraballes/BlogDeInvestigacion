@@ -176,7 +176,7 @@ namespace BlogDeInvestigacion.Controllers
                 Laboratorio = laboratorio,
                 Conversaciones = conversaciones.OrderByDescending(c => c.TiempoCreacion).ToList(),
                 Noticias = db.Noticias.Where(n => n.IdLaboratorio == id).ToList(),
-                Eventos = db.Eventos.Where(e => e.IdEvento == id).ToList(),
+                Eventos = db.Eventos.Where(e => e.IdLaboratorio == id).ToList(),
                 Encuestas = encuestas,
                 IsSubscripted = isSubscribed
             };
