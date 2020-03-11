@@ -11,6 +11,7 @@ namespace BlogDeInvestigacion.Models
         [Key]
         public int IdConversacion { get; set; }
 
+        public Laboratorio Laboratorio { get; set; }
         public int IdLaboratorio { get; set; }
 
         public DateTime TiempoCreacion { get; set; }

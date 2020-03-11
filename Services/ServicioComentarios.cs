@@ -16,7 +16,10 @@ namespace BlogDeInvestigacion.Services
 
             using (BlogContext db = new BlogContext())
             {
-                conversaciones = db.Conversaciones.Include(c => c.Comentarios).ToList();
+                conversaciones = db.Conversaciones
+                                    .Include(c => c.Comentarios)
+                                    .Include(c => c.Laboratorio)
+                                    .ToList();
             }
 
             return conversaciones;

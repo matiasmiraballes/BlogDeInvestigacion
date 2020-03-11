@@ -1,9 +1,8 @@
 ﻿using BlogDeInvestigacion.Data_Management;
 using BlogDeInvestigacion.Models;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace BlogDeInvestigacion.Services
 {
@@ -25,7 +24,9 @@ namespace BlogDeInvestigacion.Services
 
             using (BlogContext db = new BlogContext())
             {
-                eventos = db.Eventos.ToList();
+                eventos = db.Eventos
+                            .Include(e => e.Laboratorio)
+                            .ToList();
             }
 
             return eventos;

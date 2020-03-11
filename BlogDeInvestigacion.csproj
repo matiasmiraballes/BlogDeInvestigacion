@@ -193,6 +193,10 @@
     <Compile Include="Migrations\201912120201043_AgregadoDocentesACargo.Designer.cs">
       <DependentUpon>201912120201043_AgregadoDocentesACargo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003112101543_AddLaboratoryForComments.cs" />
+    <Compile Include="Migrations\202003112101543_AddLaboratoryForComments.Designer.cs">
+      <DependentUpon>202003112101543_AddLaboratoryForComments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -376,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912120201043_AgregadoDocentesACargo.resx">
       <DependentUpon>201912120201043_AgregadoDocentesACargo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003112101543_AddLaboratoryForComments.resx">
+      <DependentUpon>202003112101543_AddLaboratoryForComments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

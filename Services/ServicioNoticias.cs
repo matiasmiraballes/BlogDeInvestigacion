@@ -26,7 +26,9 @@ namespace BlogDeInvestigacion.Services
 
             using (BlogContext db = new BlogContext())
             {
-                noticias = db.Noticias.ToList();
+                noticias = db.Noticias
+                            .Include(n => n.Laboratorio)
+                            .ToList();
             }
 
             return noticias;

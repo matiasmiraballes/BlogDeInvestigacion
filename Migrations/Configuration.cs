@@ -104,6 +104,7 @@ namespace BlogDeInvestigacion.Migrations
                 {
                     IdConversacion = 1,
                     IdLaboratorio = 1,
+                    Laboratorio = laboratorios[0],
                     TiempoCreacion = DateTime.Now,
                     Comentarios = Comentarios1
                 },
@@ -111,6 +112,7 @@ namespace BlogDeInvestigacion.Migrations
                 {
                     IdConversacion = 2,
                     IdLaboratorio = 1,
+                    Laboratorio = laboratorios[0],
                     TiempoCreacion = DateTime.Now,
                     Comentarios = Comentarios2
                 }
