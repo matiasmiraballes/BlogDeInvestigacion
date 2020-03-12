@@ -1,6 +1,7 @@
 ﻿using BlogDeInvestigacion.Data_Management;
 using BlogDeInvestigacion.Models;
 using BlogDeInvestigacion.Services;
+using BlogDeInvestigacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +19,26 @@ namespace BlogDeInvestigacion.Controllers
         {
             return View(db.Eventos.ToList());
         }
-        public ActionResult Create([Bind(Include = "IdEvento,Nombre,Descripcion,Inicio,Fin")] Evento evento)
+
+        public ActionResult Create([Bind(Include = "IdEvento,Nombre,Descripcion,IdLaboratorio")] Evento evento, string Inicio, string Fin)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && !String.IsNullOrEmpty(Inicio) && !String.IsNullOrEmpty(Fin))
             {
+                evento.Inicio = DateTime.Parse(Inicio);
+                evento.Fin = DateTime.Parse(Fin);
+
                 db.Eventos.Add(evento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(evento);
+            EventoViewModel eventoViewModel = new EventoViewModel()
+            {
+                Evento = evento,
+                Laboratorios = getServicioLaboratorios().ObtenerLaboratorios(),
+            };
+
+            return View(eventoViewModel);
         }
         // boton Details
         public ActionResult Details(int? id)

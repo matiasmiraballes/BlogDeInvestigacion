@@ -18,11 +18,11 @@
         {
             Titulo = "FILTRAR MURO",
             Opciones = new List<OpcionMenu>
-{
+                    {
                         new OpcionMenu { Nombre = "Ver Conversaciones", Tipo = TipoOpcion.Action, Link = "/Home/Index?parametro=" + TipoPublicacion.Conversacion, ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Ver Eventos", Tipo = TipoOpcion.Action, Link = "/Home/Index?parametro=" + TipoPublicacion.Evento, ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Ver Noticias", Tipo = TipoOpcion.Action, Link = "/Home/Index?parametro=" + TipoPublicacion.Noticia, ClaseIcono = "fa fa-tasks fa-fw mr-3" },
-                        new OpcionMenu { Nombre = "Ver Encuestas", Tipo = TipoOpcion.Action, Link = "/Home/Index?parametro=" + TipoPublicacion.Noticia, ClaseIcono = "fa fa-tasks fa-fw mr-3" },
+                        //new OpcionMenu { Nombre = "Ver Encuestas", Tipo = TipoOpcion.Action, Link = "/Home/Index?parametro=" + TipoPublicacion.Noticia, ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         new OpcionMenu { Nombre = "Ver Todos", Tipo = TipoOpcion.Action, Link = "/Home/Index?parametro=" + TipoPublicacion.Todos, ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                     }
         });
@@ -33,7 +33,7 @@
             {
                 Titulo = "ADMINISTRAR USUARIOS",
                 Opciones = new List<OpcionMenu>
-{
+                        {
                             new OpcionMenu { Nombre = "Crear Cuenta Docente", Tipo = TipoOpcion.OpenModal, Link = "#mdlCrearDocente", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                             new OpcionMenu { Nombre = "Borrar Cuenta Docente", Tipo = TipoOpcion.OpenModal, Link = "#mdlBorrarDocente", ClaseIcono = "fa fa-tasks fa-fw mr-3" },
                         }

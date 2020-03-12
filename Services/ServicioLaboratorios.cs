@@ -58,5 +58,17 @@ namespace BlogDeInvestigacion.Services
 
             return laboratoriosACargo;
         }
+
+        public List<Laboratorio> ObtenerLaboratorios()
+        {
+            List<Laboratorio> laboratorios = new List<Laboratorio>();
+
+            using (BlogContext db = new BlogContext())
+            {
+                laboratorios = db.Laboratorios.ToList();
+            }
+
+            return laboratorios;
+        }
     }
 }

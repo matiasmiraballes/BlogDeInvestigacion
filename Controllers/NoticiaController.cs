@@ -38,7 +38,7 @@ namespace BlogDeInvestigacion.Controllers
             NoticiaViewModel noticiaViewModel = new NoticiaViewModel()
             {
                 Noticia = noticia,
-                Laboratorios = db.Laboratorios.ToList(),
+                Laboratorios = getServicioLaboratorios().ObtenerLaboratorios(),
             };
 
 

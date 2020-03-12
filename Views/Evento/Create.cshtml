@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model BlogDeInvestigacion.Models.Evento
+@model BlogDeInvestigacion.ViewModels.EventoViewModel
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -15,43 +15,65 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Evento</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Inicio, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div id="flatpickrcontainer">
-                <input type="text" name="Inicio" placeholder="Select Date.." data-input>
+    <div class="form-horizontal">
+        <h4>Evento</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Evento.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Evento.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Evento.Nombre, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Fin, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div id="flatpickrcontainer2">
-                <input type="text" name="Fin" placeholder="Select Date.." data-input>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Evento.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Evento.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Evento.Descripcion, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
-    
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Evento.Inicio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div id="flatpickrcontainer">
+                    <input type="text" name="Inicio" placeholder="Select Date.." data-input class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Evento.Fin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div id="flatpickrcontainer2">
+                    <input type="text" name="Fin" placeholder="Select Date.." data-input class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Laboratorio", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @{
+                    List<SelectListItem> listItems = new List<SelectListItem>();
+                }
+
+                @foreach (var laboratorio in Model.Laboratorios)
+                {
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = laboratorio.Nombre,
+                        Value = laboratorio.IdLaboratorio.ToString()
+                    });
+                }
+
+                @Html.DropDownListFor(model => model.Evento.IdLaboratorio, listItems, "-- Seleccionar Laboratorio --", new { @class = "form-control" })
+            </div>
+
+        </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Crear" class="btn btn-primary" />
@@ -59,7 +81,7 @@
             </div>
         </div>
 
-</div>
+    </div>
 
 }
 
