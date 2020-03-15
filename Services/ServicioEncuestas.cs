@@ -64,7 +64,9 @@ namespace BlogDeInvestigacion.Services
                 encCompletadasLabUser = db.EncuestasCompletadas.Where(ec => ec.Encuesta.IdLaboratorio == idLaboratorio && ec.Usuario == username)
                                                                 .ToList();
 
-                encLab = db.Encuestas.Where(e => e.IdLaboratorio == idLaboratorio).ToList();
+                encLab = db.Encuestas.Include(e => e.Laboratorio)
+                                     .Where(e => e.IdLaboratorio == idLaboratorio)
+                                     .ToList();
 
                 encNoCompletadas = encLab.Where(e => !encCompletadasLabUser.Any(ec => e.IdEncuesta == ec.IdEncuesta)).ToList();
             }
@@ -81,7 +83,8 @@ namespace BlogDeInvestigacion.Services
             {
                 encCompletadasUser = db.EncuestasCompletadas.Where(ec => ec.Usuario == username).ToList();
 
-                encNoCompletadas = db.Encuestas.ToList().Where(e => !encCompletadasUser.Any(ec => e.IdEncuesta == ec.IdEncuesta)).ToList();
+                encNoCompletadas = db.Encuestas.Include(e => e.Laboratorio).ToList()
+                                               .Where(e => !encCompletadasUser.Any(ec => e.IdEncuesta == ec.IdEncuesta)).ToList();
             }
 
             return encNoCompletadas;

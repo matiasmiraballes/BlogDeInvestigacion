@@ -8,7 +8,10 @@
     <h2>NOTICIA</h2>
 
     <p>
-        @Html.ActionLink("Crear Noticia", "Create", null, new { @class = "btn btn-primary" })
+        @if (User.IsInRole(UserRoles.Administrador) || User.IsInRole(UserRoles.Docente))
+        {
+            @Html.ActionLink("Crear Noticia", "Create", null, new { @class = "btn btn-primary" })
+        }
     </p>
     <table class="table">
         <thead class="thead-dark">
@@ -43,8 +46,6 @@
                 <td>
                     @if (User.IsInRole("Administrador"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IdNoticia })
-                        @Html.Raw("|");
                         @Html.ActionLink("Delete", "Delete", new { id = item.IdNoticia })
                     }
                 </td>

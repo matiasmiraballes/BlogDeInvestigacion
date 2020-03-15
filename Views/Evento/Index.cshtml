@@ -8,7 +8,10 @@
 <h2>EVENTOS</h2>
 
 <p>
-    @Html.ActionLink("Crear Evento", "Create", null, new { @class = "btn btn-primary" })
+    @if (User.IsInRole(UserRoles.Administrador) || User.IsInRole(UserRoles.Docente))
+    {
+        @Html.ActionLink("Crear Evento", "Create", null, new { @class = "btn btn-primary" })
+    }
 </p>
 
 <table class="table">
@@ -36,10 +39,6 @@
                 <td>
                     @if (User.IsInRole("Administrador"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IdEvento })
-                        @Html.Raw("|");
-                        @Html.ActionLink("Details", "Details", new { id = item.IdEvento })
-                        @Html.Raw("|");
                         @Html.ActionLink("Delete", "Delete", new { id = item.IdEvento })
                     }
                 </td>

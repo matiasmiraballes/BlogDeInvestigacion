@@ -20,6 +20,7 @@ namespace BlogDeInvestigacion.Controllers
             return View(db.Eventos.ToList());
         }
 
+        [Authorize(Roles = UserRoles.AdministradorODocente)]
         public ActionResult Create([Bind(Include = "IdEvento,Nombre,Descripcion,IdLaboratorio")] Evento evento, string Inicio, string Fin)
         {
             if (ModelState.IsValid && !String.IsNullOrEmpty(Inicio) && !String.IsNullOrEmpty(Fin))
@@ -32,11 +33,23 @@ namespace BlogDeInvestigacion.Controllers
                 return RedirectToAction("Index");
             }
 
-            EventoViewModel eventoViewModel = new EventoViewModel()
+            EventoViewModel eventoViewModel;
+            if (User.IsInRole(UserRoles.Administrador))
             {
-                Evento = evento,
-                Laboratorios = getServicioLaboratorios().ObtenerLaboratorios(),
-            };
+                eventoViewModel = new EventoViewModel()
+                {
+                    Evento = evento,
+                    Laboratorios = getServicioLaboratorios().ObtenerLaboratorios(),
+                };
+            }
+            else
+            {
+                eventoViewModel = new EventoViewModel()
+                {
+                    Evento = evento,
+                    Laboratorios = getServicioLaboratorios().LaboratoriosACargoByUsername(User.Identity.Name),
+                };
+            }
 
             return View(eventoViewModel);
         }

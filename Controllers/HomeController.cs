@@ -101,7 +101,7 @@ namespace BlogDeInvestigacion.Controllers
             return View(homeViewModel);
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = UserRoles.Administrador)]
         [HttpPost]
         public ActionResult CrearDocente(string Usuario, string Contraseña)
         {
@@ -126,7 +126,7 @@ namespace BlogDeInvestigacion.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = UserRoles.Administrador)]
         [HttpPost]
         public ActionResult BorrarDocente(string Usuario)
         {
