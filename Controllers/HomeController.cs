@@ -37,6 +37,9 @@ namespace BlogDeInvestigacion.Controllers
             ServicioEventos servicioEventos = getServicioEventos();
             List<Evento> eventos = servicioEventos.ObtenerEventos();
 
+            ServicioEncuestas servicioEncuestas = getServicioEncuestas();
+            List<Encuesta> encuestas = servicioEncuestas.ObtenerEncuestas();
+
             List<IElementoMuro> elementosMuro = new List<IElementoMuro>();
 
             if (parametro == null || parametro == "")
@@ -78,7 +81,12 @@ namespace BlogDeInvestigacion.Controllers
 
                 if (parametro == TipoPublicacion.Encuesta || parametro == TipoPublicacion.Todos)
                 {
+                    List<Encuesta> encuestasRelacionadas = encuestas.Where(e => e.IdLaboratorio == s.IdLaboratorio).ToList();
 
+                    foreach (Encuesta item in encuestasRelacionadas)
+                    {
+                        elementosMuro.Add(item);
+                    }
                 }
             }
 
