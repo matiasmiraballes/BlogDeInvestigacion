@@ -197,6 +197,10 @@
     <Compile Include="Migrations\202003112101543_AddLaboratoryForComments.Designer.cs">
       <DependentUpon>202003112101543_AddLaboratoryForComments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003151627133_FechaPublicacionEncuesta.cs" />
+    <Compile Include="Migrations\202003151627133_FechaPublicacionEncuesta.Designer.cs">
+      <DependentUpon>202003151627133_FechaPublicacionEncuesta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -384,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003112101543_AddLaboratoryForComments.resx">
       <DependentUpon>202003112101543_AddLaboratoryForComments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003151627133_FechaPublicacionEncuesta.resx">
+      <DependentUpon>202003151627133_FechaPublicacionEncuesta.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

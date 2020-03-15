@@ -235,7 +235,8 @@ namespace BlogDeInvestigacion.Controllers
             {
                 IdLaboratorio = IdLaboratorio,
                 Titulo = Titulo,
-                Preguntas = Preguntas
+                Preguntas = Preguntas,
+                FechaPublicacion = DateTime.Now
             };
 
             ServicioEncuestas servicioEncuestas = getServicioEncuestas();
