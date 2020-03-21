@@ -17,7 +17,18 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">@conversacion.Comentarios.First().NombreDeUsuario</h4>
+                        <div class="d-flex justify-content-between align-items-center media-heading">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="mr-2">
+                                    <h4 class="">@conversacion.Comentarios.First().NombreDeUsuario</h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="right-corner">
+                                    @conversacion.Comentarios.First().GetFechaDePublicacion().ToString("MM/dd/yyyy HH:mm")
+                                </div>
+                            </div>
+                        </div>
                         <p>@conversacion.Comentarios.First().Texto</p>
                         <!-- FIRST ACTION -->
 
@@ -31,7 +42,18 @@
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="media-heading">@comentario.NombreDeUsuario</h4>
+                                    <div class="d-flex justify-content-between align-items-center media-heading">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="mr-2">
+                                                <h4 class="">@comentario.NombreDeUsuario</h4>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="right-corner">
+                                                @comentario.GetFechaDePublicacion().ToString("MM/dd/yyyy HH:mm")
+                                            </div>
+                                        </div>
+                                    </div>
                                     <p>@comentario.Texto</p>
                                 </div>
                             </div>
