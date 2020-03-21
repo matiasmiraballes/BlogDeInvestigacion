@@ -26,10 +26,12 @@
 3.5.
   En Package Manager Console, correr los siguientes comandos:
   
-  Add-Migration NombreDeLaMigracion       
-                        Ej: **Add-Migration CleanMigration**
+  **Add-Migration** NombreDeLaMigracion       
+                        Ej: **Add-Migration FirstMigration**
   
   **Update-Database**
+  
+  **NOTA:** Debido a una inconsistencia con el comando RESEED de SQL Server, **Update-Database puede fallar cuando se ejecuta por primera vez** en una base de datos recien creada, en cuyo caso deberá ejecutar este comando una segunda vez.
   
 3.6.
   Iniciar la aplicación para que termine de crear las tablas restantes
