@@ -185,21 +185,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912012358032_ModelChanged.cs" />
-    <Compile Include="Migrations\201912012358032_ModelChanged.Designer.cs">
-      <DependentUpon>201912012358032_ModelChanged.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912120201043_AgregadoDocentesACargo.cs" />
-    <Compile Include="Migrations\201912120201043_AgregadoDocentesACargo.Designer.cs">
-      <DependentUpon>201912120201043_AgregadoDocentesACargo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003112101543_AddLaboratoryForComments.cs" />
-    <Compile Include="Migrations\202003112101543_AddLaboratoryForComments.Designer.cs">
-      <DependentUpon>202003112101543_AddLaboratoryForComments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003151627133_FechaPublicacionEncuesta.cs" />
-    <Compile Include="Migrations\202003151627133_FechaPublicacionEncuesta.Designer.cs">
-      <DependentUpon>202003151627133_FechaPublicacionEncuesta.cs</DependentUpon>
+    <Compile Include="Migrations\202003211925406_CamposMuro.cs" />
+    <Compile Include="Migrations\202003211925406_CamposMuro.Designer.cs">
+      <DependentUpon>202003211925406_CamposMuro.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -380,17 +368,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912012358032_ModelChanged.resx">
-      <DependentUpon>201912012358032_ModelChanged.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912120201043_AgregadoDocentesACargo.resx">
-      <DependentUpon>201912120201043_AgregadoDocentesACargo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003112101543_AddLaboratoryForComments.resx">
-      <DependentUpon>202003112101543_AddLaboratoryForComments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003151627133_FechaPublicacionEncuesta.resx">
-      <DependentUpon>202003151627133_FechaPublicacionEncuesta.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003211925406_CamposMuro.resx">
+      <DependentUpon>202003211925406_CamposMuro.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

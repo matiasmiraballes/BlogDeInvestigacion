@@ -45,9 +45,10 @@ namespace BlogDeInvestigacion.Controllers
 
                 var nuevaConversacion = new Conversacion()
                 {
+                    IdLaboratorio = IdLaboratorio,
                     Comentarios = nuevoComentario,
                     TiempoCreacion = DateTime.Now,
-                    IdLaboratorio = IdLaboratorio
+                    Username = User.Identity.Name
                 };
 
                 servicioComentarios.GuardarConversacion(nuevaConversacion);

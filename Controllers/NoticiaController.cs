@@ -31,8 +31,10 @@ namespace BlogDeInvestigacion.Controllers
             if (ModelState.IsValid)
             {
                 noticia.FechaCreacion = System.DateTime.Now;
-                db.Noticias.Add(noticia);
-                db.SaveChanges();
+                noticia.Username = User.Identity.Name;
+
+                getServicioNoticias().GuardarNoticia(noticia);
+
                 return RedirectToAction("Index");
             }
 

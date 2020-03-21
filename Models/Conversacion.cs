@@ -14,18 +14,31 @@ namespace BlogDeInvestigacion.Models
         public Laboratorio Laboratorio { get; set; }
         public int IdLaboratorio { get; set; }
 
-        public DateTime TiempoCreacion { get; set; }
 
         public IList<Comentario> Comentarios { get; set; }
 
+
+        public DateTime TiempoCreacion { get; set; }
+        public string Username { get; set; }
+
         public DateTime GetFechaDePublicacion()
         {
-            return TiempoCreacion;
+            return this.TiempoCreacion;
+        }
+
+        public string GetNombreDeLaboratorio()
+        {
+            return this.Laboratorio.Nombre;
         }
 
         public string GetTipoDePublicacion()
         {
             return TipoPublicacion.Conversacion;
+        }
+
+        public string GetUsername()
+        {
+            return this.Username;
         }
     }
 }

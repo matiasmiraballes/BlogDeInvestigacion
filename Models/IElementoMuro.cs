@@ -10,5 +10,7 @@ namespace BlogDeInvestigacion.Models
     {
         DateTime GetFechaDePublicacion();
         string GetTipoDePublicacion();
+        string GetNombreDeLaboratorio();
+        string GetUsername();
     }
 }

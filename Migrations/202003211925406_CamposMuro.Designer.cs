@@ -7,13 +7,13 @@ namespace BlogDeInvestigacion.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddLaboratoryForComments : IMigrationMetadata
+    public sealed partial class CamposMuro : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddLaboratoryForComments));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CamposMuro));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003112101543_AddLaboratoryForComments"; }
+            get { return "202003211925406_CamposMuro"; }
         }
         
         string IMigrationMetadata.Source

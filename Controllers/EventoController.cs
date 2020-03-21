@@ -27,9 +27,11 @@ namespace BlogDeInvestigacion.Controllers
             {
                 evento.Inicio = DateTime.Parse(Inicio);
                 evento.Fin = DateTime.Parse(Fin);
+                evento.FechaPublicacion = DateTime.Now;
+                evento.Username = User.Identity.Name;
 
-                db.Eventos.Add(evento);
-                db.SaveChanges();
+                getServicioEventos().GuardarEvento(evento);
+
                 return RedirectToAction("Index");
             }
 

@@ -63,8 +63,8 @@ namespace BlogDeInvestigacion.Migrations
 
             var noticias = new List<Noticia>
             {
-                new Noticia{Titulo="Inauguracion LINES", Descripcion="Se ha inaugurado la seccion de...", FechaCreacion = DateTime.ParseExact("15/06/2019 20:00:00", "dd/MM/yyyy HH:mm:ss",null), Laboratorio = laboratorios[0]},
-                new Noticia{Titulo="Proyecto GIDAS", Descripcion="GIDAS comenzo un nuevo proyecto de investigacion...", FechaCreacion = DateTime.ParseExact("15/06/2019 20:00:00", "dd/MM/yyyy HH:mm:ss",null), Laboratorio = laboratorios[2]}
+                new Noticia{Titulo="Inauguracion LINES", Descripcion="Se ha inaugurado la seccion de...", Username = "admin@mail.com", FechaCreacion = DateTime.ParseExact("15/06/2019 20:00:00", "dd/MM/yyyy HH:mm:ss",null), Laboratorio = laboratorios[0]},
+                new Noticia{Titulo="Proyecto GIDAS", Descripcion="GIDAS comenzo un nuevo proyecto de investigacion...", Username = "admin@mail.com", FechaCreacion = DateTime.ParseExact("15/06/2019 20:00:00", "dd/MM/yyyy HH:mm:ss",null), Laboratorio = laboratorios[2]}
             };
 
             noticias.ForEach(n => context.Noticias.Add(n));
@@ -78,7 +78,9 @@ namespace BlogDeInvestigacion.Migrations
                     Descripcion ="Los becarios del LINSI han presentado el primer avance del trabajo de Active Directory y SAMBA...Excelente!!!",
                     Laboratorio = laboratorios[1],
                     Inicio = DateTime.ParseExact("15/06/2018 18:00:00", "dd/MM/yyyy HH:mm:ss",null),
-                    Fin = DateTime.ParseExact("15/06/2019 22:00:00", "dd/MM/yyyy HH:mm:ss",null)
+                    Fin = DateTime.ParseExact("15/06/2019 22:00:00", "dd/MM/yyyy HH:mm:ss",null),
+                    Username = "admin@mail.com",
+                    FechaPublicacion = DateTime.Now
                 }
             };
 
@@ -105,8 +107,9 @@ namespace BlogDeInvestigacion.Migrations
                     IdConversacion = 1,
                     IdLaboratorio = 1,
                     Laboratorio = laboratorios[0],
+                    Comentarios = Comentarios1,
+                    Username = "admin@mail.com",
                     TiempoCreacion = DateTime.Now,
-                    Comentarios = Comentarios1
                 },
                 new Conversacion
                 {
@@ -153,7 +156,7 @@ namespace BlogDeInvestigacion.Migrations
 
             var encuestas = new List<Encuesta>()
             {
-                new Encuesta { IdLaboratorio = 1, Titulo = "Presentacion sobre Blockchain", Preguntas = preguntas, FechaPublicacion = DateTime.Now }
+                new Encuesta { IdLaboratorio = 1, Titulo = "Presentacion sobre Blockchain", Preguntas = preguntas, Username = "admin@mail.com", FechaPublicacion = DateTime.Now }
             };
 
             encuestas.ForEach(e => context.Encuestas.Add(e));
