@@ -25,22 +25,36 @@ namespace BlogDeInvestigacion.Controllers
         }
 
         //Crea Noticia
+        [Authorize(Roles = UserRoles.AdministradorODocente)]
         public ActionResult Create([Bind(Include = "IdNoticia,Titulo,Descripcion,FechaCreacion,IdLaboratorio")] Noticia noticia)
         {
             if (ModelState.IsValid)
             {
                 noticia.FechaCreacion = System.DateTime.Now;
-                db.Noticias.Add(noticia);
-                db.SaveChanges();
+                noticia.Username = User.Identity.Name;
+
+                getServicioNoticias().GuardarNoticia(noticia);
+
                 return RedirectToAction("Index");
             }
 
-            NoticiaViewModel noticiaViewModel = new NoticiaViewModel()
+            NoticiaViewModel noticiaViewModel;
+            if (User.IsInRole(UserRoles.Administrador))
             {
-                Noticia = noticia,
-                Laboratorios = getServicioLaboratorios().ObtenerLaboratorios(),
-            };
-
+                noticiaViewModel = new NoticiaViewModel()
+                {
+                    Noticia = noticia,
+                    Laboratorios = getServicioLaboratorios().ObtenerLaboratorios(),
+                };
+            }
+            else
+            {
+                noticiaViewModel = new NoticiaViewModel()
+                {
+                    Noticia = noticia,
+                    Laboratorios = getServicioLaboratorios().LaboratoriosACargoByUsername(User.Identity.Name),
+                };
+            }
 
             return View(noticiaViewModel);
         }

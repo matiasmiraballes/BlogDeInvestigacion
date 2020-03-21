@@ -3,7 +3,7 @@ namespace BlogDeInvestigacion.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ModelChanged : DbMigration
+    public partial class CamposMuro : DbMigration
     {
         public override void Up()
         {
@@ -12,10 +12,10 @@ namespace BlogDeInvestigacion.Migrations
                 c => new
                     {
                         IdComentario = c.Int(nullable: false, identity: true),
-                        NombreDeUsuario = c.String(),
-                        TiempoCreacion = c.DateTime(nullable: false),
-                        Texto = c.String(),
                         IdConversacion = c.Int(nullable: false),
+                        Texto = c.String(),
+                        TiempoCreacion = c.DateTime(nullable: false),
+                        NombreDeUsuario = c.String(),
                     })
                 .PrimaryKey(t => t.IdComentario)
                 .ForeignKey("dbo.Conversacions", t => t.IdConversacion, cascadeDelete: true)
@@ -28,18 +28,9 @@ namespace BlogDeInvestigacion.Migrations
                         IdConversacion = c.Int(nullable: false, identity: true),
                         IdLaboratorio = c.Int(nullable: false),
                         TiempoCreacion = c.DateTime(nullable: false),
+                        Username = c.String(),
                     })
-                .PrimaryKey(t => t.IdConversacion);
-            
-            CreateTable(
-                "dbo.Encuestas",
-                c => new
-                    {
-                        IdEncuesta = c.Int(nullable: false, identity: true),
-                        IdLaboratorio = c.Int(nullable: false),
-                        Titulo = c.String(),
-                    })
-                .PrimaryKey(t => t.IdEncuesta)
+                .PrimaryKey(t => t.IdConversacion)
                 .ForeignKey("dbo.Laboratorios", t => t.IdLaboratorio, cascadeDelete: true)
                 .Index(t => t.IdLaboratorio);
             
@@ -52,6 +43,33 @@ namespace BlogDeInvestigacion.Migrations
                         Descripcion = c.String(nullable: false, maxLength: 500),
                     })
                 .PrimaryKey(t => t.IdLaboratorio);
+            
+            CreateTable(
+                "dbo.DocentesACargo",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        IdDocente = c.String(),
+                        Username = c.String(),
+                        IdLaboratorio = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Laboratorios", t => t.IdLaboratorio, cascadeDelete: true)
+                .Index(t => t.IdLaboratorio);
+            
+            CreateTable(
+                "dbo.Encuestas",
+                c => new
+                    {
+                        IdEncuesta = c.Int(nullable: false, identity: true),
+                        IdLaboratorio = c.Int(nullable: false),
+                        Titulo = c.String(),
+                        Username = c.String(),
+                        FechaPublicacion = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.IdEncuesta)
+                .ForeignKey("dbo.Laboratorios", t => t.IdLaboratorio, cascadeDelete: true)
+                .Index(t => t.IdLaboratorio);
             
             CreateTable(
                 "dbo.Preguntas",
@@ -87,6 +105,8 @@ namespace BlogDeInvestigacion.Migrations
                         Descripcion = c.String(maxLength: 500),
                         Inicio = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Fin = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        FechaPublicacion = c.DateTime(nullable: false),
+                        Username = c.String(),
                     })
                 .PrimaryKey(t => t.IdEvento)
                 .ForeignKey("dbo.Laboratorios", t => t.IdLaboratorio, cascadeDelete: true)
@@ -101,6 +121,7 @@ namespace BlogDeInvestigacion.Migrations
                         Titulo = c.String(nullable: false, maxLength: 50),
                         Descripcion = c.String(maxLength: 500),
                         FechaCreacion = c.DateTime(nullable: false),
+                        Username = c.String(),
                     })
                 .PrimaryKey(t => t.IdNoticia)
                 .ForeignKey("dbo.Laboratorios", t => t.IdLaboratorio, cascadeDelete: true)
@@ -214,6 +235,8 @@ namespace BlogDeInvestigacion.Migrations
             DropForeignKey("dbo.EncuestaCompletadas", "IdEncuesta", "dbo.Encuestas");
             DropForeignKey("dbo.Preguntas", "IdEncuesta", "dbo.Encuestas");
             DropForeignKey("dbo.Encuestas", "IdLaboratorio", "dbo.Laboratorios");
+            DropForeignKey("dbo.DocentesACargo", "IdLaboratorio", "dbo.Laboratorios");
+            DropForeignKey("dbo.Conversacions", "IdLaboratorio", "dbo.Laboratorios");
             DropForeignKey("dbo.Comentarios", "IdConversacion", "dbo.Conversacions");
             DropIndex("dbo.AspNetUserLogins", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUserClaims", new[] { "IdentityUser_Id" });
@@ -227,6 +250,8 @@ namespace BlogDeInvestigacion.Migrations
             DropIndex("dbo.EncuestaCompletadas", new[] { "IdEncuesta" });
             DropIndex("dbo.Preguntas", new[] { "IdEncuesta" });
             DropIndex("dbo.Encuestas", new[] { "IdLaboratorio" });
+            DropIndex("dbo.DocentesACargo", new[] { "IdLaboratorio" });
+            DropIndex("dbo.Conversacions", new[] { "IdLaboratorio" });
             DropIndex("dbo.Comentarios", new[] { "IdConversacion" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
@@ -239,8 +264,9 @@ namespace BlogDeInvestigacion.Migrations
             DropTable("dbo.Eventos");
             DropTable("dbo.EncuestaCompletadas");
             DropTable("dbo.Preguntas");
-            DropTable("dbo.Laboratorios");
             DropTable("dbo.Encuestas");
+            DropTable("dbo.DocentesACargo");
+            DropTable("dbo.Laboratorios");
             DropTable("dbo.Conversacions");
             DropTable("dbo.Comentarios");
         }

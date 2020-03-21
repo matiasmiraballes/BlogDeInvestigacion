@@ -16,6 +16,7 @@ namespace BlogDeInvestigacion.Models
         public Laboratorio Laboratorio { get; set; }
         public int IdLaboratorio { get; set; }
 
+
         [Required]
         [StringLength(100)]
         public string Nombre { get; set; }
@@ -29,14 +30,28 @@ namespace BlogDeInvestigacion.Models
         [Required]
         public DateTime Fin { get; set; }
 
+
+        public DateTime FechaPublicacion { get; set; }
+        public string Username { get; set; }
+
         public DateTime GetFechaDePublicacion()
         {
-            return Inicio;
+            return FechaPublicacion;
+        }
+
+        public string GetNombreDeLaboratorio()
+        {
+            return this.Laboratorio.Nombre;
         }
 
         public string GetTipoDePublicacion()
         {
             return TipoPublicacion.Evento;
+        }
+
+        public string GetUsername()
+        {
+            return this.Username;
         }
     }
 }

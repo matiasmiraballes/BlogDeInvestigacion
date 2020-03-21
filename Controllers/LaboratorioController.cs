@@ -194,7 +194,9 @@ namespace BlogDeInvestigacion.Controllers
                 Descripcion = evento.Descripcion,
                 Inicio = evento.Inicio,
                 Fin = evento.Fin,
-
+                IdLaboratorio = evento.IdLaboratorio,
+                FechaPublicacion = DateTime.Now,
+                Username = User.Identity.Name,
             };
 
             var ServicioEvento = new ServicioEventos();
@@ -212,6 +214,7 @@ namespace BlogDeInvestigacion.Controllers
                 Titulo = noticia.Titulo,
                 Descripcion = noticia.Descripcion,
                 FechaCreacion = System.DateTime.Now,
+                Username = User.Identity.Name
             };
 
             var ServicioNoticia = new ServicioNoticias();
@@ -235,7 +238,9 @@ namespace BlogDeInvestigacion.Controllers
             {
                 IdLaboratorio = IdLaboratorio,
                 Titulo = Titulo,
-                Preguntas = Preguntas
+                Preguntas = Preguntas,
+                FechaPublicacion = DateTime.Now,
+                Username = User.Identity.Name
             };
 
             ServicioEncuestas servicioEncuestas = getServicioEncuestas();
